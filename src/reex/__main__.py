@@ -10,11 +10,11 @@ import os.path
 from os import path 
 
 parser = argparse.ArgumentParser()    
-parser.add_argument('--expression_dataset',default='../data/final_versions/Breast_A.csv', type = str)
-parser.add_argument('--background_knowledge',default='../ontologies/go-basic.obo', type = str)
+parser.add_argument('--expression_dataset',default='../example/data/Breast_A.csv', type = str)
+parser.add_argument('--background_knowledge',default='../example/ontology/go-basic.obo', type = str)
 ## http://purl.obolibrary.org/obo/go/go-basic.obo -> whole ontology
 ## http://current.geneontology.org/ontology/subsets/goslim_agr.obo -> goSlim
-parser.add_argument('--mapping_file',default='../mapping/goa_human.gaf.gz', type = str)
+parser.add_argument('--mapping_file',default='../example/mapping/goa_human.gaf.gz', type = str)
 parser.add_argument('--intersection_ratio',default=0.2, type = float)
 parser.add_argument('--depth_weight',default=0.1, type = float)
 parser.add_argument('--subset_size', default=1000, type = int)
