@@ -1,0 +1,87 @@
+## community-based semantic subgroup discovery (skrlj 2017) API. Note this does not include the biomine calls
+
+def get_hedwig_rules(partition):
+
+     ## convert examples to RDF mappings and check the validity, use gzipped gaf files..
+     dataset_name = "../background_knowledge_hedwig/example_partition_inputs.n3"
+
+     print("Mapping conversion.")
+     rdf_partitions = hedwig.convert_mapping_to_rdf(partition,annotation_mapping_file="../background_knowledge_hedwig/goa_human.gaf.gz",layer_type="uniprotkb")
+     rdf_partitions.serialize(destination = dataset_name, format="n3")
+
+     print("n3 format generation.")
+     
+     ## convert obo file to n3
+     hedwig.obo2n3("../background_knowledge_hedwig/go.obo.gz", "../background_knowledge_hedwig/bk.n3", "../background_knowledge_hedwig/goa_human.gaf.gz")
+
+     ## some default input parameters
+     hedwig_input_parameters = {"bk_dir": "../background_knowledge_hedwig",
+                                "data": "../background_knowledge_hedwig/example_partition_inputs.n3",
+                                "format": "n3",
+                                "output": None,
+                                "covered": None,
+                                "mode": "subgroups",
+                                "target": None,
+                                "score": "lift",
+                                "negations": True,
+                                "alpha": 0.05,
+                                "latex_report": False,
+                                "adjust": "fwer",
+                                "FDR": 0.05,
+                                "leaves": True,
+                                "learner": "heuristic",
+                                "optimalsubclass": False,
+                                "uris": False,
+                                "beam": 30,
+                                "support": 0.01,
+                                "depth": 8,
+                                "nocache": False,
+                                "verbose": False,
+                                "adjust":"none"}
+
+     print("starting hedwig.")
+     out_obj = hedwig.run(hedwig_input_parameters)
+     out_termsets = []
+     for class_name, rules in out_obj:
+          cterms = []
+          for rule in rules:
+               term_sets = []
+               for pred in rule.__dict__['predicates']:
+                    term_sets.append(pred.__dict__['label'].split("/")[-1])
+               cterms+=term_sets
+          out_termsets.append(cterms)
+     return out_termsets
+
+# deprecated
+# if __name__ == "__main__":
+#     import gzip
+
+#     all_terms = []
+#     with gzip.open("../mapping/goa_human.gaf.gz","rt") as gmx:
+#         for line in gmx:
+#             parts = line.strip().split("\t")
+#             try:
+#                 uniterm = parts[1]
+#                 all_terms.append("uniprotkb:"+uniterm)
+#             except:
+#                 pass
+
+#     all_terms = list(set(all_terms))[0:500]
+#     partition = {}
+#     for enx, j in enumerate(all_terms):
+#         if enx % 2 == 0:
+#             partition[j] = 2
+#         else:
+#             partition[j] = 1
+
+#      hedwig_rules = get_hedwig_rules(partition)
+#      for class_name, rules in hedwig_rules:
+#          for rule in rules:
+#               term_sets = []
+#               for pred in rule.__dict__['predicates']:
+#                    term_sets.append(pred.__dict__['label'].split("/")[-1])
+#                    print(term_sets)
+    
+#     ## partition zgleda tkole:
+#     ## {"uniprotkb:Q9JKP8" : 2}
+#     ## assign this randomly for test purposes.
