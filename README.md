@@ -3,7 +3,7 @@ using background knowledge in  the  form  of  ontologies,  generalize  instance 
 The resulting symbolic descriptions are  specific  for  individual  classes  and  offer  explainable  generalizations based on the explainer’s output. 
 
 # Basic Usage:
-`python reex --expression_dataset {path_to_dataset} --mapping_file {path_to_mapping} --background_knowledge {path_or_link_to_obo_file}`
+`python reex --expression_dataset {path_to_dataset} --mapping_file {path_to_mapping} --background_knowledge {path_or_link_to_obo_file} --results_path {path_for_results}`
 
 # Example:
 For an example run:
