@@ -18,7 +18,7 @@ parser.add_argument('--mapping_file',default='../example/mapping/goa_human.gaf.g
 parser.add_argument('--intersection_ratio',default=0.2, type = float)
 parser.add_argument('--depth_weight',default=0.1, type = float)
 parser.add_argument('--subset_size', default=1000, type = int)
-parser.add_argument('--classifier', default='gradient_boosting', type = str)
+parser.add_argument('--classifier', default='spyct', type = str)
 parser.add_argument('--absolute',default=0, type = int)
 parser.add_argument('--explanation_method',default='class-ranking', type = str)
 parser.add_argument('--reasoner',default='selective_staircase', type = str)
@@ -31,6 +31,7 @@ parser.add_argument('--reverse_graph',default="true", type = str)
 parser.add_argument('--baseline_IC', action='store_false', default=True)
 parser.add_argument('--iterations',default=2, type = int)
 parser.add_argument('--results_path',default='../results', type = str)
+parser.add_argument('--SHAP_explainer',default='kernel', type = str)
 # ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/
 args = parser.parse_args()
 

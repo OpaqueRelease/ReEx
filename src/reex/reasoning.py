@@ -215,6 +215,8 @@ def generalization_depth(performance_dictionary):
         for item_key in class_dict.keys():
             generalization_average += class_dict[item_key]
             counter += 1
+    if counter == 0:
+        return -1
     return generalization_average / counter
     
     

@@ -26,8 +26,9 @@ import obonet
 import timeit
 import sys
 import os
+import spyct
 
-def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_boosting", explanation_method = "shap"):
+def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_boosting", explanation_method = "shap", shap_explainer = "kernel"):
     
     """
     A set of calls for obtaining aggregates of explanations.
@@ -44,13 +45,16 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
     X = X.astype(float).values[:,top_k]    
     skf = StratifiedKFold(n_splits=10)
     performances = []
+    final_explanations = {}
     enx = 0
     t_start = time.time()
     logging.info("Starting importance estimation ..  shape: {}".format(X.shape))
     
     per_class_explanations = defaultdict(list)
-    classifier_mapping = ["gradient_boosting", "random_forest", "svm"]
-    classifiers = [GradientBoostingClassifier(), RandomForestClassifier(n_estimators=10), svm.SVC(probability=True)]
+    classifier_mapping = ["gradient_boosting", "random_forest", "svm", "spyct"]
+    classifiers = [GradientBoostingClassifier(), RandomForestClassifier(n_estimators=10), svm.SVC(probability=True), spyct.Model()]
+    explainers = ["kernel", "tree", ]
+    
 
     if explanation_method == "shap":
         logging.info("Shapley-based explanations.")
@@ -69,7 +73,20 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
             perf = f1_score(preds,y_test, average = average)
             performances.append(perf)
             logging.info("Performance in fold {}, {} (F1)".format(enx, perf))
-            explainer = shap.KernelExplainer(model.predict_proba, x_train)
+            ## different shap explainers
+            if shap_explainer == "kernel":
+                explainer = shap.KernelExplainer(model.predict_proba, x_train)
+            if shap_explainer == "tree":
+                explainer = shap.TreeExplainer(model.predict_proba, x_train)
+            if shap_explainer == "gradient":
+                explainer = shap.GradientExplainer(model.predict_proba, x_train)
+            if shap_explainer == "deep":
+                explainer = shap.DeepExplainer(model.predict_proba, x_train)
+            if shap_explainer == "sampling":
+                explainer = shap.SamplingExplainer(model.predict_proba, x_train)
+            if shap_explainer == "partition":
+                explainer = shap.PartitionExplainer(model.predict_proba, x_train)
+                
             for unique_class in set(preds):
                 cors_neg = np.array([enx for enx, pred_tuple in enumerate(zip(preds, y_test)) if pred_tuple[0] == pred_tuple[1] and pred_tuple[0] == unique_class])
                 if cors_neg.size != 0:
