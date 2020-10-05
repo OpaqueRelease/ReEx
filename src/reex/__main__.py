@@ -113,6 +113,7 @@ elif args.reasoner == 'quick_ancestry':
     
 dumper = json.dumps(final_json)
 json.dump(dumper, outfile)
+textualize_top_k_terms(final_json, args.mapping_file, args.background_knowledge)
 
 
 

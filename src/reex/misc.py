@@ -11,6 +11,7 @@ import timeit
 from collections import defaultdict
 import sys
 import os
+import numpy as np
 
 def list_to_ancestor_set(graph, list):
     result = set()
@@ -111,3 +112,61 @@ def get_ontology_ancestor(obo_link = '../ontologies/go-basic.obo', reverse_graph
     tnum = len(wholeset)
     logging.info("Found {} unique edge types, {}".format(tnum," | ".join(wholeset)))
     return reverseGraph
+    
+def IC_of_a_term(term, mapping, mc, normalization):
+
+
+    IC = 0
+    if term in mc:
+        p = mc[term] / normalization
+        IC += (-np.log(p))
+    else:
+        ## 1000 as in impossibly high IC
+        IC = 1000
+
+    return IC
+
+
+def textualize_top_k_terms(json_data, mapping, obo_link, k_number = 5):
+
+    try:
+        graph = obonet.read_obo(obo_link)
+    except Exception as es:
+        logging.info(es)
+        graph = obonet.read_obo(obo_link)
+
+    id_to_name = {id_: data.get('name') for id_, data in graph.nodes(data=True)}
+
+    ## go through mapping
+    mc = {}
+    all_terms = set()
+    mappings = read_generic_gaf(mapping)
+    for k, v in mappings.items():
+        for el in v:
+            all_terms.add(el)
+            if el in mc:
+                mc[el] += 1
+            else:
+                mc[el] = 1
+    normalization = len(all_terms)
+
+
+    for keyClass in json_data["resulting_generalization"]:
+        print()
+        if keyClass != "average_depth" and keyClass != "average_association":
+            genQ_dict = {}
+            for term in json_data["resulting_generalization"][keyClass]["terms"]:
+                IC = IC_of_a_term(term, mappings, mc, normalization)
+                genQ = 1 - IC / 9.82
+                genQ_dict[term] = genQ
+            for n in range(k_number):
+                max = 0
+                term = ""
+                for k,v in genQ_dict.items():
+                    if v >= max:
+                        max = v
+                        term = k
+                print("Class " + str(keyClass) + " is associated with " + str(id_to_name[term]))
+                genQ_dict[term] = -1
+
+
