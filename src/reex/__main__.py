@@ -28,10 +28,11 @@ parser.add_argument('--step',default=0.9, type = float)
 #parser.add_argument('--reverse_graph', action='store_false', default=True)
 parser.add_argument('--results',default=False, type = bool)
 parser.add_argument('--reverse_graph',default="true", type = str)
-parser.add_argument('--baseline_IC', action='store_false', default=True)
+parser.add_argument('--baseline_IC', action='store_true')
 parser.add_argument('--iterations',default=2, type = int)
 parser.add_argument('--results_path',default='../results', type = str)
 parser.add_argument('--SHAP_explainer',default='kernel', type = str)
+parser.add_argument('--visualize', action='store_true')
 # ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/
 args = parser.parse_args()
 
@@ -64,7 +65,6 @@ parsed_dataset, target_vector, gene_to_onto_map = read_the_dataset(args.expressi
 
 ## generate explanations by using 10fcv
 explanations, attributes = get_instance_explanations(parsed_dataset, target_vector, subset = args.subset_size, classifier_index = args.classifier, explanation_method = args.explanation_method)
-
 final_json = {'id' : hash_value,
               'reasoner':args.reasoner,
               'dataset':args.expression_dataset,
@@ -111,9 +111,13 @@ elif args.reasoner == 'quick_ancestry':
     final_json['resulting_generalization'] = outjson
     
     
+if args.visualize:
+    visualize_sets_of_terms(final_json, ontology_graph, performance_dictionary, target_vector)
+
 dumper = json.dumps(final_json)
 json.dump(dumper, outfile)
-textualize_top_k_terms(final_json, args.mapping_file, args.background_knowledge)
+
+textualize_top_k_terms(final_json, args.mapping_file, args.background_knowledge, target_vector)
 
 
 
@@ -139,7 +143,7 @@ if (args.baseline_IC):
     dumper = json.dumps(final_json)
     json.dump(dumper, outfile_baseline)
     outfile_baseline.close()
-    #print(final_json)
+    print(final_json)
         
 outfile.close()
 

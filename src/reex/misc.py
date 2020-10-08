@@ -12,6 +12,7 @@ from collections import defaultdict
 import sys
 import os
 import numpy as np
+from matplotlib import pyplot as plt
 
 def list_to_ancestor_set(graph, list):
     result = set()
@@ -113,8 +114,69 @@ def get_ontology_ancestor(obo_link = '../ontologies/go-basic.obo', reverse_graph
     logging.info("Found {} unique edge types, {}".format(tnum," | ".join(wholeset)))
     return reverseGraph
     
-def IC_of_a_term(term, mapping, mc, normalization):
 
+def visualize_sets_of_terms(json, ontology, dict, class_names,  k = 3):
+    """
+        Find the most generalized terms for each class, and visualize the subgraph of this term with depth *k*
+    """
+    counter = 0
+    for generalization_result in json['resulting_generalization'].keys():
+        if generalization_result  !="average_depth" and generalization_result != "average_association":
+            set1 = json['resulting_generalization'][generalization_result]["terms"]
+            working_dict = dict[0]
+
+            set_of_top_k_terms = set()
+
+            for iter in range(k):
+                if iter < len(set1):
+                    max = 0
+                    term = ""
+                    for i in set1:
+                        if i in working_dict.keys():
+                            if working_dict[i] >= max:
+                                max = working_dict[i]
+                                term = i
+
+                    set_of_top_k_terms.add(term)
+                    working_dict[term] = -1
+
+            draw_subgraph(set_of_top_k_terms, ontology, str(generalization_result))
+            counter += 1
+
+
+def expand_set(set_of_terms, ontology, iterations):
+    for i in range(iterations):
+        new_terms = set()
+        for term in set_of_terms:
+            to_add =  set([x[1] for x in ontology.out_edges(term)])
+            new_terms.update(to_add)
+        set_of_terms.update(new_terms)
+    return set_of_terms
+
+def draw_subgraph(set_of_terms, ontology, class_name):
+    copy = set()
+    copy.update(set_of_terms)
+    combined_subgraph = expand_set(set_of_terms, ontology, 2)
+    k = ontology.subgraph(combined_subgraph)
+    color_map = []
+    for node in k:
+        if str(node) in copy:
+            color_map.append('red')
+        else:
+            color_map.append('lightgrey')
+
+    #pos = graphviz_layout(k, prog='dot')
+    pos = nx.spring_layout(k)
+    plt.title("Terms for class " + class_name)
+    nx.draw(k, pos = pos, with_labels=True, node_color = color_map)
+    plt.show()
+    plt.clf()
+
+
+def IC_of_a_term(term, mapping, mc, normalization):
+    """
+        Calculates IC of a term
+    """
 
     IC = 0
     if term in mc:
@@ -127,8 +189,10 @@ def IC_of_a_term(term, mapping, mc, normalization):
     return IC
 
 
-def textualize_top_k_terms(json_data, mapping, obo_link, k_number = 5):
-
+def textualize_top_k_terms(json_data, mapping, obo_link, class_names,  k_number = 5):
+    """
+        This method prints the names of the *k_number* most important terms for each class (according to genQ)
+    """
     try:
         graph = obonet.read_obo(obo_link)
     except Exception as es:
@@ -150,8 +214,8 @@ def textualize_top_k_terms(json_data, mapping, obo_link, k_number = 5):
                 mc[el] = 1
     normalization = len(all_terms)
 
-
-    for keyClass in json_data["resulting_generalization"]:
+    counter = 0
+    for keyClass in json_data["resulting_generalization"].keys():
         print()
         if keyClass != "average_depth" and keyClass != "average_association":
             genQ_dict = {}
@@ -168,5 +232,6 @@ def textualize_top_k_terms(json_data, mapping, obo_link, k_number = 5):
                         term = k
                 print("Class " + str(keyClass) + " is associated with " + str(id_to_name[term]))
                 genQ_dict[term] = -1
+        counter += 1
 
 

@@ -147,7 +147,7 @@ def generate_output_json(class_names, subsets, depth, connectedness):
         subset = subsets[i]
         struct = {}
         struct['terms'] = list(subset)
-        outjson[i] = struct
+        outjson[class_names[i]] = struct
     outjson['average_depth'] = depth
     outjson['average_association'] = connectedness
     return outjson
@@ -166,7 +166,7 @@ def generate_output_json_IC(class_names, subsets):
         subset = subsets[i]
         struct = {}
         struct['terms'] = list(subset)
-        outjson[i] = struct
+        outjson[class_names[i]] = struct
     return outjson
 
 def generate_output_json_without_depth(class_names, subsets, connectedness):
@@ -183,7 +183,7 @@ def generate_output_json_without_depth(class_names, subsets, connectedness):
         subset = subsets[i]
         struct = {}
         struct['terms'] = subset
-        outjson[i] = struct
+        outjson[class_names[i]] = struct
     outjson['average_association'] = connectedness
     return outjson
 

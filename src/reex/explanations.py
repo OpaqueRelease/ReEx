@@ -34,9 +34,10 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
     A set of calls for obtaining aggregates of explanations.
     """
     ## label encoding
-    lab_enc = preprocessing.LabelEncoder()
-    training_scores_encoded = lab_enc.fit_transform(Y)
-
+    #lab_enc = preprocessing.LabelEncoder()
+    #training_scores_encoded = lab_enc.fit_transform(Y)
+    training_scores_encoded = Y
+    
     logging.info("Feature pre-selection via Mutual Information ({}).".format(subset))
     #X = X.iloc[:,1:100]
     minf = mutual_info_classif(X.values, training_scores_encoded)
@@ -107,7 +108,7 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
         for label in unique_scores:
             inx = np.where(training_scores_encoded == label)
             tx = VarianceThreshold().fit(X[inx]).variances_
-            final_explanations[label] = tx
+            final_explanations[int(label)] = tx
             
     t_end = time.time() - t_start
     logging.info("Time spent on explanation estimation {}s.".format(t_end))
