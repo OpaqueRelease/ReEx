@@ -35,4 +35,4 @@ For an example run:
 		
 		
 	## Most generalized term's subgraph visualization:
-		![subgraph](./figures/git_vis.png)
+		![subgraph](https://github.com/OpaqueRelease/ReEx/tree/master/figures/git_vis.png?raw=true)
