@@ -216,6 +216,7 @@ def textualize_top_k_terms(json_data, mapping, obo_link, class_names,  k_number 
 
     counter = 0
     for keyClass in json_data["resulting_generalization"].keys():
+        first = True
         print()
         if keyClass != "average_depth" and keyClass != "average_association":
             genQ_dict = {}
@@ -230,7 +231,11 @@ def textualize_top_k_terms(json_data, mapping, obo_link, class_names,  k_number 
                     if v >= max:
                         max = v
                         term = k
-                print("Class " + str(keyClass) + " is associated with " + str(id_to_name[term]))
+                if first:
+                    print("Class " + str(keyClass) + " :− " + str(id_to_name[term]))
+                    first = False
+                else:
+                    print("^" + str(id_to_name[term]))
                 genQ_dict[term] = -1
         counter += 1
 
