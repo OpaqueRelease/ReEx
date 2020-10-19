@@ -18,7 +18,7 @@ parser.add_argument('--mapping_file',default='../example/mapping/goa_human.gaf.g
 parser.add_argument('--intersection_ratio',default=0.2, type = float)
 parser.add_argument('--depth_weight',default=0.1, type = float)
 parser.add_argument('--subset_size', default=1000, type = int)
-parser.add_argument('--classifier', default='spyct', type = str)
+parser.add_argument('--classifier', default='gradient_boosting', type = str)
 parser.add_argument('--absolute',default=0, type = int)
 parser.add_argument('--explanation_method',default='class-ranking', type = str)
 parser.add_argument('--reasoner',default='selective_staircase', type = str)

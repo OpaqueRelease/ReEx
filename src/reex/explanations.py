@@ -26,7 +26,11 @@ import obonet
 import timeit
 import sys
 import os
-import spyct
+
+try:
+    import spyct
+except:
+    pass
 
 def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_boosting", explanation_method = "shap", shap_explainer = "kernel"):
     
@@ -36,49 +40,56 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
     ## label encoding
     #lab_enc = preprocessing.LabelEncoder()
     #training_scores_encoded = lab_enc.fit_transform(Y)
+    # TODO: zakaj je potreben label encoder?
     training_scores_encoded = Y
-    
+
+
     logging.info("Feature pre-selection via Mutual Information ({}).".format(subset))
     #X = X.iloc[:,1:100]
+    #print(X.values)
+    #print(training_scores_encoded)
     minf = mutual_info_classif(X.values, training_scores_encoded)
     top_k = np.argsort(minf)[::-1][0:subset]
     attribute_vector = X.columns[top_k]
-    X = X.astype(float).values[:,top_k]    
+    X = X.astype(float).values[:,top_k]
     skf = StratifiedKFold(n_splits=10)
     performances = []
-    final_explanations = {}
     enx = 0
     t_start = time.time()
     logging.info("Starting importance estimation ..  shape: {}".format(X.shape))
-    
-    per_class_explanations = defaultdict(list)
-    classifier_mapping = ["gradient_boosting", "random_forest", "svm", "spyct"]
-    classifiers = [GradientBoostingClassifier(), RandomForestClassifier(n_estimators=10), svm.SVC(probability=True), spyct.Model()]
-    
 
+    per_class_explanations = defaultdict(list)
+    classifier_mapping = ["gradient_boosting", "random_forest", "svm"]
+    classifiers = [GradientBoostingClassifier(), RandomForestClassifier(n_estimators=10), svm.SVC(probability=True)] ## spyct.Model()
+
+    model_dict = dict(zip(classifier_mapping, classifiers))
+    
     if explanation_method == "shap":
         logging.info("Shapley-based explanations.")
         ## for the correctly predicted instances, remember shap values and compute the expected value at the end.
-        for train_index, test_index in skf.split(X, Y):        
+        for train_index, test_index in skf.split(X, Y):
             enx+=1
-            clf = classifiers[classifier_mapping.index(classifier_index)]
-            x_train = X[train_index,:]
+            clf = model_dict[classifier_index]
+            x_train = X[train_index]
             x_test = X[test_index]
+            
+          
+            
             y_train = Y[train_index]
             y_test = Y[test_index]
-            
+
             ## perform simple feature ranking
             minf = mutual_info_classif(x_train, y_train)
             top_k = np.argsort(minf)[::-1][0:subset]
             x_train = x_train[:,top_k]
             x_test = x_test[:,top_k]
-            
+
             x_train = x_train.astype('float')
             y_train = y_train.astype('float')
             x_test = x_test.astype('float')
             y_test = y_test.astype('float')
-            
-            model = clf.fit(x_train, y_train)    
+
+            model = clf.fit(x_train, y_train)
             preds = model.predict(x_test)
             if len(np.unique(y_train)) > 1:
                 average = "micro"
@@ -98,7 +109,7 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
                 explainer = shap.SamplingExplainer(model.predict_proba, x_train)
             if shap_explainer == "partition":
                 explainer = shap.PartitionExplainer(model.predict_proba, x_train)
-                
+
             for unique_class in set(preds):
                 cors_neg = np.array([enx for enx, pred_tuple in enumerate(zip(preds, y_test)) if pred_tuple[0] == pred_tuple[1] and pred_tuple[0] == unique_class])
                 if cors_neg.size != 0:
@@ -111,7 +122,7 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
             final_explanations[class_name] = np.mean(np.matrix(explanation_set),axis = 0)
         average_perf = (np.mean(performances), np.std(performances))
         logging.info("Final performance: {}".format(average_perf))
-        
+
     elif explanation_method == "class-ranking":
         logging.info("Ranking-based explanations.")
         unique_scores = np.unique(training_scores_encoded)
@@ -120,8 +131,8 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
             inx = np.where(training_scores_encoded == label)
             tx = VarianceThreshold().fit(X[inx]).variances_
             final_explanations[int(label)] = tx
-            
+
     t_end = time.time() - t_start
     logging.info("Time spent on explanation estimation {}s.".format(t_end))
-    
+
     return (final_explanations, attribute_vector)
