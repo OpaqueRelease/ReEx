@@ -54,7 +54,6 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
     per_class_explanations = defaultdict(list)
     classifier_mapping = ["gradient_boosting", "random_forest", "svm", "spyct"]
     classifiers = [GradientBoostingClassifier(), RandomForestClassifier(n_estimators=10), svm.SVC(probability=True), spyct.Model()]
-    explainers = ["kernel", "tree", ]
     
 
     if explanation_method == "shap":
@@ -67,6 +66,18 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
             x_test = X[test_index]
             y_train = Y[train_index]
             y_test = Y[test_index]
+            
+            ## perform simple feature ranking
+            minf = mutual_info_classif(x_train, y_train)
+            top_k = np.argsort(minf)[::-1][0:subset]
+            x_train = x_train[:,top_k]
+            x_test = x_test[:,top_k]
+            
+            x_train = x_train.astype('float')
+            y_train = y_train.astype('float')
+            x_test = x_test.astype('float')
+            y_test = y_test.astype('float')
+            
             model = clf.fit(x_train, y_train)    
             preds = model.predict(x_test)
             if len(np.unique(y_train)) > 1:
