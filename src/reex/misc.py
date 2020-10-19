@@ -52,38 +52,9 @@ def read_the_dataset(dataset_name, attribute_mapping = None):
 #    new_dx.columns = col_names
     logging.info("Considering DF of shape {}".format(new_dx.shape))
     return new_dx, target_vector, gaf_map
-
+    
+    
 def get_ontology(obo_link = '../ontologies/go-basic.obo', reverse_graph = "false"):
-
-    try:
-        graph = obonet.read_obo(obo_link)
-    except Exception as es:
-        logging.info(es)
-        graph = obonet.read_obo(obo_link)
-    logging.info(obo_link)
-    numberOfNodes = graph.number_of_nodes() 
-    
-    logging.info("Number of nodes: {}".format(numberOfNodes))
-    reverseGraph = nx.MultiDiGraph()
-
-    ## generate whole graph first, we'll specialize later.
-    wholeset = set()
-    for edge in list(graph.edges()):
-        edge_info = set(graph.get_edge_data(edge[0], edge[1]).keys())
-        wholeset = wholeset.union(edge_info)
-        for itype in edge_info:
-            if itype == "is_a" or itype == "part_of":
-                if reverse_graph == "true":
-                    reverseGraph.add_edge(edge[1], edge[0], type = itype)
-                else:
-                    reverseGraph.add_edge(edge[0], edge[1], type = itype)
-    logging.info(nx.info(reverseGraph))
-    tnum = len(wholeset)
-    logging.info("Found {} unique edge types, {}".format(tnum," | ".join(wholeset)))
-    return reverseGraph
-    
-    
-def get_ontology_ancestor(obo_link = '../ontologies/go-basic.obo', reverse_graph = "false"):
 
     try:
         graph = obonet.read_obo(obo_link)

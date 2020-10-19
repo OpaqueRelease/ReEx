@@ -48,17 +48,9 @@ reversing = True
 if args.reverse_graph == "false":
     reversing = False
 
-## parse the background knowledge
-if args.reasoner == 'ancestry':
-    ## ancestor search is only supported on diGraphs
-    ontology_graph = get_ontology_ancestor(obo_link = args.background_knowledge, reverse_graph = reversing)
-    
-elif args.reasoner == 'selective_staircase':
-    #ontology_graph = get_ontology(obo_link = args.background_knowledge, reverse_graph = reversing)
-    ontology_graph = get_ontology_ancestor(obo_link=args.background_knowledge, reverse_graph=reversing)
-elif args.reasoner == 'quick_ancestry':
-    ## ancestor search is only supported on diGraphs
-    ontology_graph = get_ontology_ancestor(obo_link=args.background_knowledge, reverse_graph = reversing)
+
+ontology_graph = get_ontology(obo_link = args.background_knowledge, reverse_graph = reversing)
+
 
 ## read the dataset
 parsed_dataset, target_vector, gene_to_onto_map = read_the_dataset(args.expression_dataset, attribute_mapping = args.mapping_file)
