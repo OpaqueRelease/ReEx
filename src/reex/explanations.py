@@ -32,7 +32,9 @@ try:
 except:
     pass
 
-def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_boosting", explanation_method = "shap", shap_explainer = "kernel"):
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_boosting", explanation_method = "shap", shap_explainer = "kernel", text = False):
     
     """
     A set of calls for obtaining aggregates of explanations.
@@ -41,13 +43,19 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
     #lab_enc = preprocessing.LabelEncoder()
     #training_scores_encoded = lab_enc.fit_transform(Y)
     # TODO: zakaj je potreben label encoder?
+
     training_scores_encoded = Y
-
-
+    if text:
+        vectorizer = TfidfVectorizer(analyzer='word',stop_words= 'english')
+        X_vectorized = vectorizer.fit_transform(X)
+        #print(X_vectorized)
+        X_vectorized = X_vectorized.todense()
+        #print(X_vectorized)
+        X = pd.DataFrame(X_vectorized)
+        X.columns = vectorizer.get_feature_names()
+        #X.columns = vectorizer.get_feature_names()
     logging.info("Feature pre-selection via Mutual Information ({}).".format(subset))
     #X = X.iloc[:,1:100]
-    #print(X.values)
-    #print(training_scores_encoded)
     minf = mutual_info_classif(X.values, training_scores_encoded)
     top_k = np.argsort(minf)[::-1][0:subset]
     attribute_vector = X.columns[top_k]
@@ -72,8 +80,6 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
             clf = model_dict[classifier_index]
             x_train = X[train_index]
             x_test = X[test_index]
-            
-          
             
             y_train = Y[train_index]
             y_test = Y[test_index]
@@ -129,10 +135,15 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
         final_explanations = {}
         for label in unique_scores:
             inx = np.where(training_scores_encoded == label)
-            tx = VarianceThreshold().fit(X[inx]).variances_
-            final_explanations[int(label)] = tx
+            if text:
+                ## TODO: feature variance is 0 with text input
+                final_explanations[str(label)] = X[inx]
+            else:
+                tx = VarianceThreshold().fit(X[inx]).variances_
+                final_explanations[str(label)] = tx
 
     t_end = time.time() - t_start
     logging.info("Time spent on explanation estimation {}s.".format(t_end))
+
 
     return (final_explanations, attribute_vector)

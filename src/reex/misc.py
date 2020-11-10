@@ -13,6 +13,8 @@ import sys
 import os
 import numpy as np
 from matplotlib import pyplot as plt
+import nltk
+from nltk.corpus import wordnet as wn
 
 def list_to_ancestor_set(graph, list):
     result = set()
@@ -54,6 +56,14 @@ def read_the_dataset(dataset_name, attribute_mapping = None):
     return new_dx, target_vector, gaf_map
     
     
+def read_textual_dataset(dataset):
+    """
+    Reads a textual dataset
+    """
+    df = pd.read_csv(dataset)
+    return df['text_a'], df['label'].values, None
+    
+    
 def get_ontology(obo_link = '../ontologies/go-basic.obo', reverse_graph = "false"):
 
     try:
@@ -85,7 +95,55 @@ def get_ontology(obo_link = '../ontologies/go-basic.obo', reverse_graph = "false
     logging.info("Found {} unique edge types, {}".format(tnum," | ".join(wholeset)))
     return reverseGraph
     
+def text_mapping(attributes, ontology):
+    """
+    Creates mapping dictionary of words and Wordnet terms
+    """
 
+    mapping = {}
+    for col in attributes:
+        try:
+            #mappedColumn = [x[1] for x in ontology.in_edges(col + ".n.01")][0]
+            mappedColumn = wn.synset(col + ".n.01").name()
+            #mappedColumn = ontology.node(wn.synset().name())
+            #mappedColumn = col + ".n.01"
+            mapping[col] = mappedColumn
+        except:
+            pass
+    return mapping
+    
+    
+def get_ontology_text():
+    """
+    Loads ontology for textual datasets
+    """
+    nltk.download('wordnet')
+    entity = wn.synset('entity.n.01')
+    G = closure_graph_fn(entity, lambda s: s.hyponyms())
+    print(nx.info(G))
+
+    #print(set([x[0] for x in G.in_edges((wn.synset('meeting.n.01').name()))]))
+    return G
+
+def closure_graph_fn(synset, fn):
+    """
+    Constructs a NetworkX graph using nltk
+    """
+    seen = set()
+    graph = nx.DiGraph()
+
+    def recurse(s):
+        if not s in seen:
+            seen.add(s)
+            graph.add_node(s.name())
+            for s1 in fn(s):
+                graph.add_node(s1.name())
+                graph.add_edge(s.name(), s1.name())
+                recurse(s1)
+
+    recurse(synset)
+    return graph
+    
 def visualize_sets_of_terms(json, ontology, dict, class_names,  k = 3):
     """
         Find the most generalized terms for each class, and visualize the subgraph of this term with depth *k*

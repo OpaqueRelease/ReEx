@@ -6,6 +6,7 @@ import logging
 import random
 logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
 logging.getLogger().setLevel(logging.INFO)
+from nltk.corpus import wordnet as wn
 
 try:
     from py3plex.algorithms import hedwig
@@ -129,7 +130,10 @@ def result_printing(class_names, subsets, evaluation):
         for item_key in class_dict.keys():
             normalization += class_dict[item_key]
             counter += 1
-        normalization /= counter
+        if counter == 0:
+            normalization = 0
+        else:    
+            normalization /= counter
         print("RESULT_TAG" + "\t" + str(class_names[i]) + "\t" + str(normalization) + "\t" + str(evaluation[i]) + "\t")
 
 def generate_output_json(class_names, subsets, depth, connectedness):
@@ -197,7 +201,10 @@ def evaluate(original, generalized):
     result = []
     for i in range(len(original)):
         intersection = [value for value in generalized[i] if value in original[i]] 
-        result.append((len(original[i]) - len(intersection)) / len(original[i]))
+        if len(original[i]) == 0:
+            result.append(0)
+        else:
+            result.append((len(original[i]) - len(intersection)) / len(original[i]))
         
     
     return result
@@ -302,14 +309,28 @@ def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, mi
                 above_threshold = set(np.argwhere(greater_than_zero_vector >= threshold).flatten())
             else:
                 above_threshold = set(np.argwhere(np.absolute(greater_than_zero_vector) >= threshold).flatten())
-            if len(above_threshold) > min_terms or threshold < 0.3 * maxVector:
+            if len(above_threshold) > min_terms or threshold < 0.1 * maxVector:
                 break
             threshold *= step
         terms = set([x for enx,x in enumerate(attributes) if enx in above_threshold])
         all_terms = set()
-        for term in terms:
-            mapped = gene_to_go_map[term]
-            all_terms = all_terms.union(mapped)
+        if gene_to_go_map:
+            for term in terms:
+                try:
+                    mapped = gene_to_go_map[term]
+                except:
+                    try:
+                        mapped = wn.synset(term + ".n.01").name()
+                        #mapped = [x[1] for x in ontology.in_edges(term + ".n.01")][0]
+                    except:
+                        mapped = set()
+                if isinstance(mapped, set):
+                    all_terms = all_terms.union(mapped)
+                else:
+                    all_terms.add(mapped)
+
+        else:
+            all_terms = terms
         term_sets_per_class.append(all_terms)
         class_names.append(class_name)
 
