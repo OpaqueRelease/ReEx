@@ -277,7 +277,7 @@ def class_connectedness(ontology, generalized, list_of_termsets):
         return 0
     return connectedness / counter
 
-def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, min_terms, step):
+def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, min_terms, step, abs):
 
     """
     Given explanations, perform thesholding in order to get terms per class.
@@ -291,7 +291,7 @@ def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, mi
     term_sets_per_class = []
     class_names = []
     for class_name, explanation_vector in explanations.items():
-        if abs == 0:
+        if not abs:
             greater_than_zero_vector = explanation_vector[explanation_vector > 0]
             if len(greater_than_zero_vector) < 1:
                 print("Zero size feature vector. Aborting...")
@@ -305,7 +305,7 @@ def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, mi
             maxVector = np.amax(np.absolute(greater_than_zero_vector))
         threshold = maxVector
         while True:
-            if abs == 0:
+            if not abs:
                 above_threshold = set(np.argwhere(greater_than_zero_vector >= threshold).flatten())
             else:
                 above_threshold = set(np.argwhere(np.absolute(greater_than_zero_vector) >= threshold).flatten())
@@ -337,7 +337,7 @@ def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, mi
     return term_sets_per_class, class_names
 
 
-def generalize_selective_staircase(ontology_graph, explanations = None, attributes = None, target_relations = {"is_a","partOf"}, test_run = False, intersectionRatio = 0, abs = 0, print_results = False,gene_to_onto_map = None, min_terms = 5, step = 0.9):
+def generalize_selective_staircase(ontology_graph, explanations = None, attributes = None, target_relations = {"is_a","partOf"}, test_run = False, intersectionRatio = 0, abs = False, print_results = False,gene_to_onto_map = None, min_terms = 5, step = 0.9):
 
     """
     A method which generalizes explanations based on the knowledge graph structure.
@@ -347,13 +347,13 @@ def generalize_selective_staircase(ontology_graph, explanations = None, attribut
     :param target_relations: edge types in ontology used for generalization
     :param test_run: performing a test run
     :param intersectionRatio: maximum ratio of connected terms of other classes to a newly generalized term
-    :param abs: 0 means absolute value is not used when determining terms with highest SHAP values, 1 means absolute value is used
+    :param abs: means whether absolute value is not used when determining terms with highest SHAP values
     :param print_results: whether to print the taken terms before generalization
     :param gene_to_onto_map: file containing mapping from genes to GO terms
     :param min_terms: minimal number of terms taken for generalization per class
     :param step: multiplier for SHAP value threshold used to take most important terms of each class into generalization
     """
-    term_sets_per_class, class_names = extract_terms_from_explanations(explanations,attributes, gene_to_onto_map, min_terms, step)
+    term_sets_per_class, class_names = extract_terms_from_explanations(explanations,attributes, gene_to_onto_map, min_terms, step, abs)
     
     subsets = selective_staircase_multiple_sets(term_sets_per_class, ontology_graph, intersectionRatio = intersectionRatio)
 
@@ -371,7 +371,7 @@ def generalize_selective_staircase(ontology_graph, explanations = None, attribut
 
     return (generate_output_json(class_names, subsets[0], depth, connected), subsets[1])
     
-def baseline_IC(ontology_graph, explanations = None, attributes = None, target_relations = {"is_a","partOf"}, test_run = False, intersectionRatio = 0, abs = 0, print_results = False,gene_to_onto_map = None, min_terms = 5, step = 0.9):
+def baseline_IC(ontology_graph, explanations = None, attributes = None, target_relations = {"is_a","partOf"}, test_run = False, intersectionRatio = 0, abs = False, print_results = False,gene_to_onto_map = None, min_terms = 5, step = 0.9):
     """
     A method which generalizes explanations based on the knowledge graph structure.
     :param ontology_graph: a NetworkX graph.fsampl
@@ -380,14 +380,14 @@ def baseline_IC(ontology_graph, explanations = None, attributes = None, target_r
     :param target_relations: edge types in ontology used for generalization
     :param test_run: performing a test run
     :param intersectionRatio: maximum ratio of connected terms of other classes to a newly generalized term
-    :param abs: 0 means absolute value is not used when determining terms with highest SHAP values, 1 means absolute value is used
+    :param abs: means whether absolute value is not used when determining terms with highest SHAP values
     :param print_results: whether to print the taken terms before generalization
     :param gene_to_onto_map: file containing mapping from genes to GO terms
     :param min_terms: minimal number of terms taken for generalization per class
     :param step: multiplier for SHAP value threshold used to take most important terms of each class into generalization
     """
     
-    term_sets_per_class, class_names = extract_terms_from_explanations(explanations,attributes, gene_to_onto_map, min_terms, step)
+    term_sets_per_class, class_names = extract_terms_from_explanations(explanations,attributes, gene_to_onto_map, min_terms, step, abs)
     evaluation = evaluate(term_sets_per_class, term_sets_per_class)
     return generate_output_json_IC(class_names, term_sets_per_class)
 
@@ -496,7 +496,7 @@ def ancestor_multiple_sets(list_of_termsets, ontology, depthWeight):
     
     
     
-def generalize_ancestry(ontology_graph, explanations = None, attributes = None, target_relations = {"is_a","partOf"}, test_run = False, depthWeight = 0, abs = 0, print_results = False,gene_to_onto_map = None, min_terms = 5, step = 0.9):
+def generalize_ancestry(ontology_graph, explanations = None, attributes = None, target_relations = {"is_a","partOf"}, test_run = False, depthWeight = 0, abs = False, print_results = False,gene_to_onto_map = None, min_terms = 5, step = 0.9):
 
     """
     A method which generalizes explanations based on the knowledge graph structure.
@@ -506,14 +506,14 @@ def generalize_ancestry(ontology_graph, explanations = None, attributes = None, 
     :param target_relations: edge types in ontology used for generalization
     :param test_run: performing a test run
     :param depthWeight: higher weight gives greater importance to depth of generalization than the ration of intersection with terms of other classes 
-    :param abs: 0 means absolute value is not used when determining terms with highest SHAP values, 1 means absolute value is used
+    :param abs: means whether absolute value is not used when determining terms with highest SHAP values
     :param print_results: whether to print the taken terms before generalization
     :param gene_to_onto_map: file containing mapping from genes to GO terms
     :param min_terms: minimal number of terms taken for generalization per class
     :param step: multiplier for SHAP value threshold used to take most important terms of each class into generalization
     """
     
-    term_sets_per_class, class_names = extract_terms_from_explanations(explanations,attributes, gene_to_onto_map, min_terms, step)
+    term_sets_per_class, class_names = extract_terms_from_explanations(explanations,attributes, gene_to_onto_map, min_terms, step, abs)
     
     subsets = ancestor_multiple_sets(term_sets_per_class, ontology_graph, depthWeight = depthWeight)
 
@@ -532,7 +532,7 @@ def generalize_ancestry(ontology_graph, explanations = None, attributes = None, 
 
 
 def generalize_quick_ancestry(ontology_graph, explanations=None, attributes=None, target_relations={"is_a", "partOf"},
-                       test_run=False, intersectionRatio=0, abs=0, print_results=False, gene_to_onto_map=None, min_terms=5,
+                       test_run=False, intersectionRatio=0, abs=False, print_results=False, gene_to_onto_map=None, min_terms=5,
                        step=0.9, iterations=20):
     """
     A method which generalizes explanations based on the knowledge graph structure.
@@ -542,7 +542,7 @@ def generalize_quick_ancestry(ontology_graph, explanations=None, attributes=None
     :param target_relations: edge types in ontology used for generalization
     :param test_run: performing a test run
     :param intersection_ratio: maximum ratio of connected terms of other classes to a newly generalized term
-    :param abs: 0 means absolute value is not used when determining terms with highest SHAP values, 1 means absolute value is used
+    :param abs: means whether absolute value is not used when determining terms with highest SHAP values
     :param print_results: whether to print the taken terms before generalization
     :param gene_to_onto_map: file containing mapping from genes to GO terms
     :param min_terms: minimal number of terms taken for generalization per class
@@ -550,7 +550,7 @@ def generalize_quick_ancestry(ontology_graph, explanations=None, attributes=None
     """
 
     term_sets_per_class, class_names = extract_terms_from_explanations(explanations, attributes, gene_to_onto_map,
-                                                                       min_terms, step)
+                                                                       min_terms, step, abs)
 
     subsets = quick_ancestry_multiple_sets(term_sets_per_class, ontology_graph, intersection_ratio=intersectionRatio, iterations=iterations)
 
