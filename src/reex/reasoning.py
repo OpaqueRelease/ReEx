@@ -320,8 +320,7 @@ def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, mi
                     mapped = gene_to_go_map[term]
                 except:
                     try:
-                        mapped = wn.synset(term + ".n.01").name()
-                        #mapped = [x[1] for x in ontology.in_edges(term + ".n.01")][0]
+                        mapped = wn.synsets(term)[0].name()
                     except:
                         mapped = set()
                 if isinstance(mapped, set):

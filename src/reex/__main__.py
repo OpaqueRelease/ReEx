@@ -81,7 +81,6 @@ final_json = {'id' : hash_value,
               'min_terms':args.min_terms,
               'step':args.step}
 
-
 outfile = open(path_to_results+'/'+str(hash_value)+'.json', 'w')
 
 ## reason and output
@@ -118,13 +117,15 @@ elif args.reasoner == 'quick_ancestry':
         final_json['scores'] = scores
     final_json['intersection_ratio'] = args.intersection_ratio
     final_json['resulting_generalization'] = outjson
-    
-    
+
+print("Generalization complete.")
+
 if args.visualize:
     visualize_sets_of_terms(final_json, ontology_graph, performance_dictionary, target_vector)
 
 dumper = json.dumps(final_json)
 json.dump(dumper, outfile)
+print("JSON result saved.")
 
 if not args.text_input:
     textualize_top_k_terms(final_json, args.mapping_file, args.background_knowledge, target_vector)
@@ -154,5 +155,7 @@ if (args.baseline_IC):
     print(final_json)
         
 outfile.close()
+
+
 
 

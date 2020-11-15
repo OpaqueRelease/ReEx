@@ -135,12 +135,8 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
         final_explanations = {}
         for label in unique_scores:
             inx = np.where(training_scores_encoded == label)
-            if text:
-                ## TODO: feature variance is 0 with text input
-                final_explanations[str(label)] = X[inx]
-            else:
-                tx = VarianceThreshold().fit(X[inx]).variances_
-                final_explanations[str(label)] = tx
+            tx = VarianceThreshold().fit(X[inx]).variances_
+            final_explanations[str(label)] = tx
 
     t_end = time.time() - t_start
     logging.info("Time spent on explanation estimation {}s.".format(t_end))
