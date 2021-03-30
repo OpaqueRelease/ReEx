@@ -67,7 +67,7 @@ pycodestyle==2.5.0
 pycosat==0.6.3
 pycparser==2.20
 pydot==1.4.1
-Pygments==2.5.2
+Pygments==2.7.4
 pylint==2.5.0
 pymongo==3.10.1
 pyOpenSSL==19.0.0
