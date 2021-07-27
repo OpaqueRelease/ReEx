@@ -4,9 +4,10 @@ import networkx as nx
 import sys
 import logging
 import random
+from nltk.corpus import wordnet as wn
 logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
 logging.getLogger().setLevel(logging.INFO)
-from nltk.corpus import wordnet as wn
+import copy
 
 try:
     from py3plex.algorithms import hedwig
@@ -34,7 +35,8 @@ def selective_staircase_multiple_sets(list_of_termsets, ontology, intersectionRa
     """
     :param list_of_termsets: termsets as found by explanations
     :param ontology: a nx graph
-    :param intersectionRatio: ratio of connected terms of other classes that is allowed in generalization
+    :param intersectionRatio: ratio of connected terms of other classes that is allowed in
+    Generalizes sets of terms using Selective staircase algorithm
     """
     
     converged = np.ones(len(list_of_termsets))
@@ -132,7 +134,7 @@ def result_printing(class_names, subsets, evaluation):
             counter += 1
         if counter == 0:
             normalization = 0
-        else:    
+        else:
             normalization /= counter
         print("RESULT_TAG" + "\t" + str(class_names[i]) + "\t" + str(normalization) + "\t" + str(evaluation[i]) + "\t")
 
@@ -200,13 +202,14 @@ def evaluate(original, generalized):
     """
     result = []
     for i in range(len(original)):
-        intersection = [value for value in generalized[i] if value in original[i]] 
         if len(original[i]) == 0:
             result.append(0)
         else:
-            result.append((len(original[i]) - len(intersection)) / len(original[i]))
-        
-    
+            intersection = [value for value in generalized[i] if value in original[i]]
+            if len(original[i]) == 0:
+                result.append(0)
+            else:
+                result.append((len(original[i]) - len(intersection)) / len(original[i]))
     return result
     
 def generalization_depth(performance_dictionary):
@@ -223,7 +226,7 @@ def generalization_depth(performance_dictionary):
             generalization_average += class_dict[item_key]
             counter += 1
     if counter == 0:
-        return -1
+        return 0
     return generalization_average / counter
     
     
@@ -268,22 +271,28 @@ def class_connectedness(ontology, generalized, list_of_termsets):
             if not basic_term:
                 descendants = nx.descendants(ontology,term)
                 counter += 1
+                mid_sum = 0
+                all_terms = 0
                 for other_sets in range(len(list_of_termsets)):
-                    if other_sets != i and len(set.intersection(descendants, list_of_termsets[other_sets])) > 0:
-                        connectedness += 1
+                    if other_sets != i:
+                        connected_to = len(set.intersection(descendants, list_of_termsets[other_sets]))
+                        all_terms += len(list_of_termsets[other_sets])
+                        mid_sum += connected_to
+                if all_terms != 0:
+                    connectedness += (mid_sum/all_terms)
+                
 
     if counter == 0:
-        print(generalized)
         return 0
     return connectedness / counter
 
-def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, min_terms, step, abs):
+def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, min_terms, step, ontology, abs):
 
     """
     Given explanations, perform thesholding in order to get terms per class.
     :param explanations: Object containing SHAP-based explanations or similar.
     :param attributes: A vector of attributes.
-    :param gene_to_go_map: file containing mapping from genes to GO terms
+    :param gene_to_go_map: dictionary containing mapping from genes to GO terms
     :param min_terms: minimal number of terms taken for generalization per class
     :param step: multiplier for SHAP value threshold used to take most important terms of each class into generalization
     """
@@ -291,14 +300,14 @@ def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, mi
     term_sets_per_class = []
     class_names = []
     for class_name, explanation_vector in explanations.items():
-        if not abs:
-            greater_than_zero_vector = explanation_vector[explanation_vector > 0]
+        if abs:
+            greater_than_zero_vector = explanation_vector[np.absolute(explanation_vector) > 0]
             if len(greater_than_zero_vector) < 1:
                 print("Zero size feature vector. Aborting...")
                 sys.exit()
             maxVector = np.amax(greater_than_zero_vector)
         else:
-            greater_than_zero_vector = explanation_vector[np.absolute(explanation_vector) > 0]
+            greater_than_zero_vector = explanation_vector[explanation_vector > 0]
             if len(greater_than_zero_vector) < 1:
                 print("Zero size feature vector. Aborting...")
                 sys.exit()
@@ -309,10 +318,15 @@ def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, mi
                 above_threshold = set(np.argwhere(greater_than_zero_vector >= threshold).flatten())
             else:
                 above_threshold = set(np.argwhere(np.absolute(greater_than_zero_vector) >= threshold).flatten())
-            if len(above_threshold) > min_terms or threshold < 0.1 * maxVector:
+            if len(above_threshold) > min_terms or threshold < 0.03 * maxVector:
+                #threshold = 0.0001
+                above_threshold = set(np.argwhere(np.absolute(greater_than_zero_vector) >= threshold).flatten())
                 break
             threshold *= step
-        terms = set([x for enx,x in enumerate(attributes) if enx in above_threshold])
+        #terms = set([x for enx,x in enumerate(attributes) if enx in above_threshold])
+        terms = set()
+        for index in above_threshold:
+            terms.add(attributes[index])
         all_terms = set()
         if gene_to_go_map:
             for term in terms:
@@ -321,8 +335,10 @@ def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, mi
                 except:
                     try:
                         mapped = wn.synsets(term)[0].name()
+                        #mapped = [x[1] for x in ontology.in_edges(term + ".n.01")][0]
                     except:
                         mapped = set()
+                        print("Failed to map: " + str(term))
                 if isinstance(mapped, set):
                     all_terms = all_terms.union(mapped)
                 else:
@@ -352,8 +368,9 @@ def generalize_selective_staircase(ontology_graph, explanations = None, attribut
     :param min_terms: minimal number of terms taken for generalization per class
     :param step: multiplier for SHAP value threshold used to take most important terms of each class into generalization
     """
-    term_sets_per_class, class_names = extract_terms_from_explanations(explanations,attributes, gene_to_onto_map, min_terms, step, abs)
-    
+    term_sets_per_class, class_names = extract_terms_from_explanations(explanations,attributes, gene_to_onto_map, min_terms, step, ontology_graph, abs)
+
+    baseline_terms = copy.deepcopy(term_sets_per_class)
     subsets = selective_staircase_multiple_sets(term_sets_per_class, ontology_graph, intersectionRatio = intersectionRatio)
 
     
@@ -367,10 +384,9 @@ def generalize_selective_staircase(ontology_graph, explanations = None, attribut
         for i in range(len(term_sets_per_class)):
             print("class: " + str(i) + str(list(term_sets_per_class[i])))
         result_printing(class_names, subsets, evaluation)
-
-    return (generate_output_json(class_names, subsets[0], depth, connected), subsets[1])
+    return (generate_output_json(class_names, subsets[0], depth, connected), subsets[1], baseline_terms, class_names)
     
-def baseline_IC(ontology_graph, explanations = None, attributes = None, target_relations = {"is_a","partOf"}, test_run = False, intersectionRatio = 0, abs = False, print_results = False,gene_to_onto_map = None, min_terms = 5, step = 0.9):
+def baseline_IC(baseline_terms, class_names):
     """
     A method which generalizes explanations based on the knowledge graph structure.
     :param ontology_graph: a NetworkX graph.fsampl
@@ -379,16 +395,16 @@ def baseline_IC(ontology_graph, explanations = None, attributes = None, target_r
     :param target_relations: edge types in ontology used for generalization
     :param test_run: performing a test run
     :param intersectionRatio: maximum ratio of connected terms of other classes to a newly generalized term
-    :param abs: means whether absolute value is not used when determining terms with highest SHAP values
+    :param abs: means whether absolute value is used when determining terms with highest SHAP values
     :param print_results: whether to print the taken terms before generalization
     :param gene_to_onto_map: file containing mapping from genes to GO terms
     :param min_terms: minimal number of terms taken for generalization per class
     :param step: multiplier for SHAP value threshold used to take most important terms of each class into generalization
     """
     
-    term_sets_per_class, class_names = extract_terms_from_explanations(explanations,attributes, gene_to_onto_map, min_terms, step, abs)
-    evaluation = evaluate(term_sets_per_class, term_sets_per_class)
-    return generate_output_json_IC(class_names, term_sets_per_class)
+    #term_sets_per_class, class_names = extract_terms_from_explanations(explanations,attributes, gene_to_onto_map, min_terms, step, ontology_graph, abs)
+
+    return generate_output_json_IC(class_names, baseline_terms)
 
 def generalizeHedwig(ontology_graph, explanations = None, attributes = None, gene_to_onto_map = None):
     """
@@ -399,7 +415,7 @@ def generalizeHedwig(ontology_graph, explanations = None, attributes = None, gen
     :param gene_to_onto_map: file containing mapping from genes to GO terms
     """
 
-    term_sets_per_class, class_names = extract_terms_from_explanations(explanations,attributes,gene_to_onto_map)
+    term_sets_per_class, class_names = extract_terms_from_explanations(explanations,attributes,gene_to_onto_map,ontology_graph, abs)
     partition = {}
     for enx, cx in enumerate(term_sets_per_class):
         for en in cx:
@@ -447,33 +463,33 @@ def ancestor_multiple_sets(list_of_termsets, ontology, depthWeight):
                     #for item2 in range(setLength):
                     if item1 != item2: 
                         #add ancestor of the pair of elements
-                        ancestor_element = nx.lowest_common_ancestor(ontology, list_of_this_termset[item1], list_of_this_termset[item2])
-                        if ancestor_element is not None:
-                            #find just how much did we generalize and how much intersection there is with other classes
-                            generalizationDepth = nx.shortest_path_length(ontology, ancestor_element, list_of_this_termset[item1])
-                            depth2 = nx.shortest_path_length(ontology, ancestor_element, list_of_this_termset[item2])
-                            # UP TO DISCUSSION - we are interested in the lowest of values
-                            if depth2 < generalizationDepth:
-                                generalizationDepth = depth2
-                            #check intersection with other classes
-                            descendants_of_val = nx.descendants(ontology,ancestor_element)  
-                            intersectionCount = 0
-                            numberOfTerms = 0
-                            for setTwo in range(len(tmp_ancestor_storage)):
-                                if enx != setTwo:
-                                    intersectionCount+=len(set.intersection(descendants_of_val, list_of_termsets[setTwo]))
-                                    numberOfTerms += len(list_of_termsets[setTwo])
-                           
+                        if ontology.has_node(list_of_this_termset[item1]) and ontology.has_node(list_of_this_termset[item2]):
+                            ancestor_element = nx.lowest_common_ancestor(ontology, list_of_this_termset[item1], list_of_this_termset[item2])
+                            if ancestor_element is not None:
+                                #find just how much did we generalize and how much intersection there is with other classes
+                                generalizationDepth = nx.shortest_path_length(ontology, ancestor_element, list_of_this_termset[item1])
+                                depth2 = nx.shortest_path_length(ontology, ancestor_element, list_of_this_termset[item2])
+
+                                generalizationDepth = (depth2 + generalizationDepth) / 2
+                                #check intersection with other classes
+                                descendants_of_val = nx.descendants(ontology,ancestor_element)  
+                                intersectionCount = 0
+                                numberOfTerms = 0
+                                for setTwo in range(len(tmp_ancestor_storage)):
+                                    if enx != setTwo:
+                                        intersectionCount+=len(set.intersection(descendants_of_val, list_of_termsets[setTwo]))
+                                        numberOfTerms += len(list_of_termsets[setTwo])
                             
-                            # UP TO DISCUSSION - based on generalizationDepth and intersectionCount we somehow decide whether to include the element or not
-                            intersectionRatio = intersectionCount/numberOfTerms
-                            if generalizationDepth == -1 and intersectionRatio == 0 or generalizationDepth * depthWeight == 0 or intersectionRatio/(generalizationDepth * depthWeight) < 0.5:
-                                pairAncestorSet.add(ancestor_element)
-                                used[item1] = 1
-                                used[item2] = 1
-                                ## average depth + new depth
-                                combinedDepth[ancestor_element] = (combinedDepth[list_of_this_termset[item1]] + combinedDepth[list_of_this_termset[item2]]) / 2 + generalizationDepth
-                                #combinedDepth += generalizationDepth
+                                
+                                # UP TO DISCUSSION - based on generalizationDepth and intersectionCount we somehow decide whether to include the element or not
+                                intersectionRatio = intersectionCount/numberOfTerms
+                                if generalizationDepth == -1 and intersectionRatio == 0 or generalizationDepth * depthWeight == 0 or intersectionRatio/(generalizationDepth * depthWeight) < 0.5:
+                                    pairAncestorSet.add(ancestor_element)
+                                    used[item1] = 1
+                                    used[item2] = 1
+                                    ## average depth + new depth
+                                    combinedDepth[ancestor_element] = (combinedDepth[list_of_this_termset[item1]] + combinedDepth[list_of_this_termset[item2]]) / 2 + generalizationDepth
+                                    #combinedDepth += generalizationDepth
                 #pairAncestorSet.add(list_of_this_termset[e] for e in range(setLength) if used[e] == 0)
                 for k in range(len(used)):
                     if used[k] == 0:
@@ -505,15 +521,15 @@ def generalize_ancestry(ontology_graph, explanations = None, attributes = None, 
     :param target_relations: edge types in ontology used for generalization
     :param test_run: performing a test run
     :param depthWeight: higher weight gives greater importance to depth of generalization than the ration of intersection with terms of other classes 
-    :param abs: means whether absolute value is not used when determining terms with highest SHAP values
+    :param abs: means whether absolute value is used when determining terms with highest SHAP values
     :param print_results: whether to print the taken terms before generalization
     :param gene_to_onto_map: file containing mapping from genes to GO terms
     :param min_terms: minimal number of terms taken for generalization per class
     :param step: multiplier for SHAP value threshold used to take most important terms of each class into generalization
     """
     
-    term_sets_per_class, class_names = extract_terms_from_explanations(explanations,attributes, gene_to_onto_map, min_terms, step, abs)
-    
+    term_sets_per_class, class_names = extract_terms_from_explanations(explanations,attributes, gene_to_onto_map, min_terms, step, ontology_graph, abs)
+    baseline_terms = copy.deepcopy(term_sets_per_class)
     subsets = ancestor_multiple_sets(term_sets_per_class, ontology_graph, depthWeight = depthWeight)
 
         
@@ -527,7 +543,7 @@ def generalize_ancestry(ontology_graph, explanations = None, attributes = None, 
             print(str(list(term_sets_per_class[i])))
         result_printing(class_names, subsets, evaluation)
 
-    return generate_output_json(class_names, subsets[0], depth, connected)
+    return (generate_output_json(class_names, subsets[0], depth, connected), subsets[1], term_sets_per_class, class_names)
 
 
 def generalize_quick_ancestry(ontology_graph, explanations=None, attributes=None, target_relations={"is_a", "partOf"},
@@ -549,18 +565,12 @@ def generalize_quick_ancestry(ontology_graph, explanations=None, attributes=None
     """
 
     term_sets_per_class, class_names = extract_terms_from_explanations(explanations, attributes, gene_to_onto_map,
-                                                                       min_terms, step, abs)
+                                                                       min_terms, step, ontology_graph, abs)
 
     subsets = quick_ancestry_multiple_sets(term_sets_per_class, ontology_graph, intersection_ratio=intersectionRatio, iterations=iterations)
 
     evaluation = evaluate(term_sets_per_class, subsets)
     connected = class_connectedness(ontology_graph, subsets, term_sets_per_class)
-
-    #if print_results:
-     #   print("before generalization:")
-      #  for i in range(len(term_sets_per_class)):
-       #     print(str(list(term_sets_per_class[i])))
-        #result_printing(class_names, subsets, evaluation)
 
     return generate_output_json_without_depth(class_names, subsets, connected)
 

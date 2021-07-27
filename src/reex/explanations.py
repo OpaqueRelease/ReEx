@@ -19,6 +19,7 @@ from sklearn import svm
 import logging
 logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
 logging.getLogger().setLevel(logging.INFO)
+import pickle
 import time
 import gzip
 import networkx as nx
@@ -34,8 +35,18 @@ except:
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_boosting", explanation_method = "shap", shap_explainer = "kernel", text = False):
-    
+def fit_space(X, model_path="."):
+    t2v_instance, tokenizer = load()
+    features_matrix = []
+    semantic_features = t2v_instance.transform(X)
+    features_matrix.append(semantic_features)
+    tfidf_words = tokenizer.transform(build_dataframe(X))
+    features_matrix.append(tfidf_words)
+    features = hstack(features_matrix)
+    return features
+
+
+def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_boosting", explanation_method = "shap", shap_explainer = "kernel", text = False, model_path=None):
     """
     A set of calls for obtaining aggregates of explanations.
     """
@@ -48,19 +59,15 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
     if text:
         vectorizer = TfidfVectorizer(analyzer='word',stop_words= 'english')
         X_vectorized = vectorizer.fit_transform(X)
-        #print(X_vectorized)
         X_vectorized = X_vectorized.todense()
-        #print(X_vectorized)
         X = pd.DataFrame(X_vectorized)
         X.columns = vectorizer.get_feature_names()
-        #X.columns = vectorizer.get_feature_names()
     logging.info("Feature pre-selection via Mutual Information ({}).".format(subset))
-    #X = X.iloc[:,1:100]
     minf = mutual_info_classif(X.values, training_scores_encoded)
     top_k = np.argsort(minf)[::-1][0:subset]
     attribute_vector = X.columns[top_k]
     X = X.astype(float).values[:,top_k]
-    skf = StratifiedKFold(n_splits=10)
+    skf = StratifiedKFold(n_splits=3)
     performances = []
     enx = 0
     t_start = time.time()
@@ -77,7 +84,12 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
         ## for the correctly predicted instances, remember shap values and compute the expected value at the end.
         for train_index, test_index in skf.split(X, Y):
             enx+=1
-            clf = model_dict[classifier_index]
+            model = None
+            clf = None
+            if model_path:
+                model = pickle.load(open(model_path, 'rb'))
+            else:
+                clf = model_dict[classifier_index]
             x_train = X[train_index]
             x_test = X[test_index]
             
@@ -90,12 +102,14 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
             x_train = x_train[:,top_k]
             x_test = x_test[:,top_k]
 
-            x_train = x_train.astype('float')
-            y_train = y_train.astype('float')
-            x_test = x_test.astype('float')
-            y_test = y_test.astype('float')
+            if not text:
+                x_train = x_train.astype('float')
+                y_train = y_train.astype('float')
+                x_test = x_test.astype('float')
+                y_test = y_test.astype('float')
 
-            model = clf.fit(x_train, y_train)
+            if not model_path:
+                model = clf.fit(x_train, y_train)
             preds = model.predict(x_test)
             if len(np.unique(y_train)) > 1:
                 average = "micro"
@@ -104,7 +118,7 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
             logging.info("Performance in fold {}, {} (F1)".format(enx, perf))
             ## different shap explainers
             if shap_explainer == "kernel":
-                explainer = shap.KernelExplainer(model.predict_proba, x_train)
+                explainer = shap.KernelExplainer(model.decision_function, x_train)
             if shap_explainer == "tree":
                 explainer = shap.TreeExplainer(model.predict_proba, x_train)
             if shap_explainer == "gradient":
@@ -125,7 +139,7 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
 
         final_explanations = {}
         for class_name, explanation_set in per_class_explanations.items():
-            final_explanations[class_name] = np.mean(np.matrix(explanation_set),axis = 0)
+            final_explanations[str(class_name)] = np.mean(np.matrix(explanation_set),axis = 0)
         average_perf = (np.mean(performances), np.std(performances))
         logging.info("Final performance: {}".format(average_perf))
 
@@ -140,6 +154,5 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
 
     t_end = time.time() - t_start
     logging.info("Time spent on explanation estimation {}s.".format(t_end))
-
 
     return (final_explanations, attribute_vector)
