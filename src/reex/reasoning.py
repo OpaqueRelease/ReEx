@@ -459,37 +459,37 @@ def ancestor_multiple_sets(list_of_termsets, ontology, depthWeight):
                 #boolean for whether the term was used to produce a pair ancestor or not
                 used = [0] * setLength
                 for item1 in range(setLength):
-                    item2 = random.randint(0,setLength-1)
-                    #for item2 in range(setLength):
-                    if item1 != item2: 
-                        #add ancestor of the pair of elements
-                        if ontology.has_node(list_of_this_termset[item1]) and ontology.has_node(list_of_this_termset[item2]):
-                            ancestor_element = nx.lowest_common_ancestor(ontology, list_of_this_termset[item1], list_of_this_termset[item2])
-                            if ancestor_element is not None:
-                                #find just how much did we generalize and how much intersection there is with other classes
-                                generalizationDepth = nx.shortest_path_length(ontology, ancestor_element, list_of_this_termset[item1])
-                                depth2 = nx.shortest_path_length(ontology, ancestor_element, list_of_this_termset[item2])
+                    #item2 = random.randint(0,setLength-1)
+                    for item2 in range(setLength):
+                        if item1 != item2: 
+                            #add ancestor of the pair of elements
+                            if ontology.has_node(list_of_this_termset[item1]) and ontology.has_node(list_of_this_termset[item2]):
+                                ancestor_element = nx.lowest_common_ancestor(ontology, list_of_this_termset[item1], list_of_this_termset[item2])
+                                if ancestor_element is not None:
+                                    #find just how much did we generalize and how much intersection there is with other classes
+                                    generalizationDepth = nx.shortest_path_length(ontology, ancestor_element, list_of_this_termset[item1])
+                                    depth2 = nx.shortest_path_length(ontology, ancestor_element, list_of_this_termset[item2])
 
-                                generalizationDepth = (depth2 + generalizationDepth) / 2
-                                #check intersection with other classes
-                                descendants_of_val = nx.descendants(ontology,ancestor_element)  
-                                intersectionCount = 0
-                                numberOfTerms = 0
-                                for setTwo in range(len(tmp_ancestor_storage)):
-                                    if enx != setTwo:
-                                        intersectionCount+=len(set.intersection(descendants_of_val, list_of_termsets[setTwo]))
-                                        numberOfTerms += len(list_of_termsets[setTwo])
-                            
+                                    generalizationDepth = (depth2 + generalizationDepth) / 2
+                                    #check intersection with other classes
+                                    descendants_of_val = nx.descendants(ontology,ancestor_element)  
+                                    intersectionCount = 0
+                                    numberOfTerms = 0
+                                    for setTwo in range(len(tmp_ancestor_storage)):
+                                        if enx != setTwo:
+                                            intersectionCount+=len(set.intersection(descendants_of_val, list_of_termsets[setTwo]))
+                                            numberOfTerms += len(list_of_termsets[setTwo])
                                 
-                                # UP TO DISCUSSION - based on generalizationDepth and intersectionCount we somehow decide whether to include the element or not
-                                intersectionRatio = intersectionCount/numberOfTerms
-                                if generalizationDepth == -1 and intersectionRatio == 0 or generalizationDepth * depthWeight == 0 or intersectionRatio/(generalizationDepth * depthWeight) < 0.5:
-                                    pairAncestorSet.add(ancestor_element)
-                                    used[item1] = 1
-                                    used[item2] = 1
-                                    ## average depth + new depth
-                                    combinedDepth[ancestor_element] = (combinedDepth[list_of_this_termset[item1]] + combinedDepth[list_of_this_termset[item2]]) / 2 + generalizationDepth
-                                    #combinedDepth += generalizationDepth
+                                    
+                                    # UP TO DISCUSSION - based on generalizationDepth and intersectionCount we somehow decide whether to include the element or not
+                                    intersectionRatio = intersectionCount/numberOfTerms
+                                    if generalizationDepth == -1 and intersectionRatio == 0 or generalizationDepth * depthWeight == 0 or intersectionRatio/(generalizationDepth * depthWeight) < 0.5:
+                                        pairAncestorSet.add(ancestor_element)
+                                        used[item1] = 1
+                                        used[item2] = 1
+                                        ## average depth + new depth
+                                        combinedDepth[ancestor_element] = (combinedDepth[list_of_this_termset[item1]] + combinedDepth[list_of_this_termset[item2]]) / 2 + generalizationDepth
+                                        #combinedDepth += generalizationDepth
                 #pairAncestorSet.add(list_of_this_termset[e] for e in range(setLength) if used[e] == 0)
                 for k in range(len(used)):
                     if used[k] == 0:
