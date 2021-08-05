@@ -1,9 +1,11 @@
-ReEx  (Reasoning  with  Explanations) is a  method  applicable  to  explanations  generated  by  arbitrary  instance-level explainers, such as SHAP, which, by 
+ReEx  (Reasoning  from  Explanations) is a  method  applicable  to  explanations  generated  by  arbitrary  instance-level explainers, such as SHAP, which, by 
 using background knowledge in  the  form  of  ontologies,  generalize  instance  explanations  in  a  least-general-generalization-like manner. 
 The resulting symbolic descriptions are  specific  for  individual  classes  and  offer  explainable  generalizations based on the explainer’s output. 
 
 # Basic Usage:
-`python reex --expression_dataset {path_to_dataset} --mapping_file {path_to_mapping} --background_knowledge {path_or_link_to_obo_file} --results_path {path_for_results} --visualize`
+`python reex --expression_dataset {path_to_dataset} --mapping_file {path_to_mapping} --background_knowledge {path_or_link_to_obo_file} --results_path {path_for_results} --reasoner {reasoner_name}`
+
+If you are using a textual datates use `text_input`.
 
 # Example:
 For an example run:
