@@ -5,7 +5,7 @@ The resulting symbolic descriptions are  specific  for  individual  classes  and
 # Basic Usage:
 `python reex --expression_dataset {path_to_dataset} --mapping_file {path_to_mapping} --background_knowledge {path_or_link_to_obo_file} --results_path {path_for_results} --reasoner {reasoner_name}`
 
-If you are using a textual datates use `text_input`.
+If you are using a textual dataset use `text_input`.
 
 # Example:
 For an example run:
