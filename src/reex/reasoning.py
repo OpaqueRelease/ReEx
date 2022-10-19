@@ -301,6 +301,8 @@ def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, mi
     class_names = []
     for class_name, explanation_vector in explanations.items():
         if abs:
+            print(explanation_vector)
+            print(np.absolute(explanation_vector) > 0)
             greater_than_zero_vector = explanation_vector[np.absolute(explanation_vector) > 0]
             if len(greater_than_zero_vector) < 1:
                 print("Zero size feature vector. Aborting...")
@@ -334,6 +336,7 @@ def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, mi
                     mapped = gene_to_go_map[term]
                 except:
                     try:
+                        print(wn.synsets(term))
                         mapped = wn.synsets(term)[0].name()
                         #mapped = [x[1] for x in ontology.in_edges(term + ".n.01")][0]
                     except:

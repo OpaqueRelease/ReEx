@@ -8,6 +8,7 @@ import json
 import os
 import os.path
 from os import path 
+from bert_shap import *
 
 parser = argparse.ArgumentParser()    
 parser.add_argument('--expression_dataset',default='../example/data/Breast_A.csv', type = str)
@@ -31,6 +32,8 @@ parser.add_argument('--text_input', action='store_true')
 parser.add_argument('--visualize', action='store_true')
 parser.add_argument('--model',default=None, type = str)
 parser.add_argument('--results_path',default='../results', type = str)
+parser.add_argument('--bert', action='store_true')
+
 
 
 args = parser.parse_args()
@@ -57,7 +60,10 @@ if args.text_input:
 else:
     parsed_dataset, target_vector, gene_to_onto_map = read_the_dataset(args.expression_dataset, attribute_mapping = args.mapping_file)
 
-explanations, attributes = get_instance_explanations(parsed_dataset, target_vector, subset = args.subset_size, classifier_index = args.classifier, explanation_method = args.explanation_method, shap_explainer = args.SHAP_explainer, text = args.text_input, model_path=args.model)
+if args.bert:
+    explanations, attributes = get_explanations(parsed_dataset, target_vector)
+else:
+    explanations, attributes = get_instance_explanations(parsed_dataset, target_vector, subset = args.subset_size, classifier_index = args.classifier, explanation_method = args.explanation_method, shap_explainer = args.SHAP_explainer, text = args.text_input, model_path=args.model)
 if args.text_input:
     gene_to_onto_map = text_mapping(attributes)
 final_json = {'id' : hash_value,

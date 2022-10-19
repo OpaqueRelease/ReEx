@@ -1,5 +1,6 @@
 ## This is the main blob of code responsible for generation of explanations
 
+from typing import final
 import shap
 from sklearn.feature_selection import VarianceThreshold
 import numpy as np
@@ -155,4 +156,6 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
     t_end = time.time() - t_start
     logging.info("Time spent on explanation estimation {}s.".format(t_end))
 
+    print(final_explanations)
+    print(attribute_vector)
     return (final_explanations, attribute_vector)

@@ -42,13 +42,17 @@ def text_mapping(attributes):
     mapping = {}
     for col in attributes:
         try:
-            syns = wn.synsets(col)
-            mappedColumn = syns[0].name()
+            #syns = wn.synsets(col)
+            #mappedColumn = syns[0].name()
+            #mapping[col] = mappedColumn
+            if col is not None:
+                mapping[col] = col  
+
+
             #mappedColumn = [x[1] for x in ontology.in_edges(col + ".n.01")][0]
             #mappedColumn = wn.synset(col + ".n.01").name()
             #mappedColumn = ontology.node(wn.synset().name())
             #mappedColumn = col + ".n.01"
-            mapping[col] = mappedColumn
         except:
             print("failed on: " + str(col))
     print(mapping)
@@ -58,8 +62,9 @@ def read_textual_dataset(dataset):
     """
     Reads a textual dataset
     """
-    df = pd.read_csv(dataset, sep='\t')
-    return df['text_a'], df['label'].values, None
+    df = pd.read_csv(dataset, sep='\t', header=0)
+    print(df)
+    return df['data'], df['label'].values, None
 
 def read_the_dataset(dataset_name, attribute_mapping = None):
     """
