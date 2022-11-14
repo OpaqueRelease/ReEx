@@ -313,22 +313,27 @@ def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, mi
             if len(greater_than_zero_vector) < 1:
                 print("Zero size feature vector. Aborting...")
                 sys.exit()
-            maxVector = np.amax(np.absolute(greater_than_zero_vector))
+            maxVector = np.amax(greater_than_zero_vector) #np.absolute ?
         threshold = maxVector
         while True:
             if not abs:
-                above_threshold = set(np.argwhere(greater_than_zero_vector >= threshold).flatten())
+                above_threshold = set(np.argwhere(explanation_vector >= threshold).flatten())
             else:
-                above_threshold = set(np.argwhere(np.absolute(greater_than_zero_vector) >= threshold).flatten())
+                above_threshold = set(np.argwhere(np.absolute(explanation_vector) >= threshold).flatten())
             if len(above_threshold) > min_terms or threshold < 0.03 * maxVector:
                 #threshold = 0.0001
-                above_threshold = set(np.argwhere(np.absolute(greater_than_zero_vector) >= threshold).flatten())
+                #above_threshold = set(np.argwhere(np.absolute(explanation_vector) >= threshold).flatten())
                 break
             threshold *= step
         #terms = set([x for enx,x in enumerate(attributes) if enx in above_threshold])
+        print("SHAPLEY VALUES:")
+        print("above",above_threshold)
+        print("LENGTH", len(greater_than_zero_vector))
+        print("LENGTH_org", len(explanation_vector))
         terms = set()
         for index in above_threshold:
             terms.add(attributes[index])
+            print("Added: ",attributes[index], "with value:", explanation_vector[index])
         all_terms = set()
         if gene_to_go_map:
             for term in terms:
@@ -543,7 +548,7 @@ def generalize_ancestry(ontology_graph, explanations = None, attributes = None, 
     if print_results:
         print("before generalization:" )
         for i in range(len(term_sets_per_class)):
-            print(str(list(term_sets_per_class[i])))
+            print("class: " + str(i) + str(list(term_sets_per_class[i])))
         result_printing(class_names, subsets, evaluation)
 
     return (generate_output_json(class_names, subsets[0], depth, connected), subsets[1], term_sets_per_class, class_names)

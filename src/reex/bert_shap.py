@@ -4,6 +4,7 @@ import numpy as np
 import scipy as sp
 from transformers import AutoModel, AutoTokenizer,AutoModelForSequenceClassification
 import torch
+import json
 from nltk.wsd import lesk
 import nltk
 nltk.download('omw')
@@ -32,6 +33,8 @@ def get_explanations(data, labels):
     print(data)
     print(labels)
 
+    disambiguation_dictionary = {}
+
     for class_name in classes:
         per_class_max_shap_values[class_name] = {}
         per_class_explanations[class_name] = []
@@ -46,8 +49,10 @@ def get_explanations(data, labels):
                 if syns is not None:
                     if syns.name() not in feature_names:
                         feature_names.append(syns.name())
+                        disambiguation_dictionary[syns.name()] = word
                     if syns.name() not in per_class_max_shap_values[class_name] or per_class_max_shap_values[class_name][syns.name()] < shap_values.values[row_ix][word_ix]:
                         per_class_max_shap_values[class_name][syns.name()] = shap_values.values[row_ix][word_ix]
+                        disambiguation_dictionary[syns.name()] = word
                 else:
                     # feature_names.append(None)
                     pass
@@ -68,4 +73,8 @@ def get_explanations(data, labels):
          per_class_explanations[key] = np.array(per_class_explanations[key])
     print(per_class_explanations)
     print(feature_names)
+    ## export original words and their disambiguations
+    with open('disambiguation.json', 'w') as convert_file:
+     convert_file.write(json.dumps(disambiguation_dictionary))
+
     return (per_class_explanations, feature_names)

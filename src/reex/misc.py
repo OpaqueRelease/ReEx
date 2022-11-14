@@ -184,7 +184,7 @@ def closure_graph_fn(synset, fn):
     return graph
 
 
-def visualize_sets_of_terms(json, ontology, dict, class_names,  k = 3):
+def visualize_sets_of_terms(json, ontology, dict, class_names,  k = 20):
     """
         Find the most generalized terms for each class, and visualize the subgraph of this term with depth *k*
     """
@@ -192,10 +192,10 @@ def visualize_sets_of_terms(json, ontology, dict, class_names,  k = 3):
     for generalization_result in json['resulting_generalization'].keys():
         if generalization_result  !="average_depth" and generalization_result != "average_association":
             set1 = json['resulting_generalization'][generalization_result]["terms"]
-            working_dict = dict[0]
-
+            #working_dict = dict[0]
+            draw_subgraph(set(set1), ontology, str(generalization_result), 2)
+            continue
             set_of_top_k_terms = set()
-
             for iter in range(k):
                 if iter < len(set1):
                     max = 0
@@ -209,7 +209,10 @@ def visualize_sets_of_terms(json, ontology, dict, class_names,  k = 3):
                     set_of_top_k_terms.add(term)
                     working_dict[term] = -1
 
-            draw_subgraph(set_of_top_k_terms, ontology, str(generalization_result), 2)
+            if len(set_of_top_k_terms) == 0:
+                draw_subgraph(set1, ontology, str(generalization_result), 2)
+            else:
+                draw_subgraph(set_of_top_k_terms, ontology, str(generalization_result), 2)
             counter += 1
 
 
@@ -229,10 +232,13 @@ def draw_subgraph(set_of_terms, ontology, class_name, depth):
     """
     Draws a graph
     """
+    print(set_of_terms)
     copy = set()
     copy.update(set_of_terms)
     combined_subgraph = expand_set(set_of_terms, ontology, depth)
     k = ontology.subgraph(combined_subgraph)
+    nx.write_gexf(k, class_name + ".gexf")
+    print(class_name, nx.info(k))
     color_map = []
     for node in k:
         if str(node) in copy:
@@ -243,7 +249,7 @@ def draw_subgraph(set_of_terms, ontology, class_name, depth):
     pos = nx.spring_layout(k)
     plt.title("Terms for class " + class_name)
     nx.draw(k, pos = pos, with_labels=True, node_color = color_map)
-    plt.show()
+    plt.savefig(class_name + ".png", dpi=1000)
     plt.clf()
 
 
