@@ -4,6 +4,7 @@ import networkx as nx
 import sys
 import logging
 import random
+import json
 from nltk.corpus import wordnet as wn
 logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
 logging.getLogger().setLevel(logging.INFO)
@@ -296,10 +297,12 @@ def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, mi
     :param min_terms: minimal number of terms taken for generalization per class
     :param step: multiplier for SHAP value threshold used to take most important terms of each class into generalization
     """
-    
+
     term_sets_per_class = []
     class_names = []
     for class_name, explanation_vector in explanations.items():
+        print("Max SHAP: " + str(class_name))
+        print(np.max(explanation_vector))
         if abs:
             print(explanation_vector)
             print(np.absolute(explanation_vector) > 0)
@@ -331,10 +334,14 @@ def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, mi
         print("LENGTH", len(greater_than_zero_vector))
         print("LENGTH_org", len(explanation_vector))
         terms = set()
+        shapley_values = {}
         for index in above_threshold:
             terms.add(attributes[index])
+            shapley_values[attributes[index]] = explanation_vector[index]
             print("Added: ",attributes[index], "with value:", explanation_vector[index])
         all_terms = set()
+        with open("../results/" + str(class_name) + '_shapley.json', 'w') as convert_file:
+            convert_file.write(json.dumps(shapley_values))
         if gene_to_go_map:
             for term in terms:
                 try:

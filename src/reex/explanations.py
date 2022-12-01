@@ -1,6 +1,5 @@
 ## This is the main blob of code responsible for generation of explanations
 
-from typing import final
 import shap
 from sklearn.feature_selection import VarianceThreshold
 import numpy as np

@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <meta lastmodifieddate="2022-11-29">
+    <creator>NetworkX 2.6.3</creator>
+  </meta>
+  <graph defaultedgetype="directed" mode="static" name="">
+    <nodes>
+      <node id="time.v.05" label="time.v.05" />
+      <node id="blood.n.01" label="blood.n.01" />
+      <node id="hem.v.01" label="hem.v.01" />
+      <node id="blood_group.n.01" label="blood_group.n.01" />
+      <node id="uranium.n.01" label="uranium.n.01" />
+      <node id="convict.n.01" label="convict.n.01" />
+      <node id="one.s.01" label="one.s.01" />
+      <node id="thousand.s.01" label="thousand.s.01" />
+      <node id="triiodothyronine.n.01" label="triiodothyronine.n.01" />
+      <node id="a.n.07" label="a.n.07" />
+      <node id="thyroxine.n.01" label="thyroxine.n.01" />
+      <node id="thyroid_hormone.n.01" label="thyroid_hormone.n.01" />
+      <node id="hormone.n.01" label="hormone.n.01" />
+      <node id="sulfur.n.01" label="sulfur.n.01" />
+      <node id="world_health_organization.n.01" label="world_health_organization.n.01" />
+      <node id="tend.v.01" label="tend.v.01" />
+      <node id="nickel.n.01" label="nickel.n.01" />
+      <node id="thousand.n.01" label="thousand.n.01" />
+      <node id="secretion.n.02" label="secretion.n.02" />
+      <node id="far.s.04" label="far.s.04" />
+      <node id="b.n.07" label="b.n.07" />
+      <node id="watt.n.01" label="watt.n.01" />
+      <node id="stop_consonant.n.01" label="stop_consonant.n.01" />
+      <node id="lock_in.v.02" label="lock_in.v.02" />
+      <node id="liquid_body_substance.n.01" label="liquid_body_substance.n.01" />
+      <node id="phosphorus.n.01" label="phosphorus.n.01" />
+      <node id="helium.n.01" label="helium.n.01" />
+      <node id="nobelium.n.01" label="nobelium.n.01" />
+      <node id="q.n.01" label="q.n.01" />
+    </nodes>
+    <edges>
+      <edge source="blood.n.01" target="blood_group.n.01" id="0" />
+      <edge source="blood_group.n.01" target="a.n.07" id="1" />
+      <edge source="blood_group.n.01" target="b.n.07" id="2" />
+      <edge source="thyroid_hormone.n.01" target="triiodothyronine.n.01" id="3" />
+      <edge source="thyroid_hormone.n.01" target="thyroxine.n.01" id="4" />
+      <edge source="hormone.n.01" target="thyroid_hormone.n.01" id="5" />
+      <edge source="secretion.n.02" target="hormone.n.01" id="6" />
+      <edge source="liquid_body_substance.n.01" target="secretion.n.02" id="7" />
+      <edge source="liquid_body_substance.n.01" target="blood.n.01" id="8" />
+    </edges>
+  </graph>
+</gexf>

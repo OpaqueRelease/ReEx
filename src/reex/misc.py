@@ -193,7 +193,7 @@ def visualize_sets_of_terms(json, ontology, dict, class_names,  k = 20):
         if generalization_result  !="average_depth" and generalization_result != "average_association":
             set1 = json['resulting_generalization'][generalization_result]["terms"]
             #working_dict = dict[0]
-            draw_subgraph(set(set1), ontology, str(generalization_result), 2)
+            draw_subgraph(set(set1), ontology, str(generalization_result), 6)
             continue
             set_of_top_k_terms = set()
             for iter in range(k):
@@ -237,7 +237,7 @@ def draw_subgraph(set_of_terms, ontology, class_name, depth):
     copy.update(set_of_terms)
     combined_subgraph = expand_set(set_of_terms, ontology, depth)
     k = ontology.subgraph(combined_subgraph)
-    nx.write_gexf(k, class_name + ".gexf")
+    nx.write_gexf(k, "../../results/" + class_name + ".gexf")
     print(class_name, nx.info(k))
     color_map = []
     for node in k:
