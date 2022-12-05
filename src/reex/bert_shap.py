@@ -9,6 +9,13 @@ from nltk.wsd import lesk
 import nltk
 nltk.download('omw')
 
+class_name_mapping = {
+    "LABEL_0": "NOT",
+    "LABEL_1": "OFF",
+    "LABEL_2": "OFF",
+    "LABEL_3": "OFF"
+}
+
 def get_correctly_classified_instances(pipe, data, labels): ## Return dict of lists: class_name -> correctly classified instances
     classification_dictionary = {}
 
@@ -17,12 +24,12 @@ def get_correctly_classified_instances(pipe, data, labels): ## Return dict of li
         outputs = pipe(data[instance_ix])
         print(outputs)
         output_label = outputs[0]['label']
-        if output_label == labels[instance_ix]:
-            if output_label not in classification_dictionary:
-                classification_dictionary[output_label] = [data[instance_ix]]
+        if class_name_mapping[output_label] == labels[instance_ix]:
+            if labels[instance_ix] not in classification_dictionary:
+                classification_dictionary[labels[instance_ix]] = [data[instance_ix]]
             else:
-                classification_dictionary[output_label].append(data[instance_ix])
-        return classification_dictionary
+                classification_dictionary[labels[instance_ix]].append(data[instance_ix])
+    return classification_dictionary
 
 def save_instance_shapleys(class_name, shapley_values):
     json_dict = {}
@@ -57,7 +64,8 @@ def get_explanations(data, labels):
     print(data)
     print(labels)
 
-    #classification_dictionary = get_correctly_classified_instances(pipe, data, labels)
+    classification_dictionary = get_correctly_classified_instances(pipe, data, labels)
+    print(classification_dictionary)
     disambiguation_dictionary = {}
 
     for class_name in classes:

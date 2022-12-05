@@ -237,7 +237,7 @@ def draw_subgraph(set_of_terms, ontology, class_name, depth):
     copy.update(set_of_terms)
     combined_subgraph = expand_set(set_of_terms, ontology, depth)
     k = ontology.subgraph(combined_subgraph)
-    nx.write_gexf(k, "../../results/" + class_name + ".gexf")
+    nx.write_gexf(k, "../results/" + class_name + ".gexf")
     print(class_name, nx.info(k))
     color_map = []
     for node in k:
