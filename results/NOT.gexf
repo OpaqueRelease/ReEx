@@ -1,186 +1,186 @@
 <?xml version='1.0' encoding='utf-8'?>
 <gexf version="1.2" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd">
-  <meta lastmodifieddate="2022-12-05">
+  <meta lastmodifieddate="2022-12-12">
     <creator>NetworkX 2.5</creator>
   </meta>
   <graph defaultedgetype="directed" mode="static" name="">
     <nodes>
-      <node id="phosphorus.n.01" label="phosphorus.n.01" />
-      <node id="apartment.n.01" label="apartment.n.01" />
-      <node id="torus.n.02" label="torus.n.02" />
-      <node id="reading.n.03" label="reading.n.03" />
-      <node id="dissenter.n.01" label="dissenter.n.01" />
-      <node id="preserver.n.03" label="preserver.n.03" />
-      <node id="great.s.03" label="great.s.03" />
-      <node id="whole.n.02" label="whole.n.02" />
-      <node id="device.n.01" label="device.n.01" />
-      <node id="knowledge_domain.n.01" label="knowledge_domain.n.01" />
-      <node id="osmium.n.01" label="osmium.n.01" />
-      <node id="area.n.05" label="area.n.05" />
-      <node id="science.n.01" label="science.n.01" />
-      <node id="watt.n.01" label="watt.n.01" />
-      <node id="implant.n.01" label="implant.n.01" />
-      <node id="anti.n.01" label="anti.n.01" />
-      <node id="q.n.01" label="q.n.01" />
-      <node id="wrong.v.01" label="wrong.v.01" />
-      <node id="act.n.02" label="act.n.02" />
-      <node id="memory.n.04" label="memory.n.04" />
-      <node id="engineering.n.02" label="engineering.n.02" />
-      <node id="uranium.n.01" label="uranium.n.01" />
-      <node id="event.n.01" label="event.n.01" />
-      <node id="lawman.n.01" label="lawman.n.01" />
-      <node id="structure.n.01" label="structure.n.01" />
-      <node id="discrimination.n.02" label="discrimination.n.02" />
-      <node id="decoration.n.01" label="decoration.n.01" />
-      <node id="representation.n.10" label="representation.n.10" />
-      <node id="national.n.01" label="national.n.01" />
-      <node id="defender.n.01" label="defender.n.01" />
-      <node id="patriot.n.01" label="patriot.n.01" />
-      <node id="happening.n.01" label="happening.n.01" />
-      <node id="tap.v.07" label="tap.v.07" />
-      <node id="statistic.n.01" label="statistic.n.01" />
-      <node id="aristocrat.n.01" label="aristocrat.n.01" />
-      <node id="vertebrate.n.01" label="vertebrate.n.01" />
-      <node id="content.n.05" label="content.n.05" />
-      <node id="molding.n.02" label="molding.n.02" />
-      <node id="female_aristocrat.n.01" label="female_aristocrat.n.01" />
-      <node id="datum.n.01" label="datum.n.01" />
-      <node id="activity.n.01" label="activity.n.01" />
       <node id="unfortunate.n.01" label="unfortunate.n.01" />
-      <node id="conscientious_objector.n.01" label="conscientious_objector.n.01" />
-      <node id="moment.n.06" label="moment.n.06" />
-      <node id="ti.n.03" label="ti.n.03" />
       <node id="operating_room.n.01" label="operating_room.n.01" />
-      <node id="very_well.r.02" label="very_well.r.02" />
-      <node id="information.n.02" label="information.n.02" />
-      <node id="convict.n.01" label="convict.n.01" />
-      <node id="thousand.n.01" label="thousand.n.01" />
-      <node id="information_science.n.01" label="information_science.n.01" />
-      <node id="information_technology.n.01" label="information_technology.n.01" />
-      <node id="victimize.v.03" label="victimize.v.03" />
-      <node id="process.n.02" label="process.n.02" />
-      <node id="mammal.n.01" label="mammal.n.01" />
-      <node id="exist.v.01" label="exist.v.01" />
-      <node id="leader.n.01" label="leader.n.01" />
-      <node id="triiodothyronine.n.01" label="triiodothyronine.n.01" />
-      <node id="person.n.01" label="person.n.01" />
-      <node id="prisoner.n.01" label="prisoner.n.01" />
-      <node id="cognition.n.01" label="cognition.n.01" />
-      <node id="mutilate.v.03" label="mutilate.v.03" />
-      <node id="corrective.n.01" label="corrective.n.01" />
-      <node id="memory_device.n.01" label="memory_device.n.01" />
-      <node id="read-only_memory.n.01" label="read-only_memory.n.01" />
-      <node id="victimize.v.01" label="victimize.v.01" />
-      <node id="member.n.01" label="member.n.01" />
-      <node id="pictorial_representation.n.01" label="pictorial_representation.n.01" />
-      <node id="prosthesis.n.01" label="prosthesis.n.01" />
-      <node id="trouble.n.03" label="trouble.n.03" />
-      <node id="chordate.n.01" label="chordate.n.01" />
-      <node id="vitamin_d.n.01" label="vitamin_d.n.01" />
-      <node id="affliction.n.03" label="affliction.n.03" />
-      <node id="associate.n.01" label="associate.n.01" />
-      <node id="final_examination.n.01" label="final_examination.n.01" />
-      <node id="psychological_feature.n.01" label="psychological_feature.n.01" />
-      <node id="organism.n.01" label="organism.n.01" />
-      <node id="trial.n.06" label="trial.n.06" />
+      <node id="act.n.02" label="act.n.02" />
+      <node id="structure.n.01" label="structure.n.01" />
+      <node id="vertebrate.n.01" label="vertebrate.n.01" />
       <node id="count.v.08" label="count.v.08" />
-      <node id="instrumentality.n.03" label="instrumentality.n.03" />
-      <node id="animal.n.01" label="animal.n.01" />
-      <node id="basic_cognitive_process.n.01" label="basic_cognitive_process.n.01" />
-      <node id="imaging.n.02" label="imaging.n.02" />
-      <node id="artifact.n.01" label="artifact.n.01" />
-      <node id="discipline.n.01" label="discipline.n.01" />
-      <node id="a.n.07" label="a.n.07" />
-      <node id="housing.n.01" label="housing.n.01" />
-      <node id="room.n.01" label="room.n.01" />
-      <node id="hospital_room.n.01" label="hospital_room.n.01" />
-      <node id="cheat.v.01" label="cheat.v.01" />
+      <node id="watt.n.01" label="watt.n.01" />
       <node id="communication.n.01" label="communication.n.01" />
-      <node id="louisiana.n.01" label="louisiana.n.01" />
-      <node id="examination.n.02" label="examination.n.02" />
-      <node id="living_thing.n.01" label="living_thing.n.01" />
+      <node id="artifact.n.01" label="artifact.n.01" />
+      <node id="preserver.n.03" label="preserver.n.03" />
+      <node id="psychological_feature.n.01" label="psychological_feature.n.01" />
+      <node id="victimize.v.01" label="victimize.v.01" />
+      <node id="thousand.n.01" label="thousand.n.01" />
+      <node id="lawman.n.01" label="lawman.n.01" />
+      <node id="ti.n.03" label="ti.n.03" />
+      <node id="molding.n.02" label="molding.n.02" />
+      <node id="hospital_room.n.01" label="hospital_room.n.01" />
       <node id="clock_time.n.01" label="clock_time.n.01" />
+      <node id="defender.n.01" label="defender.n.01" />
+      <node id="corrective.n.01" label="corrective.n.01" />
+      <node id="science.n.01" label="science.n.01" />
+      <node id="housing.n.01" label="housing.n.01" />
+      <node id="associate.n.01" label="associate.n.01" />
+      <node id="q.n.01" label="q.n.01" />
+      <node id="living_thing.n.01" label="living_thing.n.01" />
+      <node id="prisoner.n.01" label="prisoner.n.01" />
+      <node id="activity.n.01" label="activity.n.01" />
+      <node id="information_technology.n.01" label="information_technology.n.01" />
+      <node id="vitamin_d.n.01" label="vitamin_d.n.01" />
+      <node id="discipline.n.01" label="discipline.n.01" />
+      <node id="imaging.n.02" label="imaging.n.02" />
+      <node id="memory.n.04" label="memory.n.04" />
+      <node id="mammal.n.01" label="mammal.n.01" />
+      <node id="happening.n.01" label="happening.n.01" />
+      <node id="apartment.n.01" label="apartment.n.01" />
+      <node id="exist.v.01" label="exist.v.01" />
       <node id="taste.n.03" label="taste.n.03" />
+      <node id="animal.n.01" label="animal.n.01" />
       <node id="peer.n.01" label="peer.n.01" />
+      <node id="leader.n.01" label="leader.n.01" />
+      <node id="reading.n.03" label="reading.n.03" />
+      <node id="moment.n.06" label="moment.n.06" />
+      <node id="phosphorus.n.01" label="phosphorus.n.01" />
+      <node id="basic_cognitive_process.n.01" label="basic_cognitive_process.n.01" />
+      <node id="a.n.07" label="a.n.07" />
+      <node id="trial.n.06" label="trial.n.06" />
+      <node id="victimize.v.03" label="victimize.v.03" />
+      <node id="uranium.n.01" label="uranium.n.01" />
+      <node id="content.n.05" label="content.n.05" />
+      <node id="aristocrat.n.01" label="aristocrat.n.01" />
+      <node id="patriot.n.01" label="patriot.n.01" />
+      <node id="engineering.n.02" label="engineering.n.02" />
+      <node id="mutilate.v.03" label="mutilate.v.03" />
+      <node id="statistic.n.01" label="statistic.n.01" />
+      <node id="instrumentality.n.03" label="instrumentality.n.03" />
+      <node id="read-only_memory.n.01" label="read-only_memory.n.01" />
+      <node id="decoration.n.01" label="decoration.n.01" />
+      <node id="room.n.01" label="room.n.01" />
+      <node id="organism.n.01" label="organism.n.01" />
+      <node id="female_aristocrat.n.01" label="female_aristocrat.n.01" />
+      <node id="national.n.01" label="national.n.01" />
+      <node id="datum.n.01" label="datum.n.01" />
+      <node id="knowledge_domain.n.01" label="knowledge_domain.n.01" />
+      <node id="examination.n.02" label="examination.n.02" />
+      <node id="memory_device.n.01" label="memory_device.n.01" />
+      <node id="pictorial_representation.n.01" label="pictorial_representation.n.01" />
+      <node id="event.n.01" label="event.n.01" />
+      <node id="great.s.03" label="great.s.03" />
+      <node id="convict.n.01" label="convict.n.01" />
+      <node id="information.n.02" label="information.n.02" />
+      <node id="anti.n.01" label="anti.n.01" />
+      <node id="conscientious_objector.n.01" label="conscientious_objector.n.01" />
+      <node id="very_well.r.02" label="very_well.r.02" />
+      <node id="information_science.n.01" label="information_science.n.01" />
+      <node id="implant.n.01" label="implant.n.01" />
+      <node id="final_examination.n.01" label="final_examination.n.01" />
+      <node id="cheat.v.01" label="cheat.v.01" />
+      <node id="device.n.01" label="device.n.01" />
+      <node id="trouble.n.03" label="trouble.n.03" />
+      <node id="process.n.02" label="process.n.02" />
+      <node id="chordate.n.01" label="chordate.n.01" />
+      <node id="whole.n.02" label="whole.n.02" />
+      <node id="triiodothyronine.n.01" label="triiodothyronine.n.01" />
+      <node id="torus.n.02" label="torus.n.02" />
+      <node id="prosthesis.n.01" label="prosthesis.n.01" />
+      <node id="discrimination.n.02" label="discrimination.n.02" />
+      <node id="area.n.05" label="area.n.05" />
+      <node id="dissenter.n.01" label="dissenter.n.01" />
+      <node id="representation.n.10" label="representation.n.10" />
+      <node id="tap.v.07" label="tap.v.07" />
+      <node id="cognition.n.01" label="cognition.n.01" />
+      <node id="member.n.01" label="member.n.01" />
+      <node id="affliction.n.03" label="affliction.n.03" />
+      <node id="osmium.n.01" label="osmium.n.01" />
+      <node id="wrong.v.01" label="wrong.v.01" />
+      <node id="louisiana.n.01" label="louisiana.n.01" />
+      <node id="person.n.01" label="person.n.01" />
     </nodes>
     <edges>
-      <edge id="0" source="reading.n.03" target="clock_time.n.01" />
-      <edge id="1" source="dissenter.n.01" target="conscientious_objector.n.01" />
-      <edge id="2" source="preserver.n.03" target="defender.n.01" />
-      <edge id="3" source="whole.n.02" target="living_thing.n.01" />
-      <edge id="4" source="whole.n.02" target="artifact.n.01" />
-      <edge id="5" source="device.n.01" target="memory_device.n.01" />
-      <edge id="6" source="device.n.01" target="corrective.n.01" />
-      <edge id="7" source="knowledge_domain.n.01" target="discipline.n.01" />
-      <edge id="8" source="area.n.05" target="room.n.01" />
-      <edge id="9" source="science.n.01" target="information_science.n.01" />
-      <edge id="10" source="wrong.v.01" target="victimize.v.01" />
-      <edge id="11" source="act.n.02" target="communication.n.01" />
-      <edge id="12" source="act.n.02" target="activity.n.01" />
-      <edge id="13" source="memory.n.04" target="read-only_memory.n.01" />
-      <edge id="14" source="engineering.n.02" target="information_technology.n.01" />
-      <edge id="15" source="event.n.01" target="act.n.02" />
-      <edge id="16" source="event.n.01" target="happening.n.01" />
-      <edge id="17" source="structure.n.01" target="housing.n.01" />
-      <edge id="18" source="structure.n.01" target="area.n.05" />
-      <edge id="19" source="discrimination.n.02" target="taste.n.03" />
-      <edge id="20" source="decoration.n.01" target="molding.n.02" />
-      <edge id="21" source="representation.n.10" target="pictorial_representation.n.01" />
-      <edge id="22" source="national.n.01" target="patriot.n.01" />
-      <edge id="23" source="defender.n.01" target="lawman.n.01" />
-      <edge id="24" source="happening.n.01" target="trouble.n.03" />
-      <edge id="25" source="statistic.n.01" target="moment.n.06" />
-      <edge id="26" source="aristocrat.n.01" target="female_aristocrat.n.01" />
-      <edge id="27" source="vertebrate.n.01" target="mammal.n.01" />
-      <edge id="28" source="content.n.05" target="knowledge_domain.n.01" />
-      <edge id="29" source="molding.n.02" target="torus.n.02" />
-      <edge id="30" source="datum.n.01" target="statistic.n.01" />
-      <edge id="31" source="datum.n.01" target="reading.n.03" />
-      <edge id="32" source="activity.n.01" target="representation.n.10" />
-      <edge id="33" source="unfortunate.n.01" target="prisoner.n.01" />
-      <edge id="34" source="information.n.02" target="datum.n.01" />
-      <edge id="35" source="process.n.02" target="basic_cognitive_process.n.01" />
-      <edge id="36" source="leader.n.01" target="aristocrat.n.01" />
-      <edge id="37" source="person.n.01" target="peer.n.01" />
-      <edge id="38" source="person.n.01" target="dissenter.n.01" />
-      <edge id="39" source="person.n.01" target="national.n.01" />
-      <edge id="40" source="person.n.01" target="anti.n.01" />
-      <edge id="41" source="person.n.01" target="preserver.n.03" />
-      <edge id="42" source="person.n.01" target="leader.n.01" />
-      <edge id="43" source="person.n.01" target="unfortunate.n.01" />
-      <edge id="44" source="prisoner.n.01" target="convict.n.01" />
-      <edge id="45" source="cognition.n.01" target="content.n.05" />
-      <edge id="46" source="cognition.n.01" target="process.n.02" />
-      <edge id="47" source="cognition.n.01" target="information.n.02" />
-      <edge id="48" source="corrective.n.01" target="prosthesis.n.01" />
-      <edge id="49" source="memory_device.n.01" target="memory.n.04" />
-      <edge id="50" source="victimize.v.01" target="cheat.v.01" />
-      <edge id="51" source="pictorial_representation.n.01" target="imaging.n.02" />
-      <edge id="52" source="prosthesis.n.01" target="implant.n.01" />
-      <edge id="53" source="trouble.n.03" target="affliction.n.03" />
-      <edge id="54" source="chordate.n.01" target="vertebrate.n.01" />
-      <edge id="55" source="affliction.n.03" target="trial.n.06" />
-      <edge id="56" source="associate.n.01" target="member.n.01" />
-      <edge id="57" source="psychological_feature.n.01" target="cognition.n.01" />
-      <edge id="58" source="psychological_feature.n.01" target="event.n.01" />
-      <edge id="59" source="organism.n.01" target="person.n.01" />
-      <edge id="60" source="organism.n.01" target="animal.n.01" />
-      <edge id="61" source="instrumentality.n.03" target="device.n.01" />
-      <edge id="62" source="animal.n.01" target="chordate.n.01" />
-      <edge id="63" source="basic_cognitive_process.n.01" target="discrimination.n.02" />
-      <edge id="64" source="artifact.n.01" target="decoration.n.01" />
-      <edge id="65" source="artifact.n.01" target="instrumentality.n.03" />
-      <edge id="66" source="artifact.n.01" target="structure.n.01" />
-      <edge id="67" source="discipline.n.01" target="engineering.n.02" />
-      <edge id="68" source="discipline.n.01" target="science.n.01" />
-      <edge id="69" source="housing.n.01" target="apartment.n.01" />
-      <edge id="70" source="room.n.01" target="hospital_room.n.01" />
-      <edge id="71" source="hospital_room.n.01" target="operating_room.n.01" />
-      <edge id="72" source="cheat.v.01" target="victimize.v.03" />
-      <edge id="73" source="communication.n.01" target="examination.n.02" />
-      <edge id="74" source="examination.n.02" target="final_examination.n.01" />
-      <edge id="75" source="living_thing.n.01" target="organism.n.01" />
-      <edge id="76" source="peer.n.01" target="associate.n.01" />
+      <edge id="0" source="unfortunate.n.01" target="prisoner.n.01" />
+      <edge id="1" source="act.n.02" target="communication.n.01" />
+      <edge id="2" source="act.n.02" target="activity.n.01" />
+      <edge id="3" source="structure.n.01" target="housing.n.01" />
+      <edge id="4" source="structure.n.01" target="area.n.05" />
+      <edge id="5" source="vertebrate.n.01" target="mammal.n.01" />
+      <edge id="6" source="communication.n.01" target="examination.n.02" />
+      <edge id="7" source="artifact.n.01" target="decoration.n.01" />
+      <edge id="8" source="artifact.n.01" target="instrumentality.n.03" />
+      <edge id="9" source="artifact.n.01" target="structure.n.01" />
+      <edge id="10" source="preserver.n.03" target="defender.n.01" />
+      <edge id="11" source="psychological_feature.n.01" target="cognition.n.01" />
+      <edge id="12" source="psychological_feature.n.01" target="event.n.01" />
+      <edge id="13" source="victimize.v.01" target="cheat.v.01" />
+      <edge id="14" source="molding.n.02" target="torus.n.02" />
+      <edge id="15" source="hospital_room.n.01" target="operating_room.n.01" />
+      <edge id="16" source="defender.n.01" target="lawman.n.01" />
+      <edge id="17" source="corrective.n.01" target="prosthesis.n.01" />
+      <edge id="18" source="science.n.01" target="information_science.n.01" />
+      <edge id="19" source="housing.n.01" target="apartment.n.01" />
+      <edge id="20" source="associate.n.01" target="member.n.01" />
+      <edge id="21" source="living_thing.n.01" target="organism.n.01" />
+      <edge id="22" source="prisoner.n.01" target="convict.n.01" />
+      <edge id="23" source="activity.n.01" target="representation.n.10" />
+      <edge id="24" source="discipline.n.01" target="engineering.n.02" />
+      <edge id="25" source="discipline.n.01" target="science.n.01" />
+      <edge id="26" source="memory.n.04" target="read-only_memory.n.01" />
+      <edge id="27" source="happening.n.01" target="trouble.n.03" />
+      <edge id="28" source="animal.n.01" target="chordate.n.01" />
+      <edge id="29" source="peer.n.01" target="associate.n.01" />
+      <edge id="30" source="leader.n.01" target="aristocrat.n.01" />
+      <edge id="31" source="reading.n.03" target="clock_time.n.01" />
+      <edge id="32" source="basic_cognitive_process.n.01" target="discrimination.n.02" />
+      <edge id="33" source="content.n.05" target="knowledge_domain.n.01" />
+      <edge id="34" source="aristocrat.n.01" target="female_aristocrat.n.01" />
+      <edge id="35" source="engineering.n.02" target="information_technology.n.01" />
+      <edge id="36" source="statistic.n.01" target="moment.n.06" />
+      <edge id="37" source="instrumentality.n.03" target="device.n.01" />
+      <edge id="38" source="decoration.n.01" target="molding.n.02" />
+      <edge id="39" source="room.n.01" target="hospital_room.n.01" />
+      <edge id="40" source="organism.n.01" target="person.n.01" />
+      <edge id="41" source="organism.n.01" target="animal.n.01" />
+      <edge id="42" source="national.n.01" target="patriot.n.01" />
+      <edge id="43" source="datum.n.01" target="statistic.n.01" />
+      <edge id="44" source="datum.n.01" target="reading.n.03" />
+      <edge id="45" source="knowledge_domain.n.01" target="discipline.n.01" />
+      <edge id="46" source="examination.n.02" target="final_examination.n.01" />
+      <edge id="47" source="memory_device.n.01" target="memory.n.04" />
+      <edge id="48" source="pictorial_representation.n.01" target="imaging.n.02" />
+      <edge id="49" source="event.n.01" target="act.n.02" />
+      <edge id="50" source="event.n.01" target="happening.n.01" />
+      <edge id="51" source="information.n.02" target="datum.n.01" />
+      <edge id="52" source="cheat.v.01" target="victimize.v.03" />
+      <edge id="53" source="device.n.01" target="memory_device.n.01" />
+      <edge id="54" source="device.n.01" target="corrective.n.01" />
+      <edge id="55" source="trouble.n.03" target="affliction.n.03" />
+      <edge id="56" source="process.n.02" target="basic_cognitive_process.n.01" />
+      <edge id="57" source="chordate.n.01" target="vertebrate.n.01" />
+      <edge id="58" source="whole.n.02" target="living_thing.n.01" />
+      <edge id="59" source="whole.n.02" target="artifact.n.01" />
+      <edge id="60" source="prosthesis.n.01" target="implant.n.01" />
+      <edge id="61" source="discrimination.n.02" target="taste.n.03" />
+      <edge id="62" source="area.n.05" target="room.n.01" />
+      <edge id="63" source="dissenter.n.01" target="conscientious_objector.n.01" />
+      <edge id="64" source="representation.n.10" target="pictorial_representation.n.01" />
+      <edge id="65" source="cognition.n.01" target="content.n.05" />
+      <edge id="66" source="cognition.n.01" target="process.n.02" />
+      <edge id="67" source="cognition.n.01" target="information.n.02" />
+      <edge id="68" source="affliction.n.03" target="trial.n.06" />
+      <edge id="69" source="wrong.v.01" target="victimize.v.01" />
+      <edge id="70" source="person.n.01" target="peer.n.01" />
+      <edge id="71" source="person.n.01" target="dissenter.n.01" />
+      <edge id="72" source="person.n.01" target="national.n.01" />
+      <edge id="73" source="person.n.01" target="anti.n.01" />
+      <edge id="74" source="person.n.01" target="preserver.n.03" />
+      <edge id="75" source="person.n.01" target="leader.n.01" />
+      <edge id="76" source="person.n.01" target="unfortunate.n.01" />
     </edges>
   </graph>
 </gexf>

@@ -8,6 +8,7 @@ import json
 from nltk.wsd import lesk
 import nltk
 nltk.download('omw')
+from nltk.corpus import wordnet
 
 class_name_mapping = {
     "LABEL_0": "NOT",
@@ -79,7 +80,7 @@ def get_explanations(data, labels):
         for list_of_words in shap_values.data:
             word_ix = 0
             for word in list_of_words:
-                syns = lesk(list_of_words, word)
+                syns = lesk(list_of_words, word, synsets=wordnet.synsets(word, lang='eng'))
                 if syns is not None:
                     if syns.name() not in feature_names:
                         feature_names.append(syns.name())
