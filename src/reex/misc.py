@@ -138,13 +138,15 @@ def recurse_custom(G, word):
     return G
 
 def get_ontology_text_custom(mapping):
+    print(mapping)
     nltk.download('wordnet')
     G = nx.DiGraph()
 
     for word in mapping.keys():
-       node = wn.synset(mapping[word])
-       temp_graph = closure_graph_fn(node, lambda s: s.hypernyms())
-       G = nx.compose(G, temp_graph)
+       if word != "":
+            node = wn.synset(mapping[word])
+            temp_graph = closure_graph_fn(node, lambda s: s.hypernyms())
+            G = nx.compose(G, temp_graph)
 
     print(nx.info(G))
     return G

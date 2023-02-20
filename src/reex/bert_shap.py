@@ -40,7 +40,7 @@ def save_instance_shapleys(class_name, shapley_values):
     with open('../results/' + class_name + '_instance_shapley.json', 'w') as convert_file:
         convert_file.write(json.dumps(json_dict))
 
-def get_explanations(data, labels):
+def get_explanations(data, labels, averaged):
 
     model = AutoModelForSequenceClassification.from_pretrained("IMSyPP/hate_speech_en")
     tokenizer = AutoTokenizer.from_pretrained("IMSyPP/hate_speech_en")
@@ -70,33 +70,73 @@ def get_explanations(data, labels):
     disambiguation_dictionary = {}
 
     for class_name in classes:
-        per_class_max_shap_values[class_name] = {}
-        per_class_explanations[class_name] = []
         class_subset = data.loc[labels == class_name] #classification_dictionary[class_name]   #
         shap_values = explainer(class_subset, fixed_context=1)
-        save_instance_shapleys(class_name, shap_values)
 
-        row_ix = 0
-        for list_of_words in shap_values.data:
-            word_ix = 0
-            for word in list_of_words:
-                syns = lesk(list_of_words, word, synsets=wordnet.synsets(word, lang='eng'))
-                if syns is not None:
-                    if syns.name() not in feature_names:
-                        feature_names.append(syns.name())
-                        disambiguation_dictionary[syns.name()] = word
-                    if syns.name() not in per_class_max_shap_values[class_name] or per_class_max_shap_values[class_name][syns.name()] < shap_values.values[row_ix][word_ix]:
-                        per_class_max_shap_values[class_name][syns.name()] = shap_values.values[row_ix][word_ix]
-                        disambiguation_dictionary[syns.name()] = word
+        if averaged:
+            shap.plots.bar(shap_values, max_display=20)
+            save_instance_shapleys(class_name, shap_values)
+            # print(shap_values.values)
+            # per_class_explanations[class_name] = np.abs(shap_values.values).mean(0)
+            # feature_names = shap_values.data
+
+            # print(per_class_explanations)
+            # print(feature_names)
+
+            cohorts = {"": shap_values}
+            cohort_labels = list(cohorts.keys())
+            cohort_exps = list(cohorts.values())
+            for i in range(len(cohort_exps)):
+                if len(cohort_exps[i].shape) == 2:
+                    cohort_exps[i] = cohort_exps[i].abs.mean(0)
+            features = cohort_exps[0].data
+            values = np.array([cohort_exps[i].values for i in range(len(cohort_exps))])
+
+            print(values)
+            print(sum(values))
+
+            zeros = [0] * len(feature_names) # Features of other classes set to 0
+            zeros.extend(list(sum(values)))
+            per_class_explanations[class_name] = zeros
+            syn_names = cohort_exps[0].feature_names
+            lemmas = [lesk([item], item, synsets=wordnet.synsets(item, lang='eng')) for item in syn_names]
+            print(lemmas)
+            lemma_names = []
+            for lemma in lemmas:
+                if lemma is not None:
+                    lemma_names.append(lemma.name())
                 else:
-                    # feature_names.append(None)
-                    pass
-                word_ix+=1
-            row_ix += 1
-        # shap_dict = {}
+                    lemma_names.append("")
+            print(lemma_names)
+            feature_names.extend(lemma_names)
+            print(feature_names)
 
-        # for ix in range(len(shap_values.values)):
-        #     shap_dict[str(ix)] = shap_values.values[ix]
+        else:
+            per_class_explanations[class_name] = []
+            per_class_max_shap_values[class_name] = {}  
+            row_ix = 0
+            for list_of_words in shap_values.data:
+                word_ix = 0
+                for word in list_of_words:
+                    syns = lesk(list_of_words, word, synsets=wordnet.synsets(word, lang='eng'))
+                    if syns is not None:
+                        if syns.name() not in feature_names:
+                            feature_names.append(syns.name())
+                            disambiguation_dictionary[syns.name()] = word
+                        if syns.name() not in per_class_max_shap_values[class_name] or per_class_max_shap_values[class_name][syns.name()] < shap_values.values[row_ix][word_ix]:
+                            per_class_max_shap_values[class_name][syns.name()] = shap_values.values[row_ix][word_ix]
+                            disambiguation_dictionary[syns.name()] = word
+                    else:
+                        # feature_names.append(None)
+                        pass
+                    word_ix+=1
+                row_ix += 1
+    if averaged:
+        for key in per_class_explanations.keys():
+            extend_with_zeros = [0] * (len(feature_names) - len(per_class_explanations[key]))
+            per_class_explanations[key].extend(extend_with_zeros)
+        return (per_class_explanations, feature_names)
+
     for feature in feature_names:
         for class_name in classes:
             if feature in per_class_max_shap_values[class_name]:

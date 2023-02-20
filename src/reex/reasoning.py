@@ -312,6 +312,9 @@ def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, mi
                 sys.exit()
             maxVector = np.amax(greater_than_zero_vector)
         else:
+            print(explanation_vector)
+            print(type(explanation_vector))
+            explanation_vector = np.array(explanation_vector)
             greater_than_zero_vector = explanation_vector[explanation_vector > 0]
             if len(greater_than_zero_vector) < 1:
                 print("Zero size feature vector. Aborting...")
