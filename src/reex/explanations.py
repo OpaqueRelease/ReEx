@@ -27,6 +27,8 @@ import obonet
 import timeit
 import sys
 import os
+from nltk.corpus import wordnet
+from nltk.wsd import lesk
 
 try:
     import spyct
@@ -46,7 +48,7 @@ def fit_space(X, model_path="."):
     return features
 
 
-def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_boosting", explanation_method = "shap", shap_explainer = "kernel", text = False, model_path=None):
+def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_boosting", explanation_method = "shap", shap_explainer = "kernel", text = False, model_path=None, language='eng'):
     """
     A set of calls for obtaining aggregates of explanations.
     """
@@ -155,6 +157,15 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
     t_end = time.time() - t_start
     logging.info("Time spent on explanation estimation {}s.".format(t_end))
 
+    disambiguated_feature_vector = []
+    for feature in attribute_vector:
+        ftr = feature.strip()
+        disambiguated_feature = lesk([ftr], ftr, synsets=wordnet.synsets(ftr, lang=language))
+        if disambiguated_feature is not None:
+            disambiguated_feature_vector.append(disambiguated_feature.name())
+        else:
+            disambiguated_feature_vector.append("")
+
     print(final_explanations)
     print(attribute_vector)
-    return (final_explanations, attribute_vector)
+    return (final_explanations, disambiguated_feature_vector)
