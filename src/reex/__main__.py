@@ -33,6 +33,9 @@ parser.add_argument('--visualize', action='store_true')
 parser.add_argument('--model',default=None, type = str)
 parser.add_argument('--results_path',default='../results', type = str)
 parser.add_argument('--bert', action='store_true')
+parser.add_argument('--averaged', action='store_true')
+parser.add_argument('--lang',default='eng', type = str)
+
 
 
 
@@ -61,7 +64,7 @@ else:
     parsed_dataset, target_vector, gene_to_onto_map = read_the_dataset(args.expression_dataset, attribute_mapping = args.mapping_file)
 
 if args.bert:
-    explanations, attributes = get_explanations(parsed_dataset, target_vector)
+    explanations, attributes = get_explanations(parsed_dataset, target_vector, args.averaged, args.lang)
 else:
     explanations, attributes = get_instance_explanations(parsed_dataset, target_vector, subset = args.subset_size, classifier_index = args.classifier, explanation_method = args.explanation_method, shap_explainer = args.SHAP_explainer, text = args.text_input, model_path=args.model)
 if args.text_input:

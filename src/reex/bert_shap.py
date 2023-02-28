@@ -11,10 +11,11 @@ nltk.download('omw')
 from nltk.corpus import wordnet
 
 class_name_mapping = {
-    "LABEL_0": "NOT",
-    "LABEL_1": "OFF",
-    "LABEL_2": "OFF",
-    "LABEL_3": "OFF"
+    "not offensive": "NOT",
+    "offensive": "OFF",
+    "not-offensive": "NOT"
+    # "LABEL_2": "offensive",
+    # "LABEL_3": "offensive"
 }
 
 def get_correctly_classified_instances(pipe, data, labels): ## Return dict of lists: class_name -> correctly classified instances
@@ -40,10 +41,10 @@ def save_instance_shapleys(class_name, shapley_values):
     with open('../results/' + class_name + '_instance_shapley.json', 'w') as convert_file:
         convert_file.write(json.dumps(json_dict))
 
-def get_explanations(data, labels, averaged):
+def get_explanations(data, labels, averaged, language):
 
-    model = AutoModelForSequenceClassification.from_pretrained("IMSyPP/hate_speech_en")
-    tokenizer = AutoTokenizer.from_pretrained("IMSyPP/hate_speech_en")
+    model = AutoModelForSequenceClassification.from_pretrained("Andrazp/multilingual-hate-speech-robacofi")
+    tokenizer = AutoTokenizer.from_pretrained("Andrazp/multilingual-hate-speech-robacofi")
     pipe = TextClassificationPipeline(model=model, tokenizer=tokenizer)
 
     # build an explainer using a token masker
@@ -57,7 +58,7 @@ def get_explanations(data, labels, averaged):
         return val
 
     explainer = shap.Explainer(f, tokenizer)
-    classes = ['NOT', 'OFF']
+    classes = ['not-offensive', 'offensive']
     per_class_explanations = {}
     per_class_max_shap_values = {}
     feature_names = []
@@ -70,13 +71,15 @@ def get_explanations(data, labels, averaged):
     disambiguation_dictionary = {}
 
     for class_name in classes:
-        class_subset = data.loc[labels == class_name] #classification_dictionary[class_name]   #
+        print(class_name)
+        class_subset = data.loc[labels == class_name_mapping[class_name]] #classification_dictionary[class_name]   #
+        print(class_subset)
         shap_values = explainer(class_subset, fixed_context=1)
-
+        print(shap_values)
+        save_instance_shapleys(class_name, shap_values)
+        
         if averaged:
-            shap.plots.bar(shap_values, max_display=20)
-            save_instance_shapleys(class_name, shap_values)
-            # print(shap_values.values)
+            # shap.plots.bar(shap_values, max_display=20)            # print(shap_values.values)
             # per_class_explanations[class_name] = np.abs(shap_values.values).mean(0)
             # feature_names = shap_values.data
 
@@ -99,7 +102,7 @@ def get_explanations(data, labels, averaged):
             zeros.extend(list(sum(values)))
             per_class_explanations[class_name] = zeros
             syn_names = cohort_exps[0].feature_names
-            lemmas = [lesk([item], item, synsets=wordnet.synsets(item, lang='eng')) for item in syn_names]
+            lemmas = [lesk([item], item, synsets=wordnet.synsets(item, lang=language)) for item in syn_names]
             print(lemmas)
             lemma_names = []
             for lemma in lemmas:
@@ -118,7 +121,8 @@ def get_explanations(data, labels, averaged):
             for list_of_words in shap_values.data:
                 word_ix = 0
                 for word in list_of_words:
-                    syns = lesk(list_of_words, word, synsets=wordnet.synsets(word, lang='eng'))
+                    word = word.strip() #white characters
+                    syns = lesk(list_of_words, word, synsets=wordnet.synsets(word, lang=language))
                     if syns is not None:
                         if syns.name() not in feature_names:
                             feature_names.append(syns.name())
@@ -127,8 +131,8 @@ def get_explanations(data, labels, averaged):
                             per_class_max_shap_values[class_name][syns.name()] = shap_values.values[row_ix][word_ix]
                             disambiguation_dictionary[syns.name()] = word
                     else:
-                        # feature_names.append(None)
-                        pass
+                        print("FAILED TO MAP ", word)
+                        
                     word_ix+=1
                 row_ix += 1
     if averaged:
@@ -137,15 +141,21 @@ def get_explanations(data, labels, averaged):
             per_class_explanations[key].extend(extend_with_zeros)
         return (per_class_explanations, feature_names)
 
+    print("MAXES")
+    print(per_class_max_shap_values)
+    print("FEATURES")
+    print(feature_names)
     for feature in feature_names:
         for class_name in classes:
             if feature in per_class_max_shap_values[class_name]:
                 per_class_explanations[class_name].append(per_class_max_shap_values[class_name][feature])
             else:
+                print("ADDING 0 to ", feature)
                 per_class_explanations[class_name].append(0)
     # to numpy arrays
     for key in per_class_explanations:
          per_class_explanations[key] = np.array(per_class_explanations[key])
+    print("RETURNING")
     print(per_class_explanations)
     print(feature_names)
     ## export original words and their disambiguations
