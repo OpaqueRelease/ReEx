@@ -306,6 +306,8 @@ def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, mi
         if abs:
             print(explanation_vector)
             print(np.absolute(explanation_vector) > 0)
+            explanation_vector = np.array(explanation_vector)
+            explanation_vector = explanation_vector.flatten()
             greater_than_zero_vector = explanation_vector[np.absolute(explanation_vector) > 0]
             if len(greater_than_zero_vector) < 1:
                 print("Zero size feature vector. Aborting...")
@@ -315,6 +317,7 @@ def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, mi
             print(explanation_vector)
             print(type(explanation_vector))
             explanation_vector = np.array(explanation_vector)
+            explanation_vector = explanation_vector.flatten()
             greater_than_zero_vector = explanation_vector[explanation_vector > 0]
             if len(greater_than_zero_vector) < 1:
                 print("Zero size feature vector. Aborting...")

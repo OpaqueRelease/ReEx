@@ -74,7 +74,7 @@ def get_explanations(data, labels, averaged, language):
         print(class_name)
         class_subset = data.loc[labels == class_name_mapping[class_name]] #classification_dictionary[class_name]   #
         print(class_subset)
-        shap_values = explainer(class_subset, fixed_context=1)
+        shap_values = explainer(class_subset)
         print(shap_values)
         save_instance_shapleys(class_name, shap_values)
         

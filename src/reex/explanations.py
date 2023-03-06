@@ -136,6 +136,7 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
                 cors_neg = np.array([enx for enx, pred_tuple in enumerate(zip(preds, y_test)) if pred_tuple[0] == pred_tuple[1] and pred_tuple[0] == unique_class])
                 if cors_neg.size != 0:
                     shap_values = explainer.shap_values(x_test[cors_neg], nsamples = 10, verbose = False)
+                    #shap.plots.bar(shap_values, max_display=20) 
                     stack = np.mean(np.vstack(shap_values),axis = 0)
                     per_class_explanations[unique_class].append(stack)
 
