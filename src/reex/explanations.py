@@ -62,13 +62,15 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
         vectorizer = TfidfVectorizer(analyzer='word',stop_words= 'english')
         X_vectorized = vectorizer.fit_transform(X)
         X_vectorized = X_vectorized.todense()
-        X = pd.DataFrame(X_vectorized)
-        X.columns = vectorizer.get_feature_names()
+        X_usable = pd.DataFrame(X_vectorized)
+        X_usable.columns = vectorizer.get_feature_names()
+    else:
+        X_usable = X.copy()
     logging.info("Feature pre-selection via Mutual Information ({}).".format(subset))
-    minf = mutual_info_classif(X.values, training_scores_encoded)
+    minf = mutual_info_classif(X_usable.values, training_scores_encoded)
     top_k = np.argsort(minf)[::-1][0:subset]
-    attribute_vector = X.columns[top_k]
-    X = X.astype(float).values[:,top_k]
+    attribute_vector = X_usable.columns[top_k]
+    X_usable = X_usable.astype(float).values[:,top_k]
     skf = StratifiedKFold(n_splits=3)
     performances = []
     enx = 0
@@ -84,7 +86,9 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
     if explanation_method == "shap":
         logging.info("Shapley-based explanations.")
         ## for the correctly predicted instances, remember shap values and compute the expected value at the end.
-        for train_index, test_index in skf.split(X, Y):
+        for train_index, test_index in skf.split(X_usable, Y):
+            pd.DataFrame(X[train_index]).to_csv("../results/train_split.csv")
+            pd.DataFrame(X[test_index]).to_csv("../results/test_split.csv")
             enx+=1
             model = None
             clf = None
@@ -92,17 +96,12 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
                 model = pickle.load(open(model_path, 'rb'))
             else:
                 clf = model_dict[classifier_index]
-            x_train = X[train_index]
-            x_test = X[test_index]
+
+            x_train = X_usable[train_index]
+            x_test = X_usable[test_index]
             
             y_train = Y[train_index]
             y_test = Y[test_index]
-
-            ## perform simple feature ranking
-            minf = mutual_info_classif(x_train, y_train)
-            top_k = np.argsort(minf)[::-1][0:subset]
-            x_train = x_train[:,top_k]
-            x_test = x_test[:,top_k]
 
             if not text:
                 x_train = x_train.astype('float')
@@ -119,6 +118,8 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
             performances.append(perf)
             logging.info("Performance in fold {}, {} (F1)".format(enx, perf))
             ## different shap explainers
+            if shap_explainer == "base":
+                explainer = shap.Explainer(model.decision_function, x_train)
             if shap_explainer == "kernel":
                 explainer = shap.KernelExplainer(model.decision_function, x_train)
             if shap_explainer == "tree":
@@ -133,19 +134,36 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
                 explainer = shap.PartitionExplainer(model.predict_proba, x_train)
 
             for unique_class in set(preds):
+                print("Class:", unique_class)
                 cors_neg = np.array([enx for enx, pred_tuple in enumerate(zip(preds, y_test)) if pred_tuple[0] == pred_tuple[1] and pred_tuple[0] == unique_class])
                 if cors_neg.size != 0:
-                    shap_values = explainer.shap_values(x_test[cors_neg], nsamples = 10, verbose = False)
-                    #shap.plots.bar(shap_values, max_display=20) 
-                    stack = np.mean(np.vstack(shap_values),axis = 0)
-                    per_class_explanations[unique_class].append(stack)
+                    #shap_values = explainer.shap_values(x_test[cors_neg], nsamples = 10, verbose = False)
+                    shap_values = explainer(x_test[cors_neg])
+                    # print(type(shap_values))
+                    print(attribute_vector)
+                    shap_values.feature_names = list(attribute_vector)
+                    shap.plots.bar(shap_values, max_display=20) 
+                    shap.summary_plot(shap_values, feature_names=list(attribute_vector), max_display=20)
+                    #stack = np.mean(np.vstack(shap_values),axis = 0)
+                    cohorts = {"": shap_values}
+                    cohort_labels = list(cohorts.keys())
+                    cohort_exps = list(cohorts.values())
+                    for i in range(len(cohort_exps)):
+                        if len(cohort_exps[i].shape) == 2:
+                            cohort_exps[i] = cohort_exps[i].mean(0)
+                    features = cohort_exps[0].data
+                    values = np.array([cohort_exps[i].values for i in range(len(cohort_exps))])
+                    per_class_explanations[unique_class].append(values)
+                    print(values)
+            break
 
         final_explanations = {}
         for class_name, explanation_set in per_class_explanations.items():
-            final_explanations[str(class_name)] = np.mean(np.matrix(explanation_set),axis = 0)
+            #final_explanations[str(class_name)] = np.mean(np.matrix(explanation_set),axis = 0).flatten()
+            final_explanations[str(class_name)] = explanation_set
         average_perf = (np.mean(performances), np.std(performances))
         logging.info("Final performance: {}".format(average_perf))
-
+ 
     elif explanation_method == "class-ranking":
         logging.info("Ranking-based explanations.")
         unique_scores = np.unique(training_scores_encoded)

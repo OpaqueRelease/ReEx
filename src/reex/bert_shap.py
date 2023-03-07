@@ -91,7 +91,7 @@ def get_explanations(data, labels, averaged, language):
             cohort_exps = list(cohorts.values())
             for i in range(len(cohort_exps)):
                 if len(cohort_exps[i].shape) == 2:
-                    cohort_exps[i] = cohort_exps[i].abs.mean(0)
+                    cohort_exps[i] = cohort_exps[i].mean(0)
             features = cohort_exps[0].data
             values = np.array([cohort_exps[i].values for i in range(len(cohort_exps))])
 
