@@ -16,11 +16,14 @@ from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import f1_score
 from sklearn.feature_selection import mutual_info_classif
 from sklearn import svm
+from sklearn.cluster import AffinityPropagation
 import logging
+from sklearn.cluster import MeanShift
 logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
 logging.getLogger().setLevel(logging.INFO)
 import pickle
 import time
+from numpy import unique, where
 import gzip
 import networkx as nx
 import obonet
@@ -133,29 +136,40 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
             if shap_explainer == "partition":
                 explainer = shap.PartitionExplainer(model.predict_proba, x_train)
 
+            print(set(preds))
             for unique_class in set(preds):
                 print("Class:", unique_class)
                 cors_neg = np.array([enx for enx, pred_tuple in enumerate(zip(preds, y_test)) if pred_tuple[0] == pred_tuple[1] and pred_tuple[0] == unique_class])
                 if cors_neg.size != 0:
-                    #shap_values = explainer.shap_values(x_test[cors_neg], nsamples = 10, verbose = False)
                     shap_values = explainer(x_test[cors_neg])
-                    # print(type(shap_values))
-                    print(attribute_vector)
                     shap_values.feature_names = list(attribute_vector)
-                    shap.plots.bar(shap_values, max_display=20) 
-                    shap.summary_plot(shap_values, feature_names=list(attribute_vector), max_display=20)
+                    #shap.plots.bar(shap_values, max_display=20) 
+                    #shap.summary_plot(shap_values, feature_names=list(attribute_vector), max_display=20)
                     #stack = np.mean(np.vstack(shap_values),axis = 0)
-                    cohorts = {"": shap_values}
-                    cohort_labels = list(cohorts.keys())
-                    cohort_exps = list(cohorts.values())
-                    for i in range(len(cohort_exps)):
-                        if len(cohort_exps[i].shape) == 2:
-                            cohort_exps[i] = cohort_exps[i].mean(0)
-                    features = cohort_exps[0].data
-                    values = np.array([cohort_exps[i].values for i in range(len(cohort_exps))])
-                    per_class_explanations[unique_class].append(values)
-                    print(values)
-            break
+                    values_array = np.array(shap_values.values)
+                    ## CLUSTERING
+                    #model = AffinityPropagation(damping=0.9)
+                    #model.fit(values_array)
+                    #yhat = model.predict(values_array)
+                    model = MeanShift()
+                    yhat = model.fit_predict(values_array)
+                    clusters = unique(yhat)
+                    print(clusters)
+                    for cluster in clusters:
+                        row_ix = where(yhat == cluster)
+                        values_of_cluster = values_array[row_ix]
+                        cluster_name = str(unique_class) + str(cluster)
+
+                        cohorts = {"": values_of_cluster}
+                        cohort_labels = list(cohorts.keys())
+                        cohort_exps = list(cohorts.values())
+                        for i in range(len(cohort_exps)):
+                            if len(cohort_exps[i].shape) == 2:
+                                cohort_exps[i] = cohort_exps[i].mean(0)
+                        features = cohort_exps[0].data
+                        values = np.array([cohort_exps[i] for i in range(len(cohort_exps))])
+                        per_class_explanations[cluster_name].append(values)
+            break # one train / test split
 
         final_explanations = {}
         for class_name, explanation_set in per_class_explanations.items():
