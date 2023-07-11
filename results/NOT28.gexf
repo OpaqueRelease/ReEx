@@ -1,0 +1,591 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf version="1.2" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd">
+  <meta lastmodifieddate="2023-03-24">
+    <creator>NetworkX 2.5</creator>
+  </meta>
+  <graph defaultedgetype="directed" mode="static" name="">
+    <nodes>
+      <node id="seventeen.s.01" label="seventeen.s.01" />
+      <node id="fancier.n.01" label="fancier.n.01" />
+      <node id="toweling.n.01" label="toweling.n.01" />
+      <node id="politician.n.01" label="politician.n.01" />
+      <node id="senator.n.01" label="senator.n.01" />
+      <node id="cook.n.01" label="cook.n.01" />
+      <node id="covering.n.02" label="covering.n.02" />
+      <node id="dunce.n.01" label="dunce.n.01" />
+      <node id="good_person.n.01" label="good_person.n.01" />
+      <node id="chordate.n.01" label="chordate.n.01" />
+      <node id="plant_organ.n.01" label="plant_organ.n.01" />
+      <node id="loner.n.01" label="loner.n.01" />
+      <node id="thing.n.12" label="thing.n.12" />
+      <node id="phenomenon.n.01" label="phenomenon.n.01" />
+      <node id="food.n.02" label="food.n.02" />
+      <node id="building.n.01" label="building.n.01" />
+      <node id="brush.n.02" label="brush.n.02" />
+      <node id="physical_entity.n.01" label="physical_entity.n.01" />
+      <node id="gas.n.02" label="gas.n.02" />
+      <node id="toothbrush.n.01" label="toothbrush.n.01" />
+      <node id="making.n.03" label="making.n.03" />
+      <node id="sunnite.n.01" label="sunnite.n.01" />
+      <node id="disciple.n.01" label="disciple.n.01" />
+      <node id="member.n.01" label="member.n.01" />
+      <node id="plant_part.n.01" label="plant_part.n.01" />
+      <node id="medical_practitioner.n.01" label="medical_practitioner.n.01" />
+      <node id="employee.n.01" label="employee.n.01" />
+      <node id="defender.n.01" label="defender.n.01" />
+      <node id="builder.n.03" label="builder.n.03" />
+      <node id="performer.n.01" label="performer.n.01" />
+      <node id="cousin.n.01" label="cousin.n.01" />
+      <node id="buddy.n.01" label="buddy.n.01" />
+      <node id="instrumentality.n.03" label="instrumentality.n.03" />
+      <node id="fluid.n.01" label="fluid.n.01" />
+      <node id="substance.n.01" label="substance.n.01" />
+      <node id="asshole.n.01" label="asshole.n.01" />
+      <node id="collectivist.n.01" label="collectivist.n.01" />
+      <node id="sediment.n.01" label="sediment.n.01" />
+      <node id="debater.n.01" label="debater.n.01" />
+      <node id="photograph.n.01" label="photograph.n.01" />
+      <node id="physical_phenomenon.n.01" label="physical_phenomenon.n.01" />
+      <node id="religious_person.n.01" label="religious_person.n.01" />
+      <node id="musical_instrument.n.01" label="musical_instrument.n.01" />
+      <node id="candidate.n.02" label="candidate.n.02" />
+      <node id="homosexual.n.01" label="homosexual.n.01" />
+      <node id="unpleasant_person.n.01" label="unpleasant_person.n.01" />
+      <node id="national.n.01" label="national.n.01" />
+      <node id="animal.n.01" label="animal.n.01" />
+      <node id="contractor.n.03" label="contractor.n.03" />
+      <node id="waterfall.n.01" label="waterfall.n.01" />
+      <node id="beverage.n.01" label="beverage.n.01" />
+      <node id="worker.n.01" label="worker.n.01" />
+      <node id="savior.n.02" label="savior.n.02" />
+      <node id="admirer.n.03" label="admirer.n.03" />
+      <node id="instrument.n.01" label="instrument.n.01" />
+      <node id="bodily_process.n.01" label="bodily_process.n.01" />
+      <node id="obsessive.n.01" label="obsessive.n.01" />
+      <node id="sports_equipment.n.01" label="sports_equipment.n.01" />
+      <node id="politician.n.02" label="politician.n.02" />
+      <node id="band.n.07" label="band.n.07" />
+      <node id="part.n.03" label="part.n.03" />
+      <node id="potato.n.01" label="potato.n.01" />
+      <node id="opening.n.10" label="opening.n.10" />
+      <node id="drinker.n.02" label="drinker.n.02" />
+      <node id="chemical_element.n.01" label="chemical_element.n.01" />
+      <node id="laborer.n.01" label="laborer.n.01" />
+      <node id="produce.n.01" label="produce.n.01" />
+      <node id="extremity.n.04" label="extremity.n.04" />
+      <node id="tissue.n.01" label="tissue.n.01" />
+      <node id="messiah.n.01" label="messiah.n.01" />
+      <node id="part.n.02" label="part.n.02" />
+      <node id="mechanism.n.05" label="mechanism.n.05" />
+      <node id="voter.n.01" label="voter.n.01" />
+      <node id="feminist.n.01" label="feminist.n.01" />
+      <node id="creation.n.02" label="creation.n.02" />
+      <node id="christian.n.01" label="christian.n.01" />
+      <node id="male_offspring.n.01" label="male_offspring.n.01" />
+      <node id="leader.n.01" label="leader.n.01" />
+      <node id="component.n.03" label="component.n.03" />
+      <node id="starches.n.01" label="starches.n.01" />
+      <node id="lyricist.n.01" label="lyricist.n.01" />
+      <node id="object.n.01" label="object.n.01" />
+      <node id="singer.n.01" label="singer.n.01" />
+      <node id="organic_process.n.01" label="organic_process.n.01" />
+      <node id="living_thing.n.01" label="living_thing.n.01" />
+      <node id="child.n.02" label="child.n.02" />
+      <node id="growth.n.01" label="growth.n.01" />
+      <node id="structure.n.01" label="structure.n.01" />
+      <node id="strip.n.02" label="strip.n.02" />
+      <node id="perversion.n.02" label="perversion.n.02" />
+      <node id="promethium.n.01" label="promethium.n.01" />
+      <node id="hole.n.02" label="hole.n.02" />
+      <node id="vertex.n.02" label="vertex.n.02" />
+      <node id="clubhouse.n.01" label="clubhouse.n.01" />
+      <node id="librarian.n.01" label="librarian.n.01" />
+      <node id="philosopher.n.01" label="philosopher.n.01" />
+      <node id="scholar.n.01" label="scholar.n.01" />
+      <node id="covering.n.01" label="covering.n.01" />
+      <node id="socialist.n.01" label="socialist.n.01" />
+      <node id="policeman.n.01" label="policeman.n.01" />
+      <node id="taxpayer.n.01" label="taxpayer.n.01" />
+      <node id="area.n.05" label="area.n.05" />
+      <node id="seaborgium.n.01" label="seaborgium.n.01" />
+      <node id="equipment.n.01" label="equipment.n.01" />
+      <node id="writer.n.01" label="writer.n.01" />
+      <node id="muslim.n.01" label="muslim.n.01" />
+      <node id="commodity.n.01" label="commodity.n.01" />
+      <node id="follower.n.01" label="follower.n.01" />
+      <node id="intellectual.n.01" label="intellectual.n.01" />
+      <node id="son.n.01" label="son.n.01" />
+      <node id="solanaceous_vegetable.n.01" label="solanaceous_vegetable.n.01" />
+      <node id="stupid.n.01" label="stupid.n.01" />
+      <node id="fluid.n.02" label="fluid.n.02" />
+      <node id="temp.n.01" label="temp.n.01" />
+      <node id="atmospheric_phenomenon.n.01" label="atmospheric_phenomenon.n.01" />
+      <node id="lawman.n.01" label="lawman.n.01" />
+      <node id="stimulation.n.03" label="stimulation.n.03" />
+      <node id="event.n.03" label="event.n.03" />
+      <node id="disputant.n.01" label="disputant.n.01" />
+      <node id="raper.n.01" label="raper.n.01" />
+      <node id="sexual_activity.n.01" label="sexual_activity.n.01" />
+      <node id="reformer.n.01" label="reformer.n.01" />
+      <node id="workplace.n.01" label="workplace.n.01" />
+      <node id="musician.n.01" label="musician.n.01" />
+      <node id="attacker.n.01" label="attacker.n.01" />
+      <node id="academician.n.03" label="academician.n.03" />
+      <node id="wrongdoer.n.01" label="wrongdoer.n.01" />
+      <node id="snip.n.01" label="snip.n.01" />
+      <node id="structure.n.04" label="structure.n.04" />
+      <node id="puncture.n.02" label="puncture.n.02" />
+      <node id="process.n.06" label="process.n.06" />
+      <node id="peer.n.01" label="peer.n.01" />
+      <node id="saint.n.02" label="saint.n.02" />
+      <node id="bad_person.n.01" label="bad_person.n.01" />
+      <node id="hormone.n.01" label="hormone.n.01" />
+      <node id="patriot.n.01" label="patriot.n.01" />
+      <node id="user.n.01" label="user.n.01" />
+      <node id="friend.n.01" label="friend.n.01" />
+      <node id="representation.n.02" label="representation.n.02" />
+      <node id="apparel.n.01" label="apparel.n.01" />
+      <node id="natural_object.n.01" label="natural_object.n.01" />
+      <node id="implement.n.01" label="implement.n.01" />
+      <node id="metallic_element.n.01" label="metallic_element.n.01" />
+      <node id="libertarian.n.02" label="libertarian.n.02" />
+      <node id="animal_tissue.n.01" label="animal_tissue.n.01" />
+      <node id="apple.n.01" label="apple.n.01" />
+      <node id="paraphilia.n.01" label="paraphilia.n.01" />
+      <node id="cocoa.n.01" label="cocoa.n.01" />
+      <node id="consumer_goods.n.01" label="consumer_goods.n.01" />
+      <node id="consumption.n.01" label="consumption.n.01" />
+      <node id="utensil.n.01" label="utensil.n.01" />
+      <node id="sucking.n.01" label="sucking.n.01" />
+      <node id="wrangler.n.01" label="wrangler.n.01" />
+      <node id="educator.n.01" label="educator.n.01" />
+      <node id="electronic_device.n.01" label="electronic_device.n.01" />
+      <node id="entertainer.n.01" label="entertainer.n.01" />
+      <node id="happy.s.04" label="happy.s.04" />
+      <node id="victor.n.01" label="victor.n.01" />
+      <node id="edible_fruit.n.01" label="edible_fruit.n.01" />
+      <node id="neural_structure.n.01" label="neural_structure.n.01" />
+      <node id="country.n.02" label="country.n.02" />
+      <node id="medium.n.01" label="medium.n.01" />
+      <node id="noble_metal.n.01" label="noble_metal.n.01" />
+      <node id="weather.n.01" label="weather.n.01" />
+      <node id="clothing.n.01" label="clothing.n.01" />
+      <node id="foodstuff.n.02" label="foodstuff.n.02" />
+      <node id="work.n.02" label="work.n.02" />
+      <node id="solid.n.01" label="solid.n.01" />
+      <node id="product.n.02" label="product.n.02" />
+      <node id="dregs.n.01" label="dregs.n.01" />
+      <node id="ancestor.n.01" label="ancestor.n.01" />
+      <node id="liquid_body_substance.n.01" label="liquid_body_substance.n.01" />
+      <node id="stick.n.01" label="stick.n.01" />
+      <node id="man.n.01" label="man.n.01" />
+      <node id="unwelcome_person.n.01" label="unwelcome_person.n.01" />
+      <node id="citizen.n.01" label="citizen.n.01" />
+      <node id="council_member.n.01" label="council_member.n.01" />
+      <node id="chef.n.01" label="chef.n.01" />
+      <node id="district.n.01" label="district.n.01" />
+      <node id="rightist.n.01" label="rightist.n.01" />
+      <node id="captor.n.01" label="captor.n.01" />
+      <node id="secretion.n.02" label="secretion.n.02" />
+      <node id="sexual_intercourse.n.01" label="sexual_intercourse.n.01" />
+      <node id="supporter.n.01" label="supporter.n.01" />
+      <node id="male.n.02" label="male.n.02" />
+      <node id="money_handler.n.01" label="money_handler.n.01" />
+      <node id="fascist.n.01" label="fascist.n.01" />
+      <node id="condensation.n.03" label="condensation.n.03" />
+      <node id="fantastic.s.02" label="fantastic.s.02" />
+      <node id="causal_agent.n.01" label="causal_agent.n.01" />
+      <node id="health_professional.n.01" label="health_professional.n.01" />
+      <node id="gunman.n.02" label="gunman.n.02" />
+      <node id="substance.n.07" label="substance.n.07" />
+      <node id="garment.n.01" label="garment.n.01" />
+      <node id="informant.n.01" label="informant.n.01" />
+      <node id="payer.n.01" label="payer.n.01" />
+      <node id="gold.n.03" label="gold.n.03" />
+      <node id="shot.n.05" label="shot.n.05" />
+      <node id="lawgiver.n.01" label="lawgiver.n.01" />
+      <node id="adult.n.02" label="adult.n.02" />
+      <node id="terry.n.02" label="terry.n.02" />
+      <node id="region.n.01" label="region.n.01" />
+      <node id="communicator.n.01" label="communicator.n.01" />
+      <node id="electronic_equipment.n.01" label="electronic_equipment.n.01" />
+      <node id="toiletry.n.01" label="toiletry.n.01" />
+      <node id="expert.n.01" label="expert.n.01" />
+      <node id="offspring.n.01" label="offspring.n.01" />
+      <node id="shell.n.10" label="shell.n.10" />
+      <node id="neurotic.n.01" label="neurotic.n.01" />
+      <node id="principal.n.05" label="principal.n.05" />
+      <node id="container.n.01" label="container.n.01" />
+      <node id="consumer.n.01" label="consumer.n.01" />
+      <node id="stand-in.n.01" label="stand-in.n.01" />
+      <node id="administrative_district.n.01" label="administrative_district.n.01" />
+      <node id="texas_ranger.n.01" label="texas_ranger.n.01" />
+      <node id="matter.n.03" label="matter.n.03" />
+      <node id="fuck.n.01" label="fuck.n.01" />
+      <node id="atmosphere.n.05" label="atmosphere.n.05" />
+      <node id="valve.n.05" label="valve.n.05" />
+      <node id="advocate.n.01" label="advocate.n.01" />
+      <node id="point.n.02" label="point.n.02" />
+      <node id="associate.n.01" label="associate.n.01" />
+      <node id="person.n.01" label="person.n.01" />
+      <node id="criminal.n.01" label="criminal.n.01" />
+      <node id="party.n.05" label="party.n.05" />
+      <node id="fellow.n.06" label="fellow.n.06" />
+      <node id="whole.n.02" label="whole.n.02" />
+      <node id="body_part.n.01" label="body_part.n.01" />
+      <node id="liquid.n.01" label="liquid.n.01" />
+      <node id="animal_fancier.n.01" label="animal_fancier.n.01" />
+      <node id="democrat.n.02" label="democrat.n.02" />
+      <node id="leaker.n.01" label="leaker.n.01" />
+      <node id="tory.n.03" label="tory.n.03" />
+      <node id="plant.n.02" label="plant.n.02" />
+      <node id="invertebrate.n.01" label="invertebrate.n.01" />
+      <node id="vascular_plant.n.01" label="vascular_plant.n.01" />
+      <node id="organism.n.01" label="organism.n.01" />
+      <node id="patio.n.01" label="patio.n.01" />
+      <node id="extreme_point.n.01" label="extreme_point.n.01" />
+      <node id="skilled_worker.n.01" label="skilled_worker.n.01" />
+      <node id="reproductive_structure.n.01" label="reproductive_structure.n.01" />
+      <node id="vessel.n.03" label="vessel.n.03" />
+      <node id="hoop.n.02" label="hoop.n.02" />
+      <node id="film.n.02" label="film.n.02" />
+      <node id="process.n.05" label="process.n.05" />
+      <node id="body_substance.n.01" label="body_substance.n.01" />
+      <node id="unknown.n.01" label="unknown.n.01" />
+      <node id="moralist.n.01" label="moralist.n.01" />
+      <node id="sick_person.n.01" label="sick_person.n.01" />
+      <node id="individualist.n.01" label="individualist.n.01" />
+      <node id="workman.n.01" label="workman.n.01" />
+      <node id="combatant.n.01" label="combatant.n.01" />
+      <node id="conservative.n.01" label="conservative.n.01" />
+      <node id="adipose_tissue.n.01" label="adipose_tissue.n.01" />
+      <node id="europium.n.01" label="europium.n.01" />
+      <node id="preserver.n.03" label="preserver.n.03" />
+      <node id="professional.n.01" label="professional.n.01" />
+      <node id="unfortunate.n.01" label="unfortunate.n.01" />
+      <node id="coating.n.01" label="coating.n.01" />
+      <node id="legislator.n.01" label="legislator.n.01" />
+      <node id="location.n.01" label="location.n.01" />
+      <node id="adult.n.01" label="adult.n.01" />
+      <node id="art.n.01" label="art.n.01" />
+      <node id="tuberosity.n.01" label="tuberosity.n.01" />
+      <node id="baby.n.01" label="baby.n.01" />
+      <node id="artifact.n.01" label="artifact.n.01" />
+      <node id="vegetable.n.01" label="vegetable.n.01" />
+      <node id="sky.n.01" label="sky.n.01" />
+      <node id="lover.n.01" label="lover.n.01" />
+      <node id="simpleton.n.01" label="simpleton.n.01" />
+      <node id="corrective.n.01" label="corrective.n.01" />
+      <node id="fabric.n.01" label="fabric.n.01" />
+      <node id="food.n.01" label="food.n.01" />
+      <node id="body_of_water.n.01" label="body_of_water.n.01" />
+      <node id="piece.n.01" label="piece.n.01" />
+      <node id="geographic_point.n.01" label="geographic_point.n.01" />
+      <node id="device.n.01" label="device.n.01" />
+      <node id="benefactor.n.01" label="benefactor.n.01" />
+      <node id="root_vegetable.n.01" label="root_vegetable.n.01" />
+      <node id="relative.n.01" label="relative.n.01" />
+      <node id="medulla_oblongata.n.01" label="medulla_oblongata.n.01" />
+      <node id="natural_phenomenon.n.01" label="natural_phenomenon.n.01" />
+      <node id="natural_process.n.01" label="natural_process.n.01" />
+      <node id="plastic_art.n.01" label="plastic_art.n.01" />
+      <node id="enclosure.n.01" label="enclosure.n.01" />
+      <node id="region.n.03" label="region.n.03" />
+    </nodes>
+    <edges>
+      <edge id="0" source="fancier.n.01" target="animal_fancier.n.01" />
+      <edge id="1" source="toweling.n.01" target="terry.n.02" />
+      <edge id="2" source="politician.n.01" target="legislator.n.01" />
+      <edge id="3" source="cook.n.01" target="chef.n.01" />
+      <edge id="4" source="covering.n.02" target="coating.n.01" />
+      <edge id="5" source="covering.n.02" target="clothing.n.01" />
+      <edge id="6" source="good_person.n.01" target="benefactor.n.01" />
+      <edge id="7" source="good_person.n.01" target="saint.n.02" />
+      <edge id="8" source="plant_organ.n.01" target="reproductive_structure.n.01" />
+      <edge id="9" source="thing.n.12" target="part.n.03" />
+      <edge id="10" source="thing.n.12" target="body_of_water.n.01" />
+      <edge id="11" source="phenomenon.n.01" target="natural_phenomenon.n.01" />
+      <edge id="12" source="food.n.02" target="produce.n.01" />
+      <edge id="13" source="building.n.01" target="clubhouse.n.01" />
+      <edge id="14" source="brush.n.02" target="toothbrush.n.01" />
+      <edge id="15" source="physical_entity.n.01" target="causal_agent.n.01" />
+      <edge id="16" source="physical_entity.n.01" target="object.n.01" />
+      <edge id="17" source="physical_entity.n.01" target="process.n.06" />
+      <edge id="18" source="physical_entity.n.01" target="thing.n.12" />
+      <edge id="19" source="physical_entity.n.01" target="matter.n.03" />
+      <edge id="20" source="gas.n.02" target="atmosphere.n.05" />
+      <edge id="21" source="member.n.01" target="council_member.n.01" />
+      <edge id="22" source="plant_part.n.01" target="plant_organ.n.01" />
+      <edge id="23" source="employee.n.01" target="workman.n.01" />
+      <edge id="24" source="defender.n.01" target="lawman.n.01" />
+      <edge id="25" source="performer.n.01" target="musician.n.01" />
+      <edge id="26" source="instrumentality.n.03" target="equipment.n.01" />
+      <edge id="27" source="instrumentality.n.03" target="medium.n.01" />
+      <edge id="28" source="instrumentality.n.03" target="device.n.01" />
+      <edge id="29" source="instrumentality.n.03" target="implement.n.01" />
+      <edge id="30" source="instrumentality.n.03" target="toiletry.n.01" />
+      <edge id="31" source="instrumentality.n.03" target="container.n.01" />
+      <edge id="32" source="fluid.n.01" target="liquid.n.01" />
+      <edge id="33" source="substance.n.01" target="chemical_element.n.01" />
+      <edge id="34" source="substance.n.01" target="body_substance.n.01" />
+      <edge id="35" source="substance.n.01" target="fluid.n.01" />
+      <edge id="36" source="sediment.n.01" target="dregs.n.01" />
+      <edge id="37" source="debater.n.01" target="wrangler.n.01" />
+      <edge id="38" source="physical_phenomenon.n.01" target="atmospheric_phenomenon.n.01" />
+      <edge id="39" source="physical_phenomenon.n.01" target="event.n.03" />
+      <edge id="40" source="religious_person.n.01" target="christian.n.01" />
+      <edge id="41" source="religious_person.n.01" target="muslim.n.01" />
+      <edge id="42" source="unpleasant_person.n.01" target="asshole.n.01" />
+      <edge id="43" source="national.n.01" target="patriot.n.01" />
+      <edge id="44" source="national.n.01" target="citizen.n.01" />
+      <edge id="45" source="animal.n.01" target="chordate.n.01" />
+      <edge id="46" source="animal.n.01" target="invertebrate.n.01" />
+      <edge id="47" source="animal.n.01" target="adult.n.02" />
+      <edge id="48" source="contractor.n.03" target="builder.n.03" />
+      <edge id="49" source="beverage.n.01" target="cocoa.n.01" />
+      <edge id="50" source="worker.n.01" target="skilled_worker.n.01" />
+      <edge id="51" source="worker.n.01" target="employee.n.01" />
+      <edge id="52" source="worker.n.01" target="temp.n.01" />
+      <edge id="53" source="savior.n.02" target="messiah.n.01" />
+      <edge id="54" source="admirer.n.03" target="fancier.n.01" />
+      <edge id="55" source="bodily_process.n.01" target="consumption.n.01" />
+      <edge id="56" source="bodily_process.n.01" target="sexual_activity.n.01" />
+      <edge id="57" source="politician.n.02" target="socialist.n.01" />
+      <edge id="58" source="band.n.07" target="hoop.n.02" />
+      <edge id="59" source="part.n.03" target="body_part.n.01" />
+      <edge id="60" source="opening.n.10" target="hole.n.02" />
+      <edge id="61" source="chemical_element.n.01" target="metallic_element.n.01" />
+      <edge id="62" source="chemical_element.n.01" target="seaborgium.n.01" />
+      <edge id="63" source="produce.n.01" target="vegetable.n.01" />
+      <edge id="64" source="produce.n.01" target="edible_fruit.n.01" />
+      <edge id="65" source="extremity.n.04" target="extreme_point.n.01" />
+      <edge id="66" source="tissue.n.01" target="animal_tissue.n.01" />
+      <edge id="67" source="part.n.02" target="piece.n.01" />
+      <edge id="68" source="part.n.02" target="component.n.03" />
+      <edge id="69" source="creation.n.02" target="product.n.02" />
+      <edge id="70" source="creation.n.02" target="representation.n.02" />
+      <edge id="71" source="creation.n.02" target="art.n.01" />
+      <edge id="72" source="male_offspring.n.01" target="son.n.01" />
+      <edge id="73" source="leader.n.01" target="lawgiver.n.01" />
+      <edge id="74" source="leader.n.01" target="politician.n.01" />
+      <edge id="75" source="leader.n.01" target="politician.n.02" />
+      <edge id="76" source="component.n.03" target="making.n.03" />
+      <edge id="77" source="starches.n.01" target="potato.n.01" />
+      <edge id="78" source="object.n.01" target="whole.n.02" />
+      <edge id="79" source="object.n.01" target="location.n.01" />
+      <edge id="80" source="object.n.01" target="part.n.02" />
+      <edge id="81" source="organic_process.n.01" target="bodily_process.n.01" />
+      <edge id="82" source="organic_process.n.01" target="growth.n.01" />
+      <edge id="83" source="living_thing.n.01" target="organism.n.01" />
+      <edge id="84" source="child.n.02" target="baby.n.01" />
+      <edge id="85" source="child.n.02" target="male_offspring.n.01" />
+      <edge id="86" source="structure.n.01" target="area.n.05" />
+      <edge id="87" source="structure.n.01" target="building.n.01" />
+      <edge id="88" source="strip.n.02" target="band.n.07" />
+      <edge id="89" source="perversion.n.02" target="paraphilia.n.01" />
+      <edge id="90" source="hole.n.02" target="puncture.n.02" />
+      <edge id="91" source="philosopher.n.01" target="libertarian.n.02" />
+      <edge id="92" source="philosopher.n.01" target="moralist.n.01" />
+      <edge id="93" source="scholar.n.01" target="philosopher.n.01" />
+      <edge id="94" source="covering.n.01" target="shell.n.10" />
+      <edge id="95" source="socialist.n.01" target="collectivist.n.01" />
+      <edge id="96" source="area.n.05" target="patio.n.01" />
+      <edge id="97" source="area.n.05" target="enclosure.n.01" />
+      <edge id="98" source="equipment.n.01" target="electronic_equipment.n.01" />
+      <edge id="99" source="equipment.n.01" target="sports_equipment.n.01" />
+      <edge id="100" source="writer.n.01" target="lyricist.n.01" />
+      <edge id="101" source="muslim.n.01" target="sunnite.n.01" />
+      <edge id="102" source="commodity.n.01" target="consumer_goods.n.01" />
+      <edge id="103" source="follower.n.01" target="disciple.n.01" />
+      <edge id="104" source="intellectual.n.01" target="scholar.n.01" />
+      <edge id="105" source="solanaceous_vegetable.n.01" target="potato.n.01" />
+      <edge id="106" source="stupid.n.01" target="dunce.n.01" />
+      <edge id="107" source="fluid.n.02" target="gas.n.02" />
+      <edge id="108" source="atmospheric_phenomenon.n.01" target="condensation.n.03" />
+      <edge id="109" source="atmospheric_phenomenon.n.01" target="weather.n.01" />
+      <edge id="110" source="lawman.n.01" target="texas_ranger.n.01" />
+      <edge id="111" source="lawman.n.01" target="policeman.n.01" />
+      <edge id="112" source="disputant.n.01" target="debater.n.01" />
+      <edge id="113" source="disputant.n.01" target="reformer.n.01" />
+      <edge id="114" source="sexual_activity.n.01" target="sexual_intercourse.n.01" />
+      <edge id="115" source="sexual_activity.n.01" target="perversion.n.02" />
+      <edge id="116" source="reformer.n.01" target="feminist.n.01" />
+      <edge id="117" source="musician.n.01" target="singer.n.01" />
+      <edge id="118" source="attacker.n.01" target="raper.n.01" />
+      <edge id="119" source="wrongdoer.n.01" target="attacker.n.01" />
+      <edge id="120" source="wrongdoer.n.01" target="principal.n.05" />
+      <edge id="121" source="structure.n.04" target="neural_structure.n.01" />
+      <edge id="122" source="process.n.06" target="organic_process.n.01" />
+      <edge id="123" source="process.n.06" target="natural_process.n.01" />
+      <edge id="124" source="process.n.06" target="phenomenon.n.01" />
+      <edge id="125" source="peer.n.01" target="associate.n.01" />
+      <edge id="126" source="peer.n.01" target="stand-in.n.01" />
+      <edge id="127" source="bad_person.n.01" target="wrongdoer.n.01" />
+      <edge id="128" source="user.n.01" target="consumer.n.01" />
+      <edge id="129" source="friend.n.01" target="buddy.n.01" />
+      <edge id="130" source="representation.n.02" target="photograph.n.01" />
+      <edge id="131" source="natural_object.n.01" target="covering.n.01" />
+      <edge id="132" source="natural_object.n.01" target="plant_part.n.01" />
+      <edge id="133" source="implement.n.01" target="stick.n.01" />
+      <edge id="134" source="implement.n.01" target="brush.n.02" />
+      <edge id="135" source="implement.n.01" target="utensil.n.01" />
+      <edge id="136" source="metallic_element.n.01" target="noble_metal.n.01" />
+      <edge id="137" source="metallic_element.n.01" target="promethium.n.01" />
+      <edge id="138" source="metallic_element.n.01" target="europium.n.01" />
+      <edge id="139" source="animal_tissue.n.01" target="adipose_tissue.n.01" />
+      <edge id="140" source="consumer_goods.n.01" target="clothing.n.01" />
+      <edge id="141" source="consumption.n.01" target="sucking.n.01" />
+      <edge id="142" source="educator.n.01" target="academician.n.03" />
+      <edge id="143" source="entertainer.n.01" target="performer.n.01" />
+      <edge id="144" source="edible_fruit.n.01" target="apple.n.01" />
+      <edge id="145" source="neural_structure.n.01" target="medulla_oblongata.n.01" />
+      <edge id="146" source="medium.n.01" target="film.n.02" />
+      <edge id="147" source="noble_metal.n.01" target="gold.n.03" />
+      <edge id="148" source="clothing.n.01" target="garment.n.01" />
+      <edge id="149" source="clothing.n.01" target="apparel.n.01" />
+      <edge id="150" source="foodstuff.n.02" target="starches.n.01" />
+      <edge id="151" source="solid.n.01" target="food.n.02" />
+      <edge id="152" source="product.n.02" target="work.n.02" />
+      <edge id="153" source="liquid_body_substance.n.01" target="secretion.n.02" />
+      <edge id="154" source="man.n.01" target="fellow.n.06" />
+      <edge id="155" source="unwelcome_person.n.01" target="unpleasant_person.n.01" />
+      <edge id="156" source="citizen.n.01" target="voter.n.01" />
+      <edge id="157" source="district.n.01" target="administrative_district.n.01" />
+      <edge id="158" source="rightist.n.01" target="tory.n.03" />
+      <edge id="159" source="rightist.n.01" target="fascist.n.01" />
+      <edge id="160" source="secretion.n.02" target="hormone.n.01" />
+      <edge id="161" source="sexual_intercourse.n.01" target="fuck.n.01" />
+      <edge id="162" source="male.n.02" target="man.n.01" />
+      <edge id="163" source="male.n.02" target="male_offspring.n.01" />
+      <edge id="164" source="money_handler.n.01" target="payer.n.01" />
+      <edge id="165" source="causal_agent.n.01" target="person.n.01" />
+      <edge id="166" source="health_professional.n.01" target="medical_practitioner.n.01" />
+      <edge id="167" source="substance.n.07" target="food.n.01" />
+      <edge id="168" source="informant.n.01" target="leaker.n.01" />
+      <edge id="169" source="payer.n.01" target="taxpayer.n.01" />
+      <edge id="170" source="shot.n.05" target="gunman.n.02" />
+      <edge id="171" source="lawgiver.n.01" target="legislator.n.01" />
+      <edge id="172" source="region.n.01" target="extremity.n.04" />
+      <edge id="173" source="communicator.n.01" target="writer.n.01" />
+      <edge id="174" source="communicator.n.01" target="informant.n.01" />
+      <edge id="175" source="toiletry.n.01" target="toothbrush.n.01" />
+      <edge id="176" source="expert.n.01" target="shot.n.05" />
+      <edge id="177" source="offspring.n.01" target="child.n.02" />
+      <edge id="178" source="shell.n.10" target="valve.n.05" />
+      <edge id="179" source="neurotic.n.01" target="obsessive.n.01" />
+      <edge id="180" source="principal.n.05" target="criminal.n.01" />
+      <edge id="181" source="container.n.01" target="vessel.n.03" />
+      <edge id="182" source="consumer.n.01" target="drinker.n.02" />
+      <edge id="183" source="administrative_district.n.01" target="country.n.02" />
+      <edge id="184" source="matter.n.03" target="solid.n.01" />
+      <edge id="185" source="matter.n.03" target="substance.n.07" />
+      <edge id="186" source="matter.n.03" target="substance.n.01" />
+      <edge id="187" source="matter.n.03" target="sediment.n.01" />
+      <edge id="188" source="matter.n.03" target="fluid.n.02" />
+      <edge id="189" source="atmosphere.n.05" target="sky.n.01" />
+      <edge id="190" source="advocate.n.01" target="democrat.n.02" />
+      <edge id="191" source="advocate.n.01" target="supporter.n.01" />
+      <edge id="192" source="point.n.02" target="geographic_point.n.01" />
+      <edge id="193" source="associate.n.01" target="member.n.01" />
+      <edge id="194" source="person.n.01" target="advocate.n.01" />
+      <edge id="195" source="person.n.01" target="adult.n.01" />
+      <edge id="196" source="person.n.01" target="lover.n.01" />
+      <edge id="197" source="person.n.01" target="disputant.n.01" />
+      <edge id="198" source="person.n.01" target="national.n.01" />
+      <edge id="199" source="person.n.01" target="male.n.02" />
+      <edge id="200" source="person.n.01" target="bad_person.n.01" />
+      <edge id="201" source="person.n.01" target="follower.n.01" />
+      <edge id="202" source="person.n.01" target="good_person.n.01" />
+      <edge id="203" source="person.n.01" target="worker.n.01" />
+      <edge id="204" source="person.n.01" target="communicator.n.01" />
+      <edge id="205" source="person.n.01" target="leader.n.01" />
+      <edge id="206" source="person.n.01" target="party.n.05" />
+      <edge id="207" source="person.n.01" target="relative.n.01" />
+      <edge id="208" source="person.n.01" target="preserver.n.03" />
+      <edge id="209" source="person.n.01" target="entertainer.n.01" />
+      <edge id="210" source="person.n.01" target="friend.n.01" />
+      <edge id="211" source="person.n.01" target="religious_person.n.01" />
+      <edge id="212" source="person.n.01" target="simpleton.n.01" />
+      <edge id="213" source="person.n.01" target="captor.n.01" />
+      <edge id="214" source="person.n.01" target="candidate.n.02" />
+      <edge id="215" source="person.n.01" target="expert.n.01" />
+      <edge id="216" source="person.n.01" target="individualist.n.01" />
+      <edge id="217" source="person.n.01" target="peer.n.01" />
+      <edge id="218" source="person.n.01" target="intellectual.n.01" />
+      <edge id="219" source="person.n.01" target="unwelcome_person.n.01" />
+      <edge id="220" source="person.n.01" target="money_handler.n.01" />
+      <edge id="221" source="person.n.01" target="unfortunate.n.01" />
+      <edge id="222" source="person.n.01" target="combatant.n.01" />
+      <edge id="223" source="person.n.01" target="homosexual.n.01" />
+      <edge id="224" source="person.n.01" target="user.n.01" />
+      <edge id="225" source="criminal.n.01" target="raper.n.01" />
+      <edge id="226" source="party.n.05" target="contractor.n.03" />
+      <edge id="227" source="whole.n.02" target="living_thing.n.01" />
+      <edge id="228" source="whole.n.02" target="artifact.n.01" />
+      <edge id="229" source="whole.n.02" target="natural_object.n.01" />
+      <edge id="230" source="body_part.n.01" target="structure.n.04" />
+      <edge id="231" source="body_part.n.01" target="process.n.05" />
+      <edge id="232" source="body_part.n.01" target="tissue.n.01" />
+      <edge id="233" source="liquid.n.01" target="beverage.n.01" />
+      <edge id="234" source="plant.n.02" target="vascular_plant.n.01" />
+      <edge id="235" source="organism.n.01" target="person.n.01" />
+      <edge id="236" source="organism.n.01" target="animal.n.01" />
+      <edge id="237" source="organism.n.01" target="plant.n.02" />
+      <edge id="238" source="extreme_point.n.01" target="vertex.n.02" />
+      <edge id="239" source="skilled_worker.n.01" target="cook.n.01" />
+      <edge id="240" source="process.n.05" target="tuberosity.n.01" />
+      <edge id="241" source="body_substance.n.01" target="liquid_body_substance.n.01" />
+      <edge id="242" source="sick_person.n.01" target="neurotic.n.01" />
+      <edge id="243" source="individualist.n.01" target="loner.n.01" />
+      <edge id="244" source="workman.n.01" target="laborer.n.01" />
+      <edge id="245" source="combatant.n.01" target="victor.n.01" />
+      <edge id="246" source="conservative.n.01" target="rightist.n.01" />
+      <edge id="247" source="preserver.n.03" target="defender.n.01" />
+      <edge id="248" source="professional.n.01" target="educator.n.01" />
+      <edge id="249" source="professional.n.01" target="librarian.n.01" />
+      <edge id="250" source="professional.n.01" target="health_professional.n.01" />
+      <edge id="251" source="unfortunate.n.01" target="sick_person.n.01" />
+      <edge id="252" source="legislator.n.01" target="senator.n.01" />
+      <edge id="253" source="location.n.01" target="region.n.03" />
+      <edge id="254" source="location.n.01" target="point.n.02" />
+      <edge id="255" source="location.n.01" target="region.n.01" />
+      <edge id="256" source="adult.n.01" target="professional.n.01" />
+      <edge id="257" source="adult.n.01" target="conservative.n.01" />
+      <edge id="258" source="adult.n.01" target="man.n.01" />
+      <edge id="259" source="art.n.01" target="plastic_art.n.01" />
+      <edge id="260" source="artifact.n.01" target="instrumentality.n.03" />
+      <edge id="261" source="artifact.n.01" target="covering.n.02" />
+      <edge id="262" source="artifact.n.01" target="structure.n.01" />
+      <edge id="263" source="artifact.n.01" target="creation.n.02" />
+      <edge id="264" source="artifact.n.01" target="strip.n.02" />
+      <edge id="265" source="artifact.n.01" target="opening.n.10" />
+      <edge id="266" source="artifact.n.01" target="commodity.n.01" />
+      <edge id="267" source="artifact.n.01" target="fabric.n.01" />
+      <edge id="268" source="vegetable.n.01" target="root_vegetable.n.01" />
+      <edge id="269" source="vegetable.n.01" target="solanaceous_vegetable.n.01" />
+      <edge id="270" source="lover.n.01" target="admirer.n.03" />
+      <edge id="271" source="simpleton.n.01" target="stupid.n.01" />
+      <edge id="272" source="fabric.n.01" target="terry.n.02" />
+      <edge id="273" source="fabric.n.01" target="toweling.n.01" />
+      <edge id="274" source="food.n.01" target="foodstuff.n.02" />
+      <edge id="275" source="food.n.01" target="beverage.n.01" />
+      <edge id="276" source="body_of_water.n.01" target="waterfall.n.01" />
+      <edge id="277" source="piece.n.01" target="snip.n.01" />
+      <edge id="278" source="geographic_point.n.01" target="workplace.n.01" />
+      <edge id="279" source="device.n.01" target="musical_instrument.n.01" />
+      <edge id="280" source="device.n.01" target="mechanism.n.05" />
+      <edge id="281" source="device.n.01" target="instrument.n.01" />
+      <edge id="282" source="device.n.01" target="electronic_device.n.01" />
+      <edge id="283" source="device.n.01" target="corrective.n.01" />
+      <edge id="284" source="benefactor.n.01" target="savior.n.02" />
+      <edge id="285" source="root_vegetable.n.01" target="potato.n.01" />
+      <edge id="286" source="relative.n.01" target="cousin.n.01" />
+      <edge id="287" source="relative.n.01" target="offspring.n.01" />
+      <edge id="288" source="relative.n.01" target="ancestor.n.01" />
+      <edge id="289" source="natural_phenomenon.n.01" target="physical_phenomenon.n.01" />
+      <edge id="290" source="natural_process.n.01" target="stimulation.n.03" />
+      <edge id="291" source="region.n.03" target="unknown.n.01" />
+      <edge id="292" source="region.n.03" target="district.n.01" />
+    </edges>
+  </graph>
+</gexf>

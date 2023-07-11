@@ -2,6 +2,7 @@
 from misc import *
 import numpy as np
 import operator
+
 def information_content(generalization, ontology, mappings):
     """
     A simple information content calculation

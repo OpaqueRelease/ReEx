@@ -301,24 +301,20 @@ def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, mi
     term_sets_per_class = []
     class_names = []
     for class_name, explanation_vector in explanations.items():
-        print("Max SHAP: " + str(class_name))
-        print(np.max(explanation_vector))
         if abs:
-            print(explanation_vector)
-            print(np.absolute(explanation_vector) > 0)
             explanation_vector = np.array(explanation_vector)
             explanation_vector = explanation_vector.flatten()
             greater_than_zero_vector = explanation_vector[np.absolute(explanation_vector) > 0]
+            print("Number of positive features", len(greater_than_zero_vector))
             if len(greater_than_zero_vector) < 1:
                 print("Zero size feature vector. Aborting...")
                 sys.exit()
             maxVector = np.amax(greater_than_zero_vector)
         else:
-            print(explanation_vector)
-            print(type(explanation_vector))
             explanation_vector = np.array(explanation_vector)
             explanation_vector = explanation_vector.flatten()
             greater_than_zero_vector = explanation_vector[explanation_vector > 0]
+            print("Number of positive features", len(greater_than_zero_vector))
             if len(greater_than_zero_vector) < 1:
                 print("Zero size feature vector. Aborting...")
                 sys.exit()
@@ -329,16 +325,12 @@ def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, mi
                 above_threshold = set(np.argwhere(explanation_vector >= threshold).flatten())
             else:
                 above_threshold = set(np.argwhere(np.absolute(explanation_vector) >= threshold).flatten())
-            if len(above_threshold) > min_terms or threshold < 0.03 * maxVector:
+            if len(above_threshold) > min_terms or threshold < 0.01 * maxVector:
                 #threshold = 0.0001
                 #above_threshold = set(np.argwhere(np.absolute(explanation_vector) >= threshold).flatten())
                 break
             threshold *= step
         #terms = set([x for enx,x in enumerate(attributes) if enx in above_threshold])
-        print("SHAPLEY VALUES:")
-        print("above",above_threshold)
-        print("LENGTH", len(greater_than_zero_vector))
-        print("LENGTH_org", len(explanation_vector))
         terms = set()
         shapley_values = {}
         for index in above_threshold:
@@ -354,7 +346,6 @@ def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, mi
                     mapped = gene_to_go_map[term]
                 except:
                     try:
-                        print(wn.synsets(term))
                         mapped = wn.synsets(term)[0].name()
                         #mapped = [x[1] for x in ontology.in_edges(term + ".n.01")][0]
                     except:
@@ -503,7 +494,9 @@ def ancestor_multiple_sets(list_of_termsets, ontology, depthWeight):
                                 
                                     
                                     # UP TO DISCUSSION - based on generalizationDepth and intersectionCount we somehow decide whether to include the element or not
-                                    intersectionRatio = intersectionCount/numberOfTerms
+                                    intersectionRatio = 0
+                                    if numberOfTerms > 0: 
+                                        intersectionRatio = intersectionCount/numberOfTerms
                                     if generalizationDepth == -1 and intersectionRatio == 0 or generalizationDepth * depthWeight == 0 or intersectionRatio/(generalizationDepth * depthWeight) < 0.5:
                                         pairAncestorSet.add(ancestor_element)
                                         used[item1] = 1

@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf version="1.2" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd">
+  <meta lastmodifieddate="2023-03-24">
+    <creator>NetworkX 2.5</creator>
+  </meta>
+  <graph defaultedgetype="directed" mode="static" name="">
+    <nodes>
+      <node id="give_birth.v.01" label="give_birth.v.01" />
+      <node id="design.v.04" label="design.v.04" />
+      <node id="gemini.n.03" label="gemini.n.03" />
+      <node id="create_verbally.v.01" label="create_verbally.v.01" />
+      <node id="knot.v.01" label="knot.v.01" />
+      <node id="plan.v.03" label="plan.v.03" />
+      <node id="cast.v.07" label="cast.v.07" />
+      <node id="create_from_raw_material.v.01" label="create_from_raw_material.v.01" />
+      <node id="make.v.15" label="make.v.15" />
+      <node id="whelp.v.01" label="whelp.v.01" />
+      <node id="dispatch.v.02" label="dispatch.v.02" />
+      <node id="effect.v.01" label="effect.v.01" />
+      <node id="discover.v.03" label="discover.v.03" />
+      <node id="create_by_mental_act.v.01" label="create_by_mental_act.v.01" />
+      <node id="produce.v.01" label="produce.v.01" />
+      <node id="shape.v.02" label="shape.v.02" />
+      <node id="manufacture.v.04" label="manufacture.v.04" />
+      <node id="carry_through.v.01" label="carry_through.v.01" />
+      <node id="cause.v.01" label="cause.v.01" />
+      <node id="gestate.v.01" label="gestate.v.01" />
+      <node id="imagine.v.01" label="imagine.v.01" />
+      <node id="make.v.03" label="make.v.03" />
+      <node id="visualize.v.01" label="visualize.v.01" />
+      <node id="write.v.01" label="write.v.01" />
+    </nodes>
+    <edges>
+      <edge id="0" source="give_birth.v.01" target="whelp.v.01" />
+      <edge id="1" source="create_verbally.v.01" target="write.v.01" />
+      <edge id="2" source="create_from_raw_material.v.01" target="shape.v.02" />
+      <edge id="3" source="create_from_raw_material.v.01" target="make.v.15" />
+      <edge id="4" source="create_from_raw_material.v.01" target="knot.v.01" />
+      <edge id="5" source="effect.v.01" target="carry_through.v.01" />
+      <edge id="6" source="create_by_mental_act.v.01" target="imagine.v.01" />
+      <edge id="7" source="create_by_mental_act.v.01" target="gestate.v.01" />
+      <edge id="8" source="create_by_mental_act.v.01" target="plan.v.03" />
+      <edge id="9" source="create_by_mental_act.v.01" target="design.v.04" />
+      <edge id="10" source="produce.v.01" target="give_birth.v.01" />
+      <edge id="11" source="shape.v.02" target="cast.v.07" />
+      <edge id="12" source="carry_through.v.01" target="dispatch.v.02" />
+      <edge id="13" source="cause.v.01" target="effect.v.01" />
+      <edge id="14" source="gestate.v.01" target="discover.v.03" />
+      <edge id="15" source="imagine.v.01" target="visualize.v.01" />
+      <edge id="16" source="make.v.03" target="create_from_raw_material.v.01" />
+      <edge id="17" source="make.v.03" target="produce.v.01" />
+      <edge id="18" source="make.v.03" target="create_by_mental_act.v.01" />
+      <edge id="19" source="make.v.03" target="cause.v.01" />
+      <edge id="20" source="make.v.03" target="manufacture.v.04" />
+      <edge id="21" source="make.v.03" target="create_verbally.v.01" />
+    </edges>
+  </graph>
+</gexf>

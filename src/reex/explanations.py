@@ -26,7 +26,6 @@ import time
 from numpy import unique, where
 import gzip
 import networkx as nx
-import obonet
 import timeit
 import sys
 import os
@@ -51,7 +50,7 @@ def fit_space(X, model_path="."):
     return features
 
 
-def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_boosting", explanation_method = "shap", shap_explainer = "kernel", text = False, model_path=None, language='eng'):
+def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_boosting", explanation_method = "shap", shap_explainer = "kernel", text = False, model_path=None, language='eng', clustering=False, feature_prunning=False):
     """
     A set of calls for obtaining aggregates of explanations.
     """
@@ -69,11 +68,15 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
         X_usable.columns = vectorizer.get_feature_names()
     else:
         X_usable = X.copy()
-    logging.info("Feature pre-selection via Mutual Information ({}).".format(subset))
-    minf = mutual_info_classif(X_usable.values, training_scores_encoded)
-    top_k = np.argsort(minf)[::-1][0:subset]
-    attribute_vector = X_usable.columns[top_k]
-    X_usable = X_usable.astype(float).values[:,top_k]
+    if feature_prunning:
+        logging.info("Feature pre-selection via Mutual Information ({}).".format(subset))
+        minf = mutual_info_classif(X_usable.values, training_scores_encoded)
+        top_k = np.argsort(minf)[::-1][0:subset]
+        attribute_vector = X_usable.columns[top_k]
+        X_usable = X_usable.astype(float).values[:,top_k]
+    else:
+        attribute_vector = X_usable.columns
+        
     skf = StratifiedKFold(n_splits=3)
     performances = []
     enx = 0
@@ -90,8 +93,8 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
         logging.info("Shapley-based explanations.")
         ## for the correctly predicted instances, remember shap values and compute the expected value at the end.
         for train_index, test_index in skf.split(X_usable, Y):
-            pd.DataFrame(X[train_index]).to_csv("../results/train_split.csv")
-            pd.DataFrame(X[test_index]).to_csv("../results/test_split.csv")
+            pd.DataFrame(X.iloc[train_index]).to_csv("../results/train_split.csv")
+            pd.DataFrame(X.iloc[test_index]).to_csv("../results/test_split.csv")
             enx+=1
             model = None
             clf = None
@@ -100,17 +103,17 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
             else:
                 clf = model_dict[classifier_index]
 
-            x_train = X_usable[train_index]
-            x_test = X_usable[test_index]
+            x_train = X_usable.iloc[train_index]
+            x_test = X_usable.iloc[test_index]
             
             y_train = Y[train_index]
             y_test = Y[test_index]
 
             if not text:
                 x_train = x_train.astype('float')
-                y_train = y_train.astype('float')
+                #y_train = y_train.astype('float')
                 x_test = x_test.astype('float')
-                y_test = y_test.astype('float')
+                #y_test = y_test.astype('float')
 
             if not model_path:
                 model = clf.fit(x_train, y_train)
@@ -136,10 +139,10 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
             if shap_explainer == "partition":
                 explainer = shap.PartitionExplainer(model.predict_proba, x_train)
 
-            print(set(preds))
             for unique_class in set(preds):
                 print("Class:", unique_class)
-                cors_neg = np.array([enx for enx, pred_tuple in enumerate(zip(preds, y_test)) if pred_tuple[0] == pred_tuple[1] and pred_tuple[0] == unique_class])
+                cors_neg = np.array([enx for enx, pred_tuple in enumerate(zip(preds, y_test)) if pred_tuple[0] == pred_tuple[1] and pred_tuple[0] == unique_class and unique_class == "OFF"])
+                print(cors_neg)
                 if cors_neg.size != 0:
                     shap_values = explainer(x_test[cors_neg])
                     shap_values.feature_names = list(attribute_vector)
@@ -147,28 +150,38 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
                     #shap.summary_plot(shap_values, feature_names=list(attribute_vector), max_display=20)
                     #stack = np.mean(np.vstack(shap_values),axis = 0)
                     values_array = np.array(shap_values.values)
-                    ## CLUSTERING
-                    #model = AffinityPropagation(damping=0.9)
-                    #model.fit(values_array)
-                    #yhat = model.predict(values_array)
-                    model = MeanShift()
-                    yhat = model.fit_predict(values_array)
-                    clusters = unique(yhat)
-                    print(clusters)
-                    for cluster in clusters:
-                        row_ix = where(yhat == cluster)
-                        values_of_cluster = values_array[row_ix]
-                        cluster_name = str(unique_class) + str(cluster)
+                    # for vector in range(len(values_array)):
+                    #     for value in range(len(values_array[vector])):
+                    #         if values_array[vector][value] < 0:
+                    #             values_array[vector][value] = 0
 
-                        cohorts = {"": values_of_cluster}
-                        cohort_labels = list(cohorts.keys())
-                        cohort_exps = list(cohorts.values())
-                        for i in range(len(cohort_exps)):
-                            if len(cohort_exps[i].shape) == 2:
-                                cohort_exps[i] = cohort_exps[i].mean(0)
-                        features = cohort_exps[0].data
-                        values = np.array([cohort_exps[i] for i in range(len(cohort_exps))])
-                        per_class_explanations[cluster_name].append(values)
+
+                    ## CLUSTERING
+                    if clustering:
+                        #model = AffinityPropagation(damping=0.9)
+                        #model.fit(values_array)
+                        #yhat = model.predict(values_array)
+                        model = MeanShift()
+                        yhat = model.fit_predict(values_array)
+                        clusters = unique(yhat)
+                        print(clusters)
+                        for cluster in clusters:
+                            row_ix = where(yhat == cluster)
+                            values_of_cluster = values_array[row_ix]
+                            cluster_name = str(unique_class) + str(cluster)
+
+                            cohorts = {"": values_of_cluster}
+                            cohort_labels = list(cohorts.keys())
+                            cohort_exps = list(cohorts.values())
+                            for i in range(len(cohort_exps)):
+                                if len(cohort_exps[i].shape) == 2:
+                                    cohort_exps[i] = cohort_exps[i].mean(0)
+                            features = cohort_exps[0].data
+                            values = np.array([cohort_exps[i] for i in range(len(cohort_exps))])
+                            per_class_explanations[cluster_name].append(values)
+                    else:
+                        per_class_explanations[unique_class].append(values_array)
+
             break # one train / test split
 
         final_explanations = {}
@@ -199,6 +212,4 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
         else:
             disambiguated_feature_vector.append("")
 
-    print(final_explanations)
-    print(attribute_vector)
     return (final_explanations, disambiguated_feature_vector)

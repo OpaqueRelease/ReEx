@@ -19,7 +19,7 @@ parser.add_argument('--depth_weight',default=0.1, type = float)
 parser.add_argument('--subset_size', default=1000, type = int)
 parser.add_argument('--classifier', default='gradient_boosting', type = str)
 parser.add_argument('--absolute', action='store_true')
-parser.add_argument('--explanation_method',default='class-ranking', type = str)
+parser.add_argument('--explanation_method',default='shap', type = str)
 parser.add_argument('--reasoner',default='selective_staircase', type = str)
 parser.add_argument('--min_terms',default=5, type = int)
 parser.add_argument('--step',default=0.9, type = float)
@@ -30,10 +30,12 @@ parser.add_argument('--iterations',default=2, type = int)
 parser.add_argument('--SHAP_explainer',default='base', type = str)
 parser.add_argument('--text_input', action='store_true')
 parser.add_argument('--visualize', action='store_true')
+parser.add_argument('--clustering', action='store_true')
 parser.add_argument('--model',default=None, type = str)
 parser.add_argument('--results_path',default='../results', type = str)
 parser.add_argument('--bert', action='store_true')
 parser.add_argument('--averaged', action='store_true')
+parser.add_argument('--prune', action='store_true')
 parser.add_argument('--lang',default='eng', type = str)
 
 
@@ -66,7 +68,7 @@ else:
 if args.bert:
     explanations, attributes = get_explanations(parsed_dataset, target_vector, args.averaged, args.lang)
 else:
-    explanations, attributes = get_instance_explanations(parsed_dataset, target_vector, subset = args.subset_size, classifier_index = args.classifier, explanation_method = args.explanation_method, shap_explainer = args.SHAP_explainer, text = args.text_input, model_path=args.model)
+    explanations, attributes = get_instance_explanations(parsed_dataset, target_vector, subset = args.subset_size, classifier_index = args.classifier, explanation_method = args.explanation_method, shap_explainer = args.SHAP_explainer, text = args.text_input, model_path=args.model, clustering=args.clustering, feature_prunning=args.prune)
 if args.text_input:
     gene_to_onto_map = text_mapping(attributes)
 final_json = {'id' : hash_value,
@@ -148,8 +150,8 @@ dumper = json.dumps(final_json)
 json.dump(dumper, outfile)
 print("JSON result saved.")
 
-if not args.text_input:
-    textualize_top_k_terms(final_json, args.mapping_file, args.background_knowledge, target_vector)
+#if not args.text_input:
+#    textualize_top_k_terms(final_json, args.mapping_file, args.background_knowledge, target_vector)
 
 print(final_json)
 

@@ -1,0 +1,395 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf version="1.2" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd">
+  <meta lastmodifieddate="2023-03-06">
+    <creator>NetworkX 2.5</creator>
+  </meta>
+  <graph defaultedgetype="directed" mode="static" name="">
+    <nodes>
+      <node id="day.n.04" label="day.n.04" />
+      <node id="time_period.n.01" label="time_period.n.01" />
+      <node id="fundamental_quantity.n.01" label="fundamental_quantity.n.01" />
+      <node id="measure.n.02" label="measure.n.02" />
+      <node id="abstraction.n.06" label="abstraction.n.06" />
+      <node id="entity.n.01" label="entity.n.01" />
+      <node id="pathological_state.n.01" label="pathological_state.n.01" />
+      <node id="physical_condition.n.01" label="physical_condition.n.01" />
+      <node id="condition.n.01" label="condition.n.01" />
+      <node id="state.n.02" label="state.n.02" />
+      <node id="attribute.n.02" label="attribute.n.02" />
+      <node id="sterility.n.02" label="sterility.n.02" />
+      <node id="sulfur.n.01" label="sulfur.n.01" />
+      <node id="chemical_element.n.01" label="chemical_element.n.01" />
+      <node id="substance.n.01" label="substance.n.01" />
+      <node id="matter.n.03" label="matter.n.03" />
+      <node id="physical_entity.n.01" label="physical_entity.n.01" />
+      <node id="part.n.01" label="part.n.01" />
+      <node id="relation.n.01" label="relation.n.01" />
+      <node id="wish.n.01" label="wish.n.01" />
+      <node id="desire.n.01" label="desire.n.01" />
+      <node id="feeling.n.01" label="feeling.n.01" />
+      <node id="variety.n.06" label="variety.n.06" />
+      <node id="difference.n.01" label="difference.n.01" />
+      <node id="quality.n.01" label="quality.n.01" />
+      <node id="discipline.n.01" label="discipline.n.01" />
+      <node id="knowledge_domain.n.01" label="knowledge_domain.n.01" />
+      <node id="content.n.05" label="content.n.05" />
+      <node id="cognition.n.01" label="cognition.n.01" />
+      <node id="psychological_feature.n.01" label="psychological_feature.n.01" />
+      <node id="fluorine.n.01" label="fluorine.n.01" />
+      <node id="gas.n.02" label="gas.n.02" />
+      <node id="fluid.n.02" label="fluid.n.02" />
+      <node id="halogen.n.01" label="halogen.n.01" />
+      <node id="group.n.01" label="group.n.01" />
+      <node id="animal.n.01" label="animal.n.01" />
+      <node id="organism.n.01" label="organism.n.01" />
+      <node id="living_thing.n.01" label="living_thing.n.01" />
+      <node id="whole.n.02" label="whole.n.02" />
+      <node id="object.n.01" label="object.n.01" />
+      <node id="newsworthiness.n.01" label="newsworthiness.n.01" />
+      <node id="interest.n.03" label="interest.n.03" />
+      <node id="power.n.01" label="power.n.01" />
+      <node id="cardinal_compass_point.n.01" label="cardinal_compass_point.n.01" />
+      <node id="compass_point.n.01" label="compass_point.n.01" />
+      <node id="direction.n.02" label="direction.n.02" />
+      <node id="position.n.07" label="position.n.07" />
+      <node id="angular_distance.n.01" label="angular_distance.n.01" />
+      <node id="angle.n.01" label="angle.n.01" />
+      <node id="space.n.02" label="space.n.02" />
+      <node id="amorphous_shape.n.01" label="amorphous_shape.n.01" />
+      <node id="shape.n.02" label="shape.n.02" />
+      <node id="location.n.01" label="location.n.01" />
+      <node id="appellation.n.01" label="appellation.n.01" />
+      <node id="name.n.01" label="name.n.01" />
+      <node id="language_unit.n.01" label="language_unit.n.01" />
+      <node id="administrative_unit.n.01" label="administrative_unit.n.01" />
+      <node id="unit.n.03" label="unit.n.03" />
+      <node id="organization.n.01" label="organization.n.01" />
+      <node id="social_group.n.01" label="social_group.n.01" />
+      <node id="umpire.n.01" label="umpire.n.01" />
+      <node id="official.n.02" label="official.n.02" />
+      <node id="adjudicator.n.01" label="adjudicator.n.01" />
+      <node id="person.n.01" label="person.n.01" />
+      <node id="causal_agent.n.01" label="causal_agent.n.01" />
+      <node id="blood.n.01" label="blood.n.01" />
+      <node id="liquid_body_substance.n.01" label="liquid_body_substance.n.01" />
+      <node id="body_substance.n.01" label="body_substance.n.01" />
+      <node id="health_professional.n.01" label="health_professional.n.01" />
+      <node id="professional.n.01" label="professional.n.01" />
+      <node id="adult.n.01" label="adult.n.01" />
+      <node id="vitamin_c.n.01" label="vitamin_c.n.01" />
+      <node id="antioxidant.n.01" label="antioxidant.n.01" />
+      <node id="inhibitor.n.01" label="inhibitor.n.01" />
+      <node id="substance.n.07" label="substance.n.07" />
+      <node id="vitamin.n.01" label="vitamin.n.01" />
+      <node id="nutriment.n.01" label="nutriment.n.01" />
+      <node id="food.n.01" label="food.n.01" />
+      <node id="uranium.n.01" label="uranium.n.01" />
+      <node id="metallic_element.n.01" label="metallic_element.n.01" />
+      <node id="megahertz.n.01" label="megahertz.n.01" />
+      <node id="rate.n.01" label="rate.n.01" />
+      <node id="magnitude_relation.n.01" label="magnitude_relation.n.01" />
+      <node id="solfa_syllable.n.01" label="solfa_syllable.n.01" />
+      <node id="syllable.n.01" label="syllable.n.01" />
+      <node id="informing.n.02" label="informing.n.02" />
+      <node id="speech_act.n.01" label="speech_act.n.01" />
+      <node id="act.n.02" label="act.n.02" />
+      <node id="event.n.01" label="event.n.01" />
+      <node id="southwest.n.01" label="southwest.n.01" />
+      <node id="current_unit.n.01" label="current_unit.n.01" />
+      <node id="electromagnetic_unit.n.01" label="electromagnetic_unit.n.01" />
+      <node id="unit_of_measurement.n.01" label="unit_of_measurement.n.01" />
+      <node id="definite_quantity.n.01" label="definite_quantity.n.01" />
+      <node id="code.n.03" label="code.n.03" />
+      <node id="coding_system.n.01" label="coding_system.n.01" />
+      <node id="writing.n.04" label="writing.n.04" />
+      <node id="written_communication.n.01" label="written_communication.n.01" />
+      <node id="communication.n.02" label="communication.n.02" />
+      <node id="erbium.n.01" label="erbium.n.01" />
+      <node id="password.n.01" label="password.n.01" />
+      <node id="positive_identification.n.01" label="positive_identification.n.01" />
+      <node id="identification.n.02" label="identification.n.02" />
+      <node id="evidence.n.02" label="evidence.n.02" />
+      <node id="indication.n.01" label="indication.n.01" />
+      <node id="secret.n.02" label="secret.n.02" />
+      <node id="information.n.01" label="information.n.01" />
+      <node id="message.n.02" label="message.n.02" />
+      <node id="examination.n.02" label="examination.n.02" />
+      <node id="communication.n.01" label="communication.n.01" />
+      <node id="vitamin_e.n.01" label="vitamin_e.n.01" />
+      <node id="treasure.n.04" label="treasure.n.04" />
+      <node id="collection.n.01" label="collection.n.01" />
+      <node id="power_unit.n.01" label="power_unit.n.01" />
+      <node id="holmium.n.01" label="holmium.n.01" />
+      <node id="character.n.08" label="character.n.08" />
+      <node id="written_symbol.n.01" label="written_symbol.n.01" />
+      <node id="symbol.n.01" label="symbol.n.01" />
+      <node id="signal.n.01" label="signal.n.01" />
+      <node id="second.n.01" label="second.n.01" />
+      <node id="time_unit.n.01" label="time_unit.n.01" />
+      <node id="dining-room_attendant.n.01" label="dining-room_attendant.n.01" />
+      <node id="employee.n.01" label="employee.n.01" />
+      <node id="worker.n.01" label="worker.n.01" />
+      <node id="lawman.n.01" label="lawman.n.01" />
+      <node id="defender.n.01" label="defender.n.01" />
+      <node id="preserver.n.03" label="preserver.n.03" />
+      <node id="nickel.n.01" label="nickel.n.01" />
+      <node id="charge_unit.n.01" label="charge_unit.n.01" />
+      <node id="capacitance_unit.n.01" label="capacitance_unit.n.01" />
+      <node id="democrat.n.01" label="democrat.n.01" />
+      <node id="politician.n.02" label="politician.n.02" />
+      <node id="leader.n.01" label="leader.n.01" />
+      <node id="anti.n.01" label="anti.n.01" />
+      <node id="muslim.n.01" label="muslim.n.01" />
+      <node id="religious_person.n.01" label="religious_person.n.01" />
+      <node id="buddy.n.01" label="buddy.n.01" />
+      <node id="friend.n.01" label="friend.n.01" />
+      <node id="disorder.n.01" label="disorder.n.01" />
+      <node id="serve.v.09" label="serve.v.09" />
+      <node id="spend.v.01" label="spend.v.01" />
+      <node id="child.n.04" label="child.n.04" />
+      <node id="descendant.n.01" label="descendant.n.01" />
+      <node id="relative.n.01" label="relative.n.01" />
+      <node id="card.n.01" label="card.n.01" />
+      <node id="paper.n.01" label="paper.n.01" />
+      <node id="material.n.01" label="material.n.01" />
+      <node id="gain.n.04" label="gain.n.04" />
+      <node id="sum.n.01" label="sum.n.01" />
+      <node id="assets.n.01" label="assets.n.01" />
+      <node id="possession.n.02" label="possession.n.02" />
+      <node id="compound.n.02" label="compound.n.02" />
+      <node id="chemical.n.01" label="chemical.n.01" />
+      <node id="election.n.01" label="election.n.01" />
+      <node id="vote.n.02" label="vote.n.02" />
+      <node id="group_action.n.01" label="group_action.n.01" />
+      <node id="son.n.01" label="son.n.01" />
+      <node id="male_offspring.n.01" label="male_offspring.n.01" />
+      <node id="child.n.02" label="child.n.02" />
+      <node id="offspring.n.01" label="offspring.n.01" />
+      <node id="male.n.02" label="male.n.02" />
+      <node id="device.n.01" label="device.n.01" />
+      <node id="instrumentality.n.03" label="instrumentality.n.03" />
+      <node id="artifact.n.01" label="artifact.n.01" />
+      <node id="tabun.n.01" label="tabun.n.01" />
+      <node id="organophosphate_nerve_agent.n.01" label="organophosphate_nerve_agent.n.01" />
+      <node id="nerve_gas.n.01" label="nerve_gas.n.01" />
+      <node id="agent.n.03" label="agent.n.03" />
+      <node id="poison_gas.n.01" label="poison_gas.n.01" />
+      <node id="nobelium.n.01" label="nobelium.n.01" />
+      <node id="system.n.01" label="system.n.01" />
+      <node id="oneness.n.01" label="oneness.n.01" />
+      <node id="identity.n.04" label="identity.n.04" />
+      <node id="sameness.n.01" label="sameness.n.01" />
+      <node id="concept.n.01" label="concept.n.01" />
+      <node id="idea.n.01" label="idea.n.01" />
+      <node id="indium.n.01" label="indium.n.01" />
+      <node id="gregorian_calendar_month.n.01" label="gregorian_calendar_month.n.01" />
+      <node id="calendar_month.n.01" label="calendar_month.n.01" />
+      <node id="en.n.01" label="en.n.01" />
+      <node id="linear_unit.n.01" label="linear_unit.n.01" />
+      <node id="sleep_together.v.01" label="sleep_together.v.01" />
+      <node id="copulate.v.01" label="copulate.v.01" />
+      <node id="join.v.04" label="join.v.04" />
+      <node id="connect.v.01" label="connect.v.01" />
+      <node id="helium.n.01" label="helium.n.01" />
+      <node id="noble_gas.n.01" label="noble_gas.n.01" />
+    </nodes>
+    <edges>
+      <edge id="0" source="time_period.n.01" target="day.n.04" />
+      <edge id="1" source="time_period.n.01" target="calendar_month.n.01" />
+      <edge id="2" source="fundamental_quantity.n.01" target="time_period.n.01" />
+      <edge id="3" source="measure.n.02" target="fundamental_quantity.n.01" />
+      <edge id="4" source="measure.n.02" target="definite_quantity.n.01" />
+      <edge id="5" source="measure.n.02" target="time_unit.n.01" />
+      <edge id="6" source="abstraction.n.06" target="measure.n.02" />
+      <edge id="7" source="abstraction.n.06" target="attribute.n.02" />
+      <edge id="8" source="abstraction.n.06" target="relation.n.01" />
+      <edge id="9" source="abstraction.n.06" target="psychological_feature.n.01" />
+      <edge id="10" source="abstraction.n.06" target="group.n.01" />
+      <edge id="11" source="abstraction.n.06" target="communication.n.02" />
+      <edge id="12" source="entity.n.01" target="abstraction.n.06" />
+      <edge id="13" source="entity.n.01" target="physical_entity.n.01" />
+      <edge id="14" source="physical_condition.n.01" target="pathological_state.n.01" />
+      <edge id="15" source="physical_condition.n.01" target="sterility.n.02" />
+      <edge id="16" source="physical_condition.n.01" target="disorder.n.01" />
+      <edge id="17" source="condition.n.01" target="physical_condition.n.01" />
+      <edge id="18" source="state.n.02" target="condition.n.01" />
+      <edge id="19" source="state.n.02" target="feeling.n.01" />
+      <edge id="20" source="attribute.n.02" target="state.n.02" />
+      <edge id="21" source="attribute.n.02" target="quality.n.01" />
+      <edge id="22" source="attribute.n.02" target="shape.n.02" />
+      <edge id="23" source="chemical_element.n.01" target="sulfur.n.01" />
+      <edge id="24" source="chemical_element.n.01" target="fluorine.n.01" />
+      <edge id="25" source="chemical_element.n.01" target="metallic_element.n.01" />
+      <edge id="26" source="chemical_element.n.01" target="nobelium.n.01" />
+      <edge id="27" source="chemical_element.n.01" target="helium.n.01" />
+      <edge id="28" source="chemical_element.n.01" target="noble_gas.n.01" />
+      <edge id="29" source="substance.n.01" target="chemical_element.n.01" />
+      <edge id="30" source="substance.n.01" target="body_substance.n.01" />
+      <edge id="31" source="substance.n.01" target="material.n.01" />
+      <edge id="32" source="matter.n.03" target="substance.n.01" />
+      <edge id="33" source="matter.n.03" target="fluid.n.02" />
+      <edge id="34" source="matter.n.03" target="substance.n.07" />
+      <edge id="35" source="physical_entity.n.01" target="matter.n.03" />
+      <edge id="36" source="physical_entity.n.01" target="object.n.01" />
+      <edge id="37" source="physical_entity.n.01" target="causal_agent.n.01" />
+      <edge id="38" source="part.n.01" target="substance.n.01" />
+      <edge id="39" source="part.n.01" target="language_unit.n.01" />
+      <edge id="40" source="relation.n.01" target="part.n.01" />
+      <edge id="41" source="relation.n.01" target="position.n.07" />
+      <edge id="42" source="relation.n.01" target="magnitude_relation.n.01" />
+      <edge id="43" source="relation.n.01" target="possession.n.02" />
+      <edge id="44" source="desire.n.01" target="wish.n.01" />
+      <edge id="45" source="feeling.n.01" target="desire.n.01" />
+      <edge id="46" source="difference.n.01" target="variety.n.06" />
+      <edge id="47" source="quality.n.01" target="difference.n.01" />
+      <edge id="48" source="quality.n.01" target="power.n.01" />
+      <edge id="49" source="quality.n.01" target="sameness.n.01" />
+      <edge id="50" source="knowledge_domain.n.01" target="discipline.n.01" />
+      <edge id="51" source="content.n.05" target="knowledge_domain.n.01" />
+      <edge id="52" source="content.n.05" target="idea.n.01" />
+      <edge id="53" source="cognition.n.01" target="content.n.05" />
+      <edge id="54" source="psychological_feature.n.01" target="cognition.n.01" />
+      <edge id="55" source="psychological_feature.n.01" target="event.n.01" />
+      <edge id="56" source="gas.n.02" target="fluorine.n.01" />
+      <edge id="57" source="gas.n.02" target="poison_gas.n.01" />
+      <edge id="58" source="gas.n.02" target="noble_gas.n.01" />
+      <edge id="59" source="fluid.n.02" target="gas.n.02" />
+      <edge id="60" source="halogen.n.01" target="fluorine.n.01" />
+      <edge id="61" source="group.n.01" target="halogen.n.01" />
+      <edge id="62" source="group.n.01" target="social_group.n.01" />
+      <edge id="63" source="group.n.01" target="collection.n.01" />
+      <edge id="64" source="organism.n.01" target="animal.n.01" />
+      <edge id="65" source="organism.n.01" target="person.n.01" />
+      <edge id="66" source="living_thing.n.01" target="organism.n.01" />
+      <edge id="67" source="whole.n.02" target="living_thing.n.01" />
+      <edge id="68" source="whole.n.02" target="artifact.n.01" />
+      <edge id="69" source="object.n.01" target="whole.n.02" />
+      <edge id="70" source="object.n.01" target="location.n.01" />
+      <edge id="71" source="interest.n.03" target="newsworthiness.n.01" />
+      <edge id="72" source="power.n.01" target="interest.n.03" />
+      <edge id="73" source="compass_point.n.01" target="cardinal_compass_point.n.01" />
+      <edge id="74" source="compass_point.n.01" target="southwest.n.01" />
+      <edge id="75" source="direction.n.02" target="compass_point.n.01" />
+      <edge id="76" source="position.n.07" target="direction.n.02" />
+      <edge id="77" source="angle.n.01" target="angular_distance.n.01" />
+      <edge id="78" source="space.n.02" target="angle.n.01" />
+      <edge id="79" source="amorphous_shape.n.01" target="space.n.02" />
+      <edge id="80" source="shape.n.02" target="amorphous_shape.n.01" />
+      <edge id="81" source="location.n.01" target="space.n.02" />
+      <edge id="82" source="name.n.01" target="appellation.n.01" />
+      <edge id="83" source="language_unit.n.01" target="name.n.01" />
+      <edge id="84" source="language_unit.n.01" target="syllable.n.01" />
+      <edge id="85" source="unit.n.03" target="administrative_unit.n.01" />
+      <edge id="86" source="organization.n.01" target="unit.n.03" />
+      <edge id="87" source="social_group.n.01" target="organization.n.01" />
+      <edge id="88" source="official.n.02" target="umpire.n.01" />
+      <edge id="89" source="adjudicator.n.01" target="official.n.02" />
+      <edge id="90" source="person.n.01" target="adjudicator.n.01" />
+      <edge id="91" source="person.n.01" target="adult.n.01" />
+      <edge id="92" source="person.n.01" target="worker.n.01" />
+      <edge id="93" source="person.n.01" target="preserver.n.03" />
+      <edge id="94" source="person.n.01" target="leader.n.01" />
+      <edge id="95" source="person.n.01" target="anti.n.01" />
+      <edge id="96" source="person.n.01" target="religious_person.n.01" />
+      <edge id="97" source="person.n.01" target="friend.n.01" />
+      <edge id="98" source="person.n.01" target="relative.n.01" />
+      <edge id="99" source="person.n.01" target="male.n.02" />
+      <edge id="100" source="causal_agent.n.01" target="person.n.01" />
+      <edge id="101" source="causal_agent.n.01" target="agent.n.03" />
+      <edge id="102" source="liquid_body_substance.n.01" target="blood.n.01" />
+      <edge id="103" source="body_substance.n.01" target="liquid_body_substance.n.01" />
+      <edge id="104" source="professional.n.01" target="health_professional.n.01" />
+      <edge id="105" source="adult.n.01" target="professional.n.01" />
+      <edge id="106" source="antioxidant.n.01" target="vitamin_c.n.01" />
+      <edge id="107" source="antioxidant.n.01" target="vitamin_e.n.01" />
+      <edge id="108" source="inhibitor.n.01" target="antioxidant.n.01" />
+      <edge id="109" source="substance.n.07" target="inhibitor.n.01" />
+      <edge id="110" source="substance.n.07" target="food.n.01" />
+      <edge id="111" source="substance.n.07" target="agent.n.03" />
+      <edge id="112" source="nutriment.n.01" target="vitamin.n.01" />
+      <edge id="113" source="food.n.01" target="nutriment.n.01" />
+      <edge id="114" source="metallic_element.n.01" target="uranium.n.01" />
+      <edge id="115" source="metallic_element.n.01" target="erbium.n.01" />
+      <edge id="116" source="metallic_element.n.01" target="holmium.n.01" />
+      <edge id="117" source="metallic_element.n.01" target="nickel.n.01" />
+      <edge id="118" source="metallic_element.n.01" target="indium.n.01" />
+      <edge id="119" source="rate.n.01" target="megahertz.n.01" />
+      <edge id="120" source="magnitude_relation.n.01" target="rate.n.01" />
+      <edge id="121" source="syllable.n.01" target="solfa_syllable.n.01" />
+      <edge id="122" source="speech_act.n.01" target="informing.n.02" />
+      <edge id="123" source="act.n.02" target="speech_act.n.01" />
+      <edge id="124" source="act.n.02" target="communication.n.01" />
+      <edge id="125" source="act.n.02" target="group_action.n.01" />
+      <edge id="126" source="event.n.01" target="act.n.02" />
+      <edge id="127" source="event.n.01" target="group_action.n.01" />
+      <edge id="128" source="electromagnetic_unit.n.01" target="current_unit.n.01" />
+      <edge id="129" source="electromagnetic_unit.n.01" target="power_unit.n.01" />
+      <edge id="130" source="electromagnetic_unit.n.01" target="charge_unit.n.01" />
+      <edge id="131" source="electromagnetic_unit.n.01" target="capacitance_unit.n.01" />
+      <edge id="132" source="unit_of_measurement.n.01" target="electromagnetic_unit.n.01" />
+      <edge id="133" source="unit_of_measurement.n.01" target="linear_unit.n.01" />
+      <edge id="134" source="definite_quantity.n.01" target="unit_of_measurement.n.01" />
+      <edge id="135" source="coding_system.n.01" target="code.n.03" />
+      <edge id="136" source="writing.n.04" target="coding_system.n.01" />
+      <edge id="137" source="written_communication.n.01" target="writing.n.04" />
+      <edge id="138" source="communication.n.02" target="written_communication.n.01" />
+      <edge id="139" source="communication.n.02" target="indication.n.01" />
+      <edge id="140" source="communication.n.02" target="message.n.02" />
+      <edge id="141" source="communication.n.02" target="signal.n.01" />
+      <edge id="142" source="positive_identification.n.01" target="password.n.01" />
+      <edge id="143" source="identification.n.02" target="positive_identification.n.01" />
+      <edge id="144" source="evidence.n.02" target="identification.n.02" />
+      <edge id="145" source="indication.n.01" target="evidence.n.02" />
+      <edge id="146" source="secret.n.02" target="password.n.01" />
+      <edge id="147" source="information.n.01" target="secret.n.02" />
+      <edge id="148" source="message.n.02" target="information.n.01" />
+      <edge id="149" source="communication.n.01" target="examination.n.02" />
+      <edge id="150" source="collection.n.01" target="treasure.n.04" />
+      <edge id="151" source="written_symbol.n.01" target="character.n.08" />
+      <edge id="152" source="symbol.n.01" target="written_symbol.n.01" />
+      <edge id="153" source="signal.n.01" target="symbol.n.01" />
+      <edge id="154" source="time_unit.n.01" target="second.n.01" />
+      <edge id="155" source="employee.n.01" target="dining-room_attendant.n.01" />
+      <edge id="156" source="worker.n.01" target="employee.n.01" />
+      <edge id="157" source="defender.n.01" target="lawman.n.01" />
+      <edge id="158" source="preserver.n.03" target="defender.n.01" />
+      <edge id="159" source="politician.n.02" target="democrat.n.01" />
+      <edge id="160" source="leader.n.01" target="politician.n.02" />
+      <edge id="161" source="religious_person.n.01" target="muslim.n.01" />
+      <edge id="162" source="friend.n.01" target="buddy.n.01" />
+      <edge id="163" source="spend.v.01" target="serve.v.09" />
+      <edge id="164" source="descendant.n.01" target="child.n.04" />
+      <edge id="165" source="relative.n.01" target="descendant.n.01" />
+      <edge id="166" source="relative.n.01" target="offspring.n.01" />
+      <edge id="167" source="paper.n.01" target="card.n.01" />
+      <edge id="168" source="material.n.01" target="paper.n.01" />
+      <edge id="169" source="material.n.01" target="chemical.n.01" />
+      <edge id="170" source="sum.n.01" target="gain.n.04" />
+      <edge id="171" source="assets.n.01" target="sum.n.01" />
+      <edge id="172" source="possession.n.02" target="assets.n.01" />
+      <edge id="173" source="chemical.n.01" target="compound.n.02" />
+      <edge id="174" source="vote.n.02" target="election.n.01" />
+      <edge id="175" source="group_action.n.01" target="vote.n.02" />
+      <edge id="176" source="male_offspring.n.01" target="son.n.01" />
+      <edge id="177" source="child.n.02" target="male_offspring.n.01" />
+      <edge id="178" source="offspring.n.01" target="child.n.02" />
+      <edge id="179" source="male.n.02" target="male_offspring.n.01" />
+      <edge id="180" source="instrumentality.n.03" target="device.n.01" />
+      <edge id="181" source="instrumentality.n.03" target="system.n.01" />
+      <edge id="182" source="artifact.n.01" target="instrumentality.n.03" />
+      <edge id="183" source="organophosphate_nerve_agent.n.01" target="tabun.n.01" />
+      <edge id="184" source="nerve_gas.n.01" target="organophosphate_nerve_agent.n.01" />
+      <edge id="185" source="agent.n.03" target="nerve_gas.n.01" />
+      <edge id="186" source="poison_gas.n.01" target="nerve_gas.n.01" />
+      <edge id="187" source="identity.n.04" target="oneness.n.01" />
+      <edge id="188" source="sameness.n.01" target="identity.n.04" />
+      <edge id="189" source="idea.n.01" target="concept.n.01" />
+      <edge id="190" source="calendar_month.n.01" target="gregorian_calendar_month.n.01" />
+      <edge id="191" source="linear_unit.n.01" target="en.n.01" />
+      <edge id="192" source="copulate.v.01" target="sleep_together.v.01" />
+      <edge id="193" source="join.v.04" target="copulate.v.01" />
+      <edge id="194" source="connect.v.01" target="join.v.04" />
+      <edge id="195" source="noble_gas.n.01" target="helium.n.01" />
+    </edges>
+  </graph>
+</gexf>

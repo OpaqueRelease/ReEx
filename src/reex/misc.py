@@ -6,7 +6,7 @@ import pandas as pd
 import time
 import gzip
 import networkx as nx
-import obonet
+# import obonet
 import timeit
 from collections import defaultdict
 import sys
@@ -55,7 +55,6 @@ def text_mapping(attributes):
             #mappedColumn = col + ".n.01"
         except:
             print("failed on: " + str(col))
-    print(mapping)
     return mapping
 
 def read_textual_dataset(dataset):
@@ -76,61 +75,60 @@ def read_the_dataset(dataset_name, attribute_mapping = None):
     colx = rd.columns.tolist()
     col_indices = []
     col_names = []
-    target_vector = rd['target'].values
+    target_vector = rd['class'].values
+    rd = rd.drop('class', axis=1)
+    # for enx, x in enumerate(colx):
+    #     if x in gaf_map:
+    #         col_indices.append(enx)
+    #         nmx = list(gaf_map[x])
+    #         col_names.append(nmx[0])
 
-    for enx, x in enumerate(colx):
-        if x in gaf_map:
-            col_indices.append(enx)
-            nmx = list(gaf_map[x])
-            col_names.append(nmx[0])
-    new_dx = rd.iloc[:,col_indices]
-    logging.info("Considering DF of shape {}".format(new_dx.shape))
-    return new_dx, target_vector, gaf_map
+    # new_dx = rd.iloc[:,col_indices]
+    logging.info("Considering DF of shape {}".format(rd.shape))
+    return rd, target_vector, gaf_map
     
     
 def get_ontology(obo_link = '../ontologies/go-basic.obo', reverse_graph = "false"):
     """
         Loads ontology for non-textual datasets.
     """
-    try:
-        graph = obonet.read_obo(obo_link)
-    except Exception as es:
-        logging.info(es)
-        graph = obonet.read_obo(obo_link)
-        #obo_link = 'http://purl.obolibrary.org/obo/go/go-basic.obo'
+    return nx.read_edgelist(obo_link)
+    # try:
+    #     graph = obonet.read_obo(obo_link)
+    # except Exception as es:
+    #     logging.info(es)
+    #     graph = obonet.read_obo(obo_link)
+    #     #obo_link = 'http://purl.obolibrary.org/obo/go/go-basic.obo'
 
-    logging.info(obo_link)
-    numberOfNodes = graph.number_of_nodes() 
+    # logging.info(obo_link)
+    # numberOfNodes = graph.number_of_nodes() 
     
-    logging.info("Number of nodes: {}".format(numberOfNodes))
-    reverseGraph = nx.DiGraph()
+    # logging.info("Number of nodes: {}".format(numberOfNodes))
+    # reverseGraph = nx.DiGraph()
 
-    ## generate whole graph first, we'll specialize later.
-    wholeset = set()
-    for edge in list(graph.edges()):
-        edge_info = set(graph.get_edge_data(edge[0], edge[1]).keys())
-        wholeset = wholeset.union(edge_info)
-        for itype in edge_info:
-            if itype == "is_a" or itype == "part_of":
-                if reverse_graph == "true":
-                    reverseGraph.add_edge(edge[1], edge[0], type=itype)
-                else:
-                    reverseGraph.add_edge(edge[0], edge[1], type=itype)
-    logging.info(nx.info(reverseGraph))
-    tnum = len(wholeset)
-    logging.info("Found {} unique edge types, {}".format(tnum," | ".join(wholeset)))
-    return reverseGraph
+    # ## generate whole graph first, we'll specialize later.
+    # wholeset = set()
+    # for edge in list(graph.edges()):
+    #     edge_info = set(graph.get_edge_data(edge[0], edge[1]).keys())
+    #     wholeset = wholeset.union(edge_info)
+    #     for itype in edge_info:
+    #         if itype == "is_a" or itype == "part_of":
+    #             if reverse_graph == "true":
+    #                 reverseGraph.add_edge(edge[1], edge[0], type=itype)
+    #             else:
+    #                 reverseGraph.add_edge(edge[0], edge[1], type=itype)
+    # logging.info(nx.info(reverseGraph))
+    # tnum = len(wholeset)
+    # logging.info("Found {} unique edge types, {}".format(tnum," | ".join(wholeset)))
+    # return reverseGraph
 
 def recurse_custom(G, word):
-    print("Entering with word: " + str(word))
     syns = wn.synsets(word)
-    print(syns)
     w = syns[0]
     if not G.has_node(w.name()):
         G.add_node(w.name())
         for h in w.hypernyms():
             if h.name() != w.name():
-                print (h)
                 G.add_node(h.name())
                 G.add_edge(w.name(),h.name())
                 G = recurse_custom(G, h.name()[:-5])
@@ -138,7 +136,6 @@ def recurse_custom(G, word):
     return G
 
 def get_ontology_text_custom(mapping):
-    print(mapping)
     nltk.download('wordnet')
     G = nx.DiGraph()
 
@@ -149,6 +146,7 @@ def get_ontology_text_custom(mapping):
             G = nx.compose(G, temp_graph)
 
     print(nx.info(G))
+    nx.write_edgelist(G, "wordnet.edgelist")
     return G
 
 def get_ontology_text():
@@ -272,6 +270,7 @@ def IC_of_a_term(term, mapping, mc, normalization):
 
 
 def textualize_top_k_terms(json_data, mapping, obo_link, class_names,  k_number = 5):
+    pass
     """
         This method prints the names of the *k_number* most important terms for each class (according to genQ)
     """

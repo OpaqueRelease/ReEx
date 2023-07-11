@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf version="1.2" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd">
+  <meta lastmodifieddate="2023-03-24">
+    <creator>NetworkX 2.5</creator>
+  </meta>
+  <graph defaultedgetype="directed" mode="static" name="">
+    <nodes>
+      <node id="support.v.01" label="support.v.01" />
+      <node id="help.v.01" label="help.v.01" />
+      <node id="care.v.02" label="care.v.02" />
+    </nodes>
+    <edges>
+      <edge id="0" source="support.v.01" target="help.v.01" />
+      <edge id="1" source="help.v.01" target="care.v.02" />
+    </edges>
+  </graph>
+</gexf>

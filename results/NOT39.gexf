@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf version="1.2" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd">
+  <meta lastmodifieddate="2023-03-24">
+    <creator>NetworkX 2.5</creator>
+  </meta>
+  <graph defaultedgetype="directed" mode="static" name="">
+    <nodes>
+      <node id="sleep_together.v.01" label="sleep_together.v.01" />
+      <node id="connect.v.01" label="connect.v.01" />
+      <node id="join.v.04" label="join.v.04" />
+      <node id="plug_in.v.01" label="plug_in.v.01" />
+      <node id="copulate.v.01" label="copulate.v.01" />
+      <node id="tie.v.01" label="tie.v.01" />
+      <node id="grant.v.07" label="grant.v.07" />
+      <node id="attach.v.01" label="attach.v.01" />
+      <node id="tag.v.01" label="tag.v.01" />
+      <node id="yoke.v.02" label="yoke.v.02" />
+      <node id="fasten.v.01" label="fasten.v.01" />
+      <node id="give.v.08" label="give.v.08" />
+      <node id="tick.v.03" label="tick.v.03" />
+      <node id="donate.v.01" label="donate.v.01" />
+      <node id="insert.v.01" label="insert.v.01" />
+      <node id="clip.v.03" label="clip.v.03" />
+      <node id="sew.v.01" label="sew.v.01" />
+      <node id="bell.v.01" label="bell.v.01" />
+      <node id="knot.v.02" label="knot.v.02" />
+      <node id="point.v.09" label="point.v.09" />
+    </nodes>
+    <edges>
+      <edge id="0" source="connect.v.01" target="attach.v.01" />
+      <edge id="1" source="connect.v.01" target="join.v.04" />
+      <edge id="2" source="join.v.04" target="copulate.v.01" />
+      <edge id="3" source="copulate.v.01" target="sleep_together.v.01" />
+      <edge id="4" source="tie.v.01" target="knot.v.02" />
+      <edge id="5" source="attach.v.01" target="fasten.v.01" />
+      <edge id="6" source="attach.v.01" target="clip.v.03" />
+      <edge id="7" source="attach.v.01" target="yoke.v.02" />
+      <edge id="8" source="attach.v.01" target="bell.v.01" />
+      <edge id="9" source="attach.v.01" target="tag.v.01" />
+      <edge id="10" source="attach.v.01" target="insert.v.01" />
+      <edge id="11" source="tag.v.01" target="point.v.09" />
+      <edge id="12" source="fasten.v.01" target="sew.v.01" />
+      <edge id="13" source="fasten.v.01" target="tie.v.01" />
+      <edge id="14" source="give.v.08" target="grant.v.07" />
+      <edge id="15" source="give.v.08" target="donate.v.01" />
+      <edge id="16" source="insert.v.01" target="plug_in.v.01" />
+      <edge id="17" source="sew.v.01" target="tick.v.03" />
+    </edges>
+  </graph>
+</gexf>

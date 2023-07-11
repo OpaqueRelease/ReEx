@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf version="1.2" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd">
+  <meta lastmodifieddate="2023-03-24">
+    <creator>NetworkX 2.5</creator>
+  </meta>
+  <graph defaultedgetype="directed" mode="static" name="">
+    <nodes>
+      <node id="peep.v.03" label="peep.v.03" />
+      <node id="chitter.v.01" label="chitter.v.01" />
+      <node id="utter.v.02" label="utter.v.02" />
+      <node id="smack.v.05" label="smack.v.05" />
+    </nodes>
+    <edges>
+      <edge id="0" source="peep.v.03" target="chitter.v.01" />
+      <edge id="1" source="utter.v.02" target="smack.v.05" />
+      <edge id="2" source="utter.v.02" target="peep.v.03" />
+    </edges>
+  </graph>
+</gexf>

@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf version="1.2" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd">
+  <meta lastmodifieddate="2023-03-24">
+    <creator>NetworkX 2.5</creator>
+  </meta>
+  <graph defaultedgetype="directed" mode="static" name="">
+    <nodes>
+      <node id="shake.v.09" label="shake.v.09" />
+      <node id="victimize.v.03" label="victimize.v.03" />
+      <node id="react.v.01" label="react.v.01" />
+      <node id="transgress.v.01" label="transgress.v.01" />
+      <node id="testify.v.02" label="testify.v.02" />
+      <node id="introduce.v.01" label="introduce.v.01" />
+      <node id="address.v.01" label="address.v.01" />
+      <node id="officiate.v.01" label="officiate.v.01" />
+      <node id="communicate.v.02" label="communicate.v.02" />
+      <node id="interact.v.01" label="interact.v.01" />
+      <node id="debate.v.03" label="debate.v.03" />
+      <node id="gesticulate.v.01" label="gesticulate.v.01" />
+      <node id="misinform.v.01" label="misinform.v.01" />
+      <node id="manipulate.v.05" label="manipulate.v.05" />
+      <node id="meet.v.07" label="meet.v.07" />
+      <node id="react.v.02" label="react.v.02" />
+      <node id="tell.v.02" label="tell.v.02" />
+      <node id="perform.v.02" label="perform.v.02" />
+      <node id="report.v.01" label="report.v.01" />
+      <node id="victimize.v.01" label="victimize.v.01" />
+      <node id="bravo.v.01" label="bravo.v.01" />
+      <node id="group.v.02" label="group.v.02" />
+      <node id="question.v.03" label="question.v.03" />
+      <node id="relate.v.05" label="relate.v.05" />
+      <node id="ask.v.05" label="ask.v.05" />
+      <node id="air.v.03" label="air.v.03" />
+      <node id="treat.v.01" label="treat.v.01" />
+      <node id="interview.v.03" label="interview.v.03" />
+      <node id="meet.v.09" label="meet.v.09" />
+      <node id="unwrap.v.02" label="unwrap.v.02" />
+      <node id="quibble.v.02" label="quibble.v.02" />
+      <node id="applaud.v.01" label="applaud.v.01" />
+      <node id="attract.v.03" label="attract.v.03" />
+      <node id="inform.v.03" label="inform.v.03" />
+      <node id="teach.v.01" label="teach.v.01" />
+      <node id="wait.v.02" label="wait.v.02" />
+      <node id="legalize.v.01" label="legalize.v.01" />
+      <node id="revolutionize.v.03" label="revolutionize.v.03" />
+      <node id="delay.v.02" label="delay.v.02" />
+      <node id="accept.v.03" label="accept.v.03" />
+      <node id="indoctrinate.v.01" label="indoctrinate.v.01" />
+      <node id="act.v.01" label="act.v.01" />
+      <node id="force.v.08" label="force.v.08" />
+      <node id="postpone.v.01" label="postpone.v.01" />
+      <node id="impart.v.01" label="impart.v.01" />
+      <node id="conflict.v.02" label="conflict.v.02" />
+      <node id="talk.v.01" label="talk.v.01" />
+      <node id="inform.v.01" label="inform.v.01" />
+      <node id="converse.v.01" label="converse.v.01" />
+      <node id="publicize.v.01" label="publicize.v.01" />
+      <node id="permit.v.01" label="permit.v.01" />
+      <node id="hash_out.v.01" label="hash_out.v.01" />
+      <node id="privilege.v.01" label="privilege.v.01" />
+      <node id="marry.v.02" label="marry.v.02" />
+      <node id="wrong.v.01" label="wrong.v.01" />
+      <node id="beat_around_the_bush.v.01" label="beat_around_the_bush.v.01" />
+      <node id="cheat.v.01" label="cheat.v.01" />
+      <node id="try.v.01" label="try.v.01" />
+      <node id="present.v.12" label="present.v.12" />
+      <node id="marginalize.v.01" label="marginalize.v.01" />
+      <node id="disrespect.v.01" label="disrespect.v.01" />
+      <node id="pool.v.02" label="pool.v.02" />
+      <node id="talk.v.02" label="talk.v.02" />
+      <node id="woo.v.02" label="woo.v.02" />
+      <node id="pull.v.04" label="pull.v.04" />
+      <node id="tell.v.07" label="tell.v.07" />
+      <node id="gamble.v.01" label="gamble.v.01" />
+      <node id="make_bold.v.01" label="make_bold.v.01" />
+      <node id="talk_of.v.01" label="talk_of.v.01" />
+      <node id="convey.v.01" label="convey.v.01" />
+      <node id="argue.v.02" label="argue.v.02" />
+    </nodes>
+    <edges>
+      <edge id="0" source="react.v.01" target="accept.v.03" />
+      <edge id="1" source="transgress.v.01" target="conflict.v.02" />
+      <edge id="2" source="introduce.v.01" target="present.v.12" />
+      <edge id="3" source="address.v.01" target="ask.v.05" />
+      <edge id="4" source="officiate.v.01" target="marry.v.02" />
+      <edge id="5" source="communicate.v.02" target="inform.v.01" />
+      <edge id="6" source="communicate.v.02" target="talk.v.02" />
+      <edge id="7" source="communicate.v.02" target="gesticulate.v.01" />
+      <edge id="8" source="communicate.v.02" target="talk.v.01" />
+      <edge id="9" source="communicate.v.02" target="address.v.01" />
+      <edge id="10" source="interact.v.01" target="communicate.v.02" />
+      <edge id="11" source="interact.v.01" target="manipulate.v.05" />
+      <edge id="12" source="interact.v.01" target="meet.v.07" />
+      <edge id="13" source="interact.v.01" target="relate.v.05" />
+      <edge id="14" source="interact.v.01" target="marginalize.v.01" />
+      <edge id="15" source="interact.v.01" target="treat.v.01" />
+      <edge id="16" source="gesticulate.v.01" target="applaud.v.01" />
+      <edge id="17" source="gesticulate.v.01" target="shake.v.09" />
+      <edge id="18" source="misinform.v.01" target="beat_around_the_bush.v.01" />
+      <edge id="19" source="meet.v.07" target="meet.v.09" />
+      <edge id="20" source="meet.v.07" target="group.v.02" />
+      <edge id="21" source="tell.v.02" target="unwrap.v.02" />
+      <edge id="22" source="tell.v.02" target="publicize.v.01" />
+      <edge id="23" source="tell.v.02" target="impart.v.01" />
+      <edge id="24" source="perform.v.02" target="officiate.v.01" />
+      <edge id="25" source="victimize.v.01" target="cheat.v.01" />
+      <edge id="26" source="group.v.02" target="pool.v.02" />
+      <edge id="27" source="relate.v.05" target="disrespect.v.01" />
+      <edge id="28" source="ask.v.05" target="question.v.03" />
+      <edge id="29" source="treat.v.01" target="wrong.v.01" />
+      <edge id="30" source="applaud.v.01" target="bravo.v.01" />
+      <edge id="31" source="inform.v.03" target="tell.v.07" />
+      <edge id="32" source="teach.v.01" target="indoctrinate.v.01" />
+      <edge id="33" source="wait.v.02" target="delay.v.02" />
+      <edge id="34" source="delay.v.02" target="postpone.v.01" />
+      <edge id="35" source="accept.v.03" target="permit.v.01" />
+      <edge id="36" source="indoctrinate.v.01" target="revolutionize.v.03" />
+      <edge id="37" source="act.v.01" target="interact.v.01" />
+      <edge id="38" source="act.v.01" target="react.v.01" />
+      <edge id="39" source="act.v.01" target="perform.v.02" />
+      <edge id="40" source="act.v.01" target="force.v.08" />
+      <edge id="41" source="act.v.01" target="try.v.01" />
+      <edge id="42" source="act.v.01" target="woo.v.02" />
+      <edge id="43" source="act.v.01" target="wait.v.02" />
+      <edge id="44" source="act.v.01" target="react.v.02" />
+      <edge id="45" source="act.v.01" target="make_bold.v.01" />
+      <edge id="46" source="force.v.08" target="pull.v.04" />
+      <edge id="47" source="impart.v.01" target="convey.v.01" />
+      <edge id="48" source="talk.v.01" target="converse.v.01" />
+      <edge id="49" source="inform.v.01" target="testify.v.02" />
+      <edge id="50" source="inform.v.01" target="tell.v.02" />
+      <edge id="51" source="inform.v.01" target="teach.v.01" />
+      <edge id="52" source="inform.v.01" target="report.v.01" />
+      <edge id="53" source="inform.v.01" target="misinform.v.01" />
+      <edge id="54" source="inform.v.01" target="introduce.v.01" />
+      <edge id="55" source="inform.v.01" target="inform.v.03" />
+      <edge id="56" source="converse.v.01" target="argue.v.02" />
+      <edge id="57" source="converse.v.01" target="interview.v.03" />
+      <edge id="58" source="publicize.v.01" target="air.v.03" />
+      <edge id="59" source="permit.v.01" target="legalize.v.01" />
+      <edge id="60" source="permit.v.01" target="privilege.v.01" />
+      <edge id="61" source="hash_out.v.01" target="debate.v.03" />
+      <edge id="62" source="wrong.v.01" target="victimize.v.01" />
+      <edge id="63" source="cheat.v.01" target="victimize.v.03" />
+      <edge id="64" source="try.v.01" target="gamble.v.01" />
+      <edge id="65" source="disrespect.v.01" target="transgress.v.01" />
+      <edge id="66" source="talk.v.02" target="talk_of.v.01" />
+      <edge id="67" source="pull.v.04" target="attract.v.03" />
+      <edge id="68" source="talk_of.v.01" target="hash_out.v.01" />
+      <edge id="69" source="argue.v.02" target="quibble.v.02" />
+    </edges>
+  </graph>
+</gexf>

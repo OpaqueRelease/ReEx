@@ -1,0 +1,269 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf version="1.2" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd">
+  <meta lastmodifieddate="2023-03-31">
+    <creator>NetworkX 2.5</creator>
+  </meta>
+  <graph defaultedgetype="directed" mode="static" name="">
+    <nodes>
+      <node id="michigan.n.03" label="michigan.n.03" />
+      <node id="press.n.09" label="press.n.09" />
+      <node id="fishing.n.02" label="fishing.n.02" />
+      <node id="sermon.n.01" label="sermon.n.01" />
+      <node id="speechless.s.01" label="speechless.s.01" />
+      <node id="projective_test.n.01" label="projective_test.n.01" />
+      <node id="socialist.n.01" label="socialist.n.01" />
+      <node id="possession.n.01" label="possession.n.01" />
+      <node id="control.n.05" label="control.n.05" />
+      <node id="golfing.n.01" label="golfing.n.01" />
+      <node id="push.n.01" label="push.n.01" />
+      <node id="termination.n.05" label="termination.n.05" />
+      <node id="commercial_enterprise.n.02" label="commercial_enterprise.n.02" />
+      <node id="way.n.05" label="way.n.05" />
+      <node id="act.n.02" label="act.n.02" />
+      <node id="recognition.n.08" label="recognition.n.08" />
+      <node id="restraint.n.01" label="restraint.n.01" />
+      <node id="substance_abuse.n.01" label="substance_abuse.n.01" />
+      <node id="translation.n.07" label="translation.n.07" />
+      <node id="ceremony.n.03" label="ceremony.n.03" />
+      <node id="leap.n.01" label="leap.n.01" />
+      <node id="collection.n.04" label="collection.n.04" />
+      <node id="positron_emission_tomography.n.01" label="positron_emission_tomography.n.01" />
+      <node id="change.n.03" label="change.n.03" />
+      <node id="acquiring.n.01" label="acquiring.n.01" />
+      <node id="answer.n.03" label="answer.n.03" />
+      <node id="removal.n.01" label="removal.n.01" />
+      <node id="test.n.02" label="test.n.02" />
+      <node id="combination.n.07" label="combination.n.07" />
+      <node id="imprisonment.n.03" label="imprisonment.n.03" />
+      <node id="sacrament.n.01" label="sacrament.n.01" />
+      <node id="mental_measurement.n.01" label="mental_measurement.n.01" />
+      <node id="affiliation.n.02" label="affiliation.n.02" />
+      <node id="masse.n.01" label="masse.n.01" />
+      <node id="communist.n.02" label="communist.n.02" />
+      <node id="reply.n.02" label="reply.n.02" />
+      <node id="investigation.n.02" label="investigation.n.02" />
+      <node id="pictorial_representation.n.01" label="pictorial_representation.n.01" />
+      <node id="dilution.n.02" label="dilution.n.02" />
+      <node id="motion.n.06" label="motion.n.06" />
+      <node id="daughter.n.01" label="daughter.n.01" />
+      <node id="misuse.n.01" label="misuse.n.01" />
+      <node id="saturated.a.03" label="saturated.a.03" />
+      <node id="decision.n.01" label="decision.n.01" />
+      <node id="struggle.n.03" label="struggle.n.03" />
+      <node id="maneuver.n.03" label="maneuver.n.03" />
+      <node id="grouping.n.02" label="grouping.n.02" />
+      <node id="wrestle.n.01" label="wrestle.n.01" />
+      <node id="literally.r.02" label="literally.r.02" />
+      <node id="role.n.04" label="role.n.04" />
+      <node id="lockdown.n.01" label="lockdown.n.01" />
+      <node id="stroke.n.01" label="stroke.n.01" />
+      <node id="monster.n.05" label="monster.n.05" />
+      <node id="occupation.n.01" label="occupation.n.01" />
+      <node id="association.n.02" label="association.n.02" />
+      <node id="decrease.n.04" label="decrease.n.04" />
+      <node id="disaster.n.03" label="disaster.n.03" />
+      <node id="deletion.n.04" label="deletion.n.04" />
+      <node id="gather.n.02" label="gather.n.02" />
+      <node id="president_of_the_united_states.n.02" label="president_of_the_united_states.n.02" />
+      <node id="aid.n.02" label="aid.n.02" />
+      <node id="motion.n.03" label="motion.n.03" />
+      <node id="service.n.01" label="service.n.01" />
+      <node id="jump.n.06" label="jump.n.06" />
+      <node id="religious_ceremony.n.01" label="religious_ceremony.n.01" />
+      <node id="buyout.n.01" label="buyout.n.01" />
+      <node id="group_action.n.01" label="group_action.n.01" />
+      <node id="transaction.n.01" label="transaction.n.01" />
+      <node id="show.n.01" label="show.n.01" />
+      <node id="requirement.n.01" label="requirement.n.01" />
+      <node id="imaging.n.02" label="imaging.n.02" />
+      <node id="position.n.06" label="position.n.06" />
+      <node id="blessing.n.01" label="blessing.n.01" />
+      <node id="social_activity.n.01" label="social_activity.n.01" />
+      <node id="playing.n.02" label="playing.n.02" />
+      <node id="prayer.n.02" label="prayer.n.02" />
+      <node id="speech_act.n.01" label="speech_act.n.01" />
+      <node id="course.n.04" label="course.n.04" />
+      <node id="personality_test.n.01" label="personality_test.n.01" />
+      <node id="action.n.01" label="action.n.01" />
+      <node id="change_of_magnitude.n.01" label="change_of_magnitude.n.01" />
+      <node id="monte.n.01" label="monte.n.01" />
+      <node id="fusion.n.07" label="fusion.n.07" />
+      <node id="refutation.n.01" label="refutation.n.01" />
+      <node id="shutting.n.01" label="shutting.n.01" />
+      <node id="restriction.n.03" label="restriction.n.03" />
+      <node id="nonaccomplishment.n.01" label="nonaccomplishment.n.01" />
+      <node id="sitting.s.02" label="sitting.s.02" />
+      <node id="measurement.n.01" label="measurement.n.01" />
+      <node id="examination.n.01" label="examination.n.01" />
+      <node id="takeover.n.02" label="takeover.n.02" />
+      <node id="performance.n.02" label="performance.n.02" />
+      <node id="use.n.01" label="use.n.01" />
+      <node id="weakening.n.02" label="weakening.n.02" />
+      <node id="pitcher.n.05" label="pitcher.n.05" />
+      <node id="stupidity.n.02" label="stupidity.n.02" />
+      <node id="work.n.01" label="work.n.01" />
+      <node id="commerce.n.01" label="commerce.n.01" />
+      <node id="choice.n.02" label="choice.n.02" />
+      <node id="logging.n.01" label="logging.n.01" />
+      <node id="duty.n.01" label="duty.n.01" />
+      <node id="effort.n.02" label="effort.n.02" />
+      <node id="propulsion.n.02" label="propulsion.n.02" />
+      <node id="patriotic.a.01" label="patriotic.a.01" />
+      <node id="support.n.02" label="support.n.02" />
+      <node id="presidency.n.02" label="presidency.n.02" />
+      <node id="destruction.n.01" label="destruction.n.01" />
+      <node id="naming.n.01" label="naming.n.01" />
+      <node id="card_game.n.01" label="card_game.n.01" />
+      <node id="mistake.n.01" label="mistake.n.01" />
+      <node id="activity.n.01" label="activity.n.01" />
+      <node id="acquisition.n.01" label="acquisition.n.01" />
+      <node id="presentation.n.02" label="presentation.n.02" />
+      <node id="closure.n.07" label="closure.n.07" />
+      <node id="appointment.n.01" label="appointment.n.01" />
+      <node id="address.n.03" label="address.n.03" />
+      <node id="game.n.01" label="game.n.01" />
+      <node id="representation.n.10" label="representation.n.10" />
+      <node id="diversion.n.01" label="diversion.n.01" />
+      <node id="position.n.09" label="position.n.09" />
+      <node id="social_control.n.01" label="social_control.n.01" />
+      <node id="entertainment.n.01" label="entertainment.n.01" />
+      <node id="privation.n.02" label="privation.n.02" />
+      <node id="kindness.n.03" label="kindness.n.03" />
+      <node id="survey.n.01" label="survey.n.01" />
+      <node id="starvation.n.02" label="starvation.n.02" />
+      <node id="change_of_state.n.01" label="change_of_state.n.01" />
+      <node id="separation.n.09" label="separation.n.09" />
+      <node id="change_of_integrity.n.01" label="change_of_integrity.n.01" />
+      <node id="facility.n.05" label="facility.n.05" />
+      <node id="confinement.n.02" label="confinement.n.02" />
+      <node id="labor.n.02" label="labor.n.02" />
+      <node id="request.n.02" label="request.n.02" />
+    </nodes>
+    <edges>
+      <edge id="0" source="socialist.n.01" target="communist.n.02" />
+      <edge id="1" source="control.n.05" target="restraint.n.01" />
+      <edge id="2" source="control.n.05" target="possession.n.01" />
+      <edge id="3" source="push.n.01" target="press.n.09" />
+      <edge id="4" source="termination.n.05" target="destruction.n.01" />
+      <edge id="5" source="termination.n.05" target="closure.n.07" />
+      <edge id="6" source="commercial_enterprise.n.02" target="fishing.n.02" />
+      <edge id="7" source="act.n.02" target="speech_act.n.01" />
+      <edge id="8" source="act.n.02" target="activity.n.01" />
+      <edge id="9" source="act.n.02" target="action.n.01" />
+      <edge id="10" source="act.n.02" target="acquiring.n.01" />
+      <edge id="11" source="act.n.02" target="nonaccomplishment.n.01" />
+      <edge id="12" source="act.n.02" target="group_action.n.01" />
+      <edge id="13" source="act.n.02" target="propulsion.n.02" />
+      <edge id="14" source="restraint.n.01" target="restriction.n.03" />
+      <edge id="15" source="restraint.n.01" target="confinement.n.02" />
+      <edge id="16" source="ceremony.n.03" target="religious_ceremony.n.01" />
+      <edge id="17" source="collection.n.04" target="gather.n.02" />
+      <edge id="18" source="change.n.03" target="motion.n.03" />
+      <edge id="19" source="change.n.03" target="motion.n.06" />
+      <edge id="20" source="change.n.03" target="change_of_magnitude.n.01" />
+      <edge id="21" source="change.n.03" target="change_of_integrity.n.01" />
+      <edge id="22" source="change.n.03" target="change_of_state.n.01" />
+      <edge id="23" source="acquiring.n.01" target="acquisition.n.01" />
+      <edge id="24" source="answer.n.03" target="refutation.n.01" />
+      <edge id="25" source="removal.n.01" target="deletion.n.04" />
+      <edge id="26" source="test.n.02" target="personality_test.n.01" />
+      <edge id="27" source="combination.n.07" target="fusion.n.07" />
+      <edge id="28" source="imprisonment.n.03" target="lockdown.n.01" />
+      <edge id="29" source="mental_measurement.n.01" target="test.n.02" />
+      <edge id="30" source="reply.n.02" target="answer.n.03" />
+      <edge id="31" source="investigation.n.02" target="examination.n.01" />
+      <edge id="32" source="pictorial_representation.n.01" target="imaging.n.02" />
+      <edge id="33" source="motion.n.06" target="maneuver.n.03" />
+      <edge id="34" source="motion.n.06" target="translation.n.07" />
+      <edge id="35" source="misuse.n.01" target="substance_abuse.n.01" />
+      <edge id="36" source="decision.n.01" target="appointment.n.01" />
+      <edge id="37" source="struggle.n.03" target="wrestle.n.01" />
+      <edge id="38" source="maneuver.n.03" target="stroke.n.01" />
+      <edge id="39" source="grouping.n.02" target="collection.n.04" />
+      <edge id="40" source="role.n.04" target="position.n.09" />
+      <edge id="41" source="stroke.n.01" target="masse.n.01" />
+      <edge id="42" source="occupation.n.01" target="position.n.06" />
+      <edge id="43" source="association.n.02" target="affiliation.n.02" />
+      <edge id="44" source="decrease.n.04" target="weakening.n.02" />
+      <edge id="45" source="aid.n.02" target="support.n.02" />
+      <edge id="46" source="motion.n.03" target="shutting.n.01" />
+      <edge id="47" source="service.n.01" target="facility.n.05" />
+      <edge id="48" source="jump.n.06" target="leap.n.01" />
+      <edge id="49" source="religious_ceremony.n.01" target="sacrament.n.01" />
+      <edge id="50" source="buyout.n.01" target="takeover.n.02" />
+      <edge id="51" source="group_action.n.01" target="social_control.n.01" />
+      <edge id="52" source="group_action.n.01" target="transaction.n.01" />
+      <edge id="53" source="group_action.n.01" target="social_activity.n.01" />
+      <edge id="54" source="transaction.n.01" target="commerce.n.01" />
+      <edge id="55" source="show.n.01" target="presentation.n.02" />
+      <edge id="56" source="imaging.n.02" target="positron_emission_tomography.n.01" />
+      <edge id="57" source="position.n.06" target="presidency.n.02" />
+      <edge id="58" source="social_activity.n.01" target="association.n.02" />
+      <edge id="59" source="playing.n.02" target="golfing.n.01" />
+      <edge id="60" source="speech_act.n.01" target="address.n.03" />
+      <edge id="61" source="speech_act.n.01" target="reply.n.02" />
+      <edge id="62" source="speech_act.n.01" target="request.n.02" />
+      <edge id="63" source="speech_act.n.01" target="naming.n.01" />
+      <edge id="64" source="course.n.04" target="way.n.05" />
+      <edge id="65" source="personality_test.n.01" target="projective_test.n.01" />
+      <edge id="66" source="action.n.01" target="change.n.03" />
+      <edge id="67" source="action.n.01" target="course.n.04" />
+      <edge id="68" source="action.n.01" target="choice.n.02" />
+      <edge id="69" source="action.n.01" target="kindness.n.03" />
+      <edge id="70" source="action.n.01" target="playing.n.02" />
+      <edge id="71" source="change_of_magnitude.n.01" target="decrease.n.04" />
+      <edge id="72" source="nonaccomplishment.n.01" target="mistake.n.01" />
+      <edge id="73" source="measurement.n.01" target="mental_measurement.n.01" />
+      <edge id="74" source="examination.n.01" target="survey.n.01" />
+      <edge id="75" source="use.n.01" target="misuse.n.01" />
+      <edge id="76" source="weakening.n.02" target="dilution.n.02" />
+      <edge id="77" source="work.n.01" target="service.n.01" />
+      <edge id="78" source="work.n.01" target="investigation.n.02" />
+      <edge id="79" source="work.n.01" target="labor.n.02" />
+      <edge id="80" source="work.n.01" target="logging.n.01" />
+      <edge id="81" source="commerce.n.01" target="commercial_enterprise.n.02" />
+      <edge id="82" source="choice.n.02" target="decision.n.01" />
+      <edge id="83" source="duty.n.01" target="requirement.n.01" />
+      <edge id="84" source="effort.n.02" target="struggle.n.03" />
+      <edge id="85" source="propulsion.n.02" target="jump.n.06" />
+      <edge id="86" source="propulsion.n.02" target="push.n.01" />
+      <edge id="87" source="support.n.02" target="blessing.n.01" />
+      <edge id="88" source="presidency.n.02" target="president_of_the_united_states.n.02" />
+      <edge id="89" source="destruction.n.01" target="disaster.n.03" />
+      <edge id="90" source="card_game.n.01" target="monte.n.01" />
+      <edge id="91" source="card_game.n.01" target="michigan.n.03" />
+      <edge id="92" source="mistake.n.01" target="stupidity.n.02" />
+      <edge id="93" source="activity.n.01" target="use.n.01" />
+      <edge id="94" source="activity.n.01" target="work.n.01" />
+      <edge id="95" source="activity.n.01" target="game.n.01" />
+      <edge id="96" source="activity.n.01" target="role.n.04" />
+      <edge id="97" source="activity.n.01" target="control.n.05" />
+      <edge id="98" source="activity.n.01" target="diversion.n.01" />
+      <edge id="99" source="activity.n.01" target="representation.n.10" />
+      <edge id="100" source="activity.n.01" target="measurement.n.01" />
+      <edge id="101" source="activity.n.01" target="ceremony.n.03" />
+      <edge id="102" source="activity.n.01" target="occupation.n.01" />
+      <edge id="103" source="activity.n.01" target="aid.n.02" />
+      <edge id="104" source="activity.n.01" target="grouping.n.02" />
+      <edge id="105" source="acquisition.n.01" target="buyout.n.01" />
+      <edge id="106" source="presentation.n.02" target="performance.n.02" />
+      <edge id="107" source="appointment.n.01" target="recognition.n.08" />
+      <edge id="108" source="address.n.03" target="sermon.n.01" />
+      <edge id="109" source="game.n.01" target="card_game.n.01" />
+      <edge id="110" source="representation.n.10" target="pictorial_representation.n.01" />
+      <edge id="111" source="diversion.n.01" target="entertainment.n.01" />
+      <edge id="112" source="position.n.09" target="pitcher.n.05" />
+      <edge id="113" source="social_control.n.01" target="duty.n.01" />
+      <edge id="114" source="social_control.n.01" target="privation.n.02" />
+      <edge id="115" source="entertainment.n.01" target="show.n.01" />
+      <edge id="116" source="privation.n.02" target="starvation.n.02" />
+      <edge id="117" source="change_of_state.n.01" target="termination.n.05" />
+      <edge id="118" source="separation.n.09" target="removal.n.01" />
+      <edge id="119" source="change_of_integrity.n.01" target="combination.n.07" />
+      <edge id="120" source="change_of_integrity.n.01" target="separation.n.09" />
+      <edge id="121" source="confinement.n.02" target="imprisonment.n.03" />
+      <edge id="122" source="labor.n.02" target="effort.n.02" />
+      <edge id="123" source="request.n.02" target="prayer.n.02" />
+    </edges>
+  </graph>
+</gexf>
