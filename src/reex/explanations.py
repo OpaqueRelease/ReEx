@@ -110,6 +110,7 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
             y_test = Y[test_index]
 
             if not text:
+                pass
                 x_train = x_train.astype('float')
                 #y_train = y_train.astype('float')
                 x_test = x_test.astype('float')
@@ -139,7 +140,9 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
             if shap_explainer == "partition":
                 explainer = shap.PartitionExplainer(model.predict_proba, x_train)
 
-            for unique_class in set(preds):
+            class_ix = -1
+            for unique_class in model.classes_:
+                class_ix +=1
                 print("Class:", unique_class)
                 cors_neg = np.array([enx for enx, pred_tuple in enumerate(zip(preds, y_test)) if pred_tuple[0] == pred_tuple[1] and pred_tuple[0] == unique_class])
                 print(cors_neg)
@@ -150,6 +153,8 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
                     #shap.summary_plot(shap_values, feature_names=list(attribute_vector), max_display=20)
                     
                     values_array = np.array(shap_values.values)
+                    values_array = values_array[:,:,class_ix] # only take shap values of the unique class
+
                     # for vector in range(len(values_array)):
                     #     for value in range(len(values_array[vector])):
                     #         if values_array[vector][value] < 0:
@@ -161,6 +166,7 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
                         #model.fit(values_array)
                         #yhat = model.predict(values_array)
                         model = MeanShift()
+                        print(values_array.shape)
                         yhat = model.fit_predict(values_array)
                         clusters = unique(yhat)
                         print(clusters)
@@ -180,6 +186,7 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
                             per_class_explanations[cluster_name].append(values)
                     else:
                         stack = np.mean(np.vstack(values_array),axis = 0)
+                        print(stack.shape)
                         per_class_explanations[unique_class].append(stack)
 
             break # one train / test split
