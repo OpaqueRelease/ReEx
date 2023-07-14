@@ -50,7 +50,7 @@ def fit_space(X, model_path="."):
     return features
 
 
-def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_boosting", explanation_method = "shap", shap_explainer = "kernel", text = False, model_path=None, language='eng', clustering=False, feature_prunning=False):
+def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_boosting", explanation_method = "shap", shap_explainer = "kernel", text = False, model_path=None, language='eng', clustering=False, feature_prunning=False, disambiguation=False):
     """
     A set of calls for obtaining aggregates of explanations.
     """
@@ -141,20 +141,19 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
 
             for unique_class in set(preds):
                 print("Class:", unique_class)
-                cors_neg = np.array([enx for enx, pred_tuple in enumerate(zip(preds, y_test)) if pred_tuple[0] == pred_tuple[1] and pred_tuple[0] == unique_class and unique_class == "OFF"])
+                cors_neg = np.array([enx for enx, pred_tuple in enumerate(zip(preds, y_test)) if pred_tuple[0] == pred_tuple[1] and pred_tuple[0] == unique_class])
                 print(cors_neg)
                 if cors_neg.size != 0:
-                    shap_values = explainer(x_test[cors_neg])
+                    shap_values = explainer(x_test.iloc[cors_neg])
                     shap_values.feature_names = list(attribute_vector)
                     #shap.plots.bar(shap_values, max_display=20) 
                     #shap.summary_plot(shap_values, feature_names=list(attribute_vector), max_display=20)
-                    #stack = np.mean(np.vstack(shap_values),axis = 0)
+                    
                     values_array = np.array(shap_values.values)
                     # for vector in range(len(values_array)):
                     #     for value in range(len(values_array[vector])):
                     #         if values_array[vector][value] < 0:
                     #             values_array[vector][value] = 0
-
 
                     ## CLUSTERING
                     if clustering:
@@ -180,7 +179,8 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
                             values = np.array([cohort_exps[i] for i in range(len(cohort_exps))])
                             per_class_explanations[cluster_name].append(values)
                     else:
-                        per_class_explanations[unique_class].append(values_array)
+                        stack = np.mean(np.vstack(values_array),axis = 0)
+                        per_class_explanations[unique_class].append(stack)
 
             break # one train / test split
 
@@ -203,13 +203,17 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
     t_end = time.time() - t_start
     logging.info("Time spent on explanation estimation {}s.".format(t_end))
 
-    disambiguated_feature_vector = []
-    for feature in attribute_vector:
-        ftr = feature.strip()
-        disambiguated_feature = lesk([ftr], ftr, synsets=wordnet.synsets(ftr, lang=language))
-        if disambiguated_feature is not None:
-            disambiguated_feature_vector.append(disambiguated_feature.name())
-        else:
-            disambiguated_feature_vector.append("")
+    if disambiguation:
+        disambiguated_feature_vector = []
+        for feature in attribute_vector:
+            ftr = feature.strip()
+            disambiguated_feature = lesk([ftr], ftr, synsets=wordnet.synsets(ftr, lang=language))
+            if disambiguated_feature is not None:
+                disambiguated_feature_vector.append(disambiguated_feature.name())
+            else:
+                disambiguated_feature_vector.append("")
 
-    return (final_explanations, disambiguated_feature_vector)
+        return (final_explanations, disambiguated_feature_vector)
+    else:
+        return (final_explanations, attribute_vector)
+

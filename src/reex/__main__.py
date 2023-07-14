@@ -13,7 +13,7 @@ from bert_shap import *
 parser = argparse.ArgumentParser()    
 parser.add_argument('--expression_dataset',default='../example/data/Breast_A.csv', type = str)
 parser.add_argument('--background_knowledge',default='../example/ontology/go-basic.obo', type = str)
-parser.add_argument('--mapping_file',default='../example/mapping/goa_human.gaf.gz', type = str)
+parser.add_argument('--mapping_file', type = str)
 parser.add_argument('--intersection_ratio',default=0.2, type = float)
 parser.add_argument('--depth_weight',default=0.1, type = float)
 parser.add_argument('--subset_size', default=1000, type = int)
@@ -36,6 +36,7 @@ parser.add_argument('--results_path',default='../results', type = str)
 parser.add_argument('--bert', action='store_true')
 parser.add_argument('--averaged', action='store_true')
 parser.add_argument('--prune', action='store_true')
+parser.add_argument('--disambiguate', action='store_true')
 parser.add_argument('--lang',default='eng', type = str)
 
 
@@ -68,7 +69,7 @@ else:
 if args.bert:
     explanations, attributes = get_explanations(parsed_dataset, target_vector, args.averaged, args.lang)
 else:
-    explanations, attributes = get_instance_explanations(parsed_dataset, target_vector, subset = args.subset_size, classifier_index = args.classifier, explanation_method = args.explanation_method, shap_explainer = args.SHAP_explainer, text = args.text_input, model_path=args.model, clustering=args.clustering, feature_prunning=args.prune)
+    explanations, attributes = get_instance_explanations(parsed_dataset, target_vector, subset = args.subset_size, classifier_index = args.classifier, explanation_method = args.explanation_method, shap_explainer = args.SHAP_explainer, text = args.text_input, model_path=args.model, clustering=args.clustering, feature_prunning=args.prune, disambiguation=args.disambiguate)
 if args.text_input:
     gene_to_onto_map = text_mapping(attributes)
 final_json = {'id' : hash_value,

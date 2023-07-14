@@ -336,7 +336,7 @@ def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, mi
         for index in above_threshold:
             terms.add(attributes[index])
             shapley_values[attributes[index]] = explanation_vector[index]
-            print("Added: ",attributes[index], "with value:", explanation_vector[index])
+            print("Added to "+class_name+": ",attributes[index], "with value:", explanation_vector[index])
         all_terms = set()
         with open("../results/" + str(class_name) + '_shapley.json', 'w') as convert_file:
             convert_file.write(json.dumps(shapley_values))

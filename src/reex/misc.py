@@ -69,7 +69,9 @@ def read_the_dataset(dataset_name, attribute_mapping = None):
     """
     Reads a nontextual dataset
     """
-    gaf_map = read_generic_gaf(attribute_mapping)
+    gaf_map = None
+    if attribute_mapping:
+        gaf_map = read_generic_gaf(attribute_mapping)
     rd = pd.read_csv(dataset_name)
     ## re-map.
     colx = rd.columns.tolist()
@@ -92,7 +94,7 @@ def get_ontology(obo_link = '../ontologies/go-basic.obo', reverse_graph = "false
     """
         Loads ontology for non-textual datasets.
     """
-    return nx.read_edgelist(obo_link)
+    return nx.read_edgelist(obo_link, create_using=nx.DiGraph)
     # try:
     #     graph = obonet.read_obo(obo_link)
     # except Exception as es:
