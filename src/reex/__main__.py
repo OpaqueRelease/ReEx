@@ -38,6 +38,7 @@ parser.add_argument('--averaged', action='store_true')
 parser.add_argument('--prune', action='store_true')
 parser.add_argument('--disambiguate', action='store_true')
 parser.add_argument('--lang',default='eng', type = str)
+parser.add_argument('--twoclasses', action='store_true')
 
 
 
@@ -69,7 +70,7 @@ else:
 if args.bert:
     explanations, attributes = get_explanations(parsed_dataset, target_vector, args.averaged, args.lang)
 else:
-    explanations, attributes = get_instance_explanations(parsed_dataset, target_vector, subset = args.subset_size, classifier_index = args.classifier, explanation_method = args.explanation_method, shap_explainer = args.SHAP_explainer, text = args.text_input, model_path=args.model, clustering=args.clustering, feature_prunning=args.prune, disambiguation=args.disambiguate)
+    explanations, attributes = get_instance_explanations(parsed_dataset, target_vector, subset = args.subset_size, classifier_index = args.classifier, explanation_method = args.explanation_method, shap_explainer = args.SHAP_explainer, text = args.text_input, model_path=args.model, clustering=args.clustering, feature_prunning=args.prune, disambiguation=args.disambiguate, twoclasses=args.twoclasses)
 if args.text_input:
     gene_to_onto_map = text_mapping(attributes)
 final_json = {'id' : hash_value,

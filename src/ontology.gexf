@@ -1,0 +1,194 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf version="1.2" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd">
+  <meta lastmodifieddate="2023-07-31">
+    <creator>NetworkX 2.5</creator>
+  </meta>
+  <graph defaultedgetype="directed" mode="static" name="">
+    <nodes>
+      <node id="T1" label="T1" />
+      <node id="H1" label="H1" />
+      <node id="H2" label="H2" />
+      <node id="H3" label="H3" />
+      <node id="T2" label="T2" />
+      <node id="H4" label="H4" />
+      <node id="H5" label="H5" />
+      <node id="M1" label="M1" />
+      <node id="M2" label="M2" />
+      <node id="M3" label="M3" />
+      <node id="M4" label="M4" />
+      <node id="M5" label="M5" />
+      <node id="M6" label="M6" />
+      <node id="M7" label="M7" />
+      <node id="M8" label="M8" />
+      <node id="M9" label="M9" />
+      <node id="M10" label="M10" />
+      <node id="M11" label="M11" />
+      <node id="M12" label="M12" />
+      <node id="L1" label="L1" />
+      <node id="L10" label="L10" />
+      <node id="L2" label="L2" />
+      <node id="L19" label="L19" />
+      <node id="L3" label="L3" />
+      <node id="L11" label="L11" />
+      <node id="L4" label="L4" />
+      <node id="L18" label="L18" />
+      <node id="L12" label="L12" />
+      <node id="L5" label="L5" />
+      <node id="L17" label="L17" />
+      <node id="L16" label="L16" />
+      <node id="L6" label="L6" />
+      <node id="L13" label="L13" />
+      <node id="L7" label="L7" />
+      <node id="L8" label="L8" />
+      <node id="L14" label="L14" />
+      <node id="L15" label="L15" />
+      <node id="L9" label="L9" />
+      <node id="F1" label="F1" />
+      <node id="F20" label="F20" />
+      <node id="F3" label="F3" />
+      <node id="F22" label="F22" />
+      <node id="F5" label="F5" />
+      <node id="F6" label="F6" />
+      <node id="F4" label="F4" />
+      <node id="F24" label="F24" />
+      <node id="F8" label="F8" />
+      <node id="F7" label="F7" />
+      <node id="F9" label="F9" />
+      <node id="F10" label="F10" />
+      <node id="F23" label="F23" />
+      <node id="F11" label="F11" />
+      <node id="F12" label="F12" />
+      <node id="F13" label="F13" />
+      <node id="F21" label="F21" />
+      <node id="F14" label="F14" />
+      <node id="F16" label="F16" />
+      <node id="F15" label="F15" />
+      <node id="F17" label="F17" />
+      <node id="F18" label="F18" />
+      <node id="F19" label="F19" />
+    </nodes>
+    <edges>
+      <edge id="0" source="T1" target="H1" />
+      <edge id="1" source="T1" target="H2" />
+      <edge id="2" source="T1" target="H3" />
+      <edge id="3" source="H1" target="M1" />
+      <edge id="4" source="H1" target="M2" />
+      <edge id="5" source="H1" target="M3" />
+      <edge id="6" source="H1" target="M4" />
+      <edge id="7" source="H2" target="M1" />
+      <edge id="8" source="H2" target="M3" />
+      <edge id="9" source="H2" target="M4" />
+      <edge id="10" source="H2" target="M5" />
+      <edge id="11" source="H2" target="M6" />
+      <edge id="12" source="H3" target="M6" />
+      <edge id="13" source="H3" target="M7" />
+      <edge id="14" source="H3" target="M8" />
+      <edge id="15" source="H3" target="M9" />
+      <edge id="16" source="T2" target="H3" />
+      <edge id="17" source="T2" target="H4" />
+      <edge id="18" source="T2" target="H5" />
+      <edge id="19" source="H4" target="M9" />
+      <edge id="20" source="H4" target="M10" />
+      <edge id="21" source="H4" target="M8" />
+      <edge id="22" source="H4" target="M11" />
+      <edge id="23" source="H5" target="M3" />
+      <edge id="24" source="H5" target="M11" />
+      <edge id="25" source="H5" target="M12" />
+      <edge id="26" source="M1" target="L1" />
+      <edge id="27" source="M1" target="L10" />
+      <edge id="28" source="M2" target="L1" />
+      <edge id="29" source="M2" target="L2" />
+      <edge id="30" source="M2" target="L19" />
+      <edge id="31" source="M3" target="L2" />
+      <edge id="32" source="M3" target="L3" />
+      <edge id="33" source="M3" target="L19" />
+      <edge id="34" source="M3" target="L11" />
+      <edge id="35" source="M4" target="L2" />
+      <edge id="36" source="M4" target="L3" />
+      <edge id="37" source="M4" target="L4" />
+      <edge id="38" source="M4" target="L10" />
+      <edge id="39" source="M4" target="L18" />
+      <edge id="40" source="M5" target="L3" />
+      <edge id="41" source="M5" target="L4" />
+      <edge id="42" source="M5" target="L11" />
+      <edge id="43" source="M5" target="L12" />
+      <edge id="44" source="M6" target="L4" />
+      <edge id="45" source="M6" target="L5" />
+      <edge id="46" source="M6" target="L18" />
+      <edge id="47" source="M6" target="L17" />
+      <edge id="48" source="M7" target="L5" />
+      <edge id="49" source="M7" target="L16" />
+      <edge id="50" source="M7" target="L12" />
+      <edge id="51" source="M8" target="L16" />
+      <edge id="52" source="M8" target="L6" />
+      <edge id="53" source="M8" target="L17" />
+      <edge id="54" source="M8" target="L13" />
+      <edge id="55" source="M9" target="L6" />
+      <edge id="56" source="M9" target="L7" />
+      <edge id="57" source="M9" target="L8" />
+      <edge id="58" source="M9" target="L13" />
+      <edge id="59" source="M9" target="L14" />
+      <edge id="60" source="M10" target="L7" />
+      <edge id="61" source="M10" target="L8" />
+      <edge id="62" source="M10" target="L13" />
+      <edge id="63" source="M10" target="L14" />
+      <edge id="64" source="M10" target="L15" />
+      <edge id="65" source="M11" target="L8" />
+      <edge id="66" source="M11" target="L9" />
+      <edge id="67" source="M11" target="L15" />
+      <edge id="68" source="M11" target="L14" />
+      <edge id="69" source="M12" target="L9" />
+      <edge id="70" source="M12" target="L15" />
+      <edge id="71" source="L1" target="F1" />
+      <edge id="72" source="L1" target="F20" />
+      <edge id="73" source="L10" target="F23" />
+      <edge id="74" source="L10" target="F10" />
+      <edge id="75" source="L10" target="F11" />
+      <edge id="76" source="L2" target="F1" />
+      <edge id="77" source="L2" target="F20" />
+      <edge id="78" source="L2" target="F3" />
+      <edge id="79" source="L19" target="F19" />
+      <edge id="80" source="L19" target="F20" />
+      <edge id="81" source="L19" target="F21" />
+      <edge id="82" source="L3" target="F3" />
+      <edge id="83" source="L3" target="F22" />
+      <edge id="84" source="L3" target="F5" />
+      <edge id="85" source="L3" target="F6" />
+      <edge id="86" source="L11" target="F11" />
+      <edge id="87" source="L11" target="F12" />
+      <edge id="88" source="L11" target="F13" />
+      <edge id="89" source="L4" target="F4" />
+      <edge id="90" source="L4" target="F5" />
+      <edge id="91" source="L18" target="F17" />
+      <edge id="92" source="L18" target="F18" />
+      <edge id="93" source="L18" target="F19" />
+      <edge id="94" source="L12" target="F12" />
+      <edge id="95" source="L12" target="F21" />
+      <edge id="96" source="L5" target="F24" />
+      <edge id="97" source="L5" target="F5" />
+      <edge id="98" source="L5" target="F6" />
+      <edge id="99" source="L17" target="F17" />
+      <edge id="100" source="L17" target="F23" />
+      <edge id="101" source="L16" target="F15" />
+      <edge id="102" source="L16" target="F16" />
+      <edge id="103" source="L16" target="F17" />
+      <edge id="104" source="L6" target="F6" />
+      <edge id="105" source="L6" target="F24" />
+      <edge id="106" source="L6" target="F8" />
+      <edge id="107" source="L13" target="F12" />
+      <edge id="108" source="L13" target="F13" />
+      <edge id="109" source="L7" target="F7" />
+      <edge id="110" source="L7" target="F8" />
+      <edge id="111" source="L8" target="F22" />
+      <edge id="112" source="L8" target="F8" />
+      <edge id="113" source="L8" target="F9" />
+      <edge id="114" source="L14" target="F14" />
+      <edge id="115" source="L14" target="F23" />
+      <edge id="116" source="L14" target="F16" />
+      <edge id="117" source="L15" target="F15" />
+      <edge id="118" source="L15" target="F16" />
+      <edge id="119" source="L9" target="F9" />
+      <edge id="120" source="L9" target="F10" />
+    </edges>
+  </graph>
+</gexf>

@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf version="1.2" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd">
+  <meta lastmodifieddate="2023-07-26">
+    <creator>NetworkX 2.5</creator>
+  </meta>
+  <graph defaultedgetype="directed" mode="static" name="">
+    <nodes>
+      <node id="L9" label="L9" />
+      <node id="F10" label="F10" />
+      <node id="F3" label="F3" />
+      <node id="L15" label="L15" />
+      <node id="L1" label="L1" />
+      <node id="F9" label="F9" />
+      <node id="F15" label="F15" />
+      <node id="L16" label="L16" />
+      <node id="F20" label="F20" />
+      <node id="L2" label="L2" />
+      <node id="F1" label="F1" />
+      <node id="F21" label="F21" />
+      <node id="F19" label="F19" />
+      <node id="F16" label="F16" />
+      <node id="L19" label="L19" />
+      <node id="F17" label="F17" />
+      <node id="M12" label="M12" />
+    </nodes>
+    <edges>
+      <edge id="0" source="L9" target="F9" />
+      <edge id="1" source="L9" target="F10" />
+      <edge id="2" source="L15" target="F15" />
+      <edge id="3" source="L15" target="F16" />
+      <edge id="4" source="L1" target="F1" />
+      <edge id="5" source="L1" target="F20" />
+      <edge id="6" source="L16" target="F15" />
+      <edge id="7" source="L16" target="F16" />
+      <edge id="8" source="L16" target="F17" />
+      <edge id="9" source="L2" target="F1" />
+      <edge id="10" source="L2" target="F20" />
+      <edge id="11" source="L2" target="F3" />
+      <edge id="12" source="L19" target="F19" />
+      <edge id="13" source="L19" target="F20" />
+      <edge id="14" source="L19" target="F21" />
+      <edge id="15" source="M12" target="L9" />
+      <edge id="16" source="M12" target="L15" />
+    </edges>
+  </graph>
+</gexf>

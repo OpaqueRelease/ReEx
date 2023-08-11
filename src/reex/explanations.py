@@ -50,7 +50,7 @@ def fit_space(X, model_path="."):
     return features
 
 
-def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_boosting", explanation_method = "shap", shap_explainer = "kernel", text = False, model_path=None, language='eng', clustering=False, feature_prunning=False, disambiguation=False):
+def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_boosting", explanation_method = "shap", shap_explainer = "kernel", text = False, model_path=None, language='eng', clustering=False, feature_prunning=False, disambiguation=False, twoclasses=False):
     """
     A set of calls for obtaining aggregates of explanations.
     """
@@ -147,13 +147,14 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
                 cors_neg = np.array([enx for enx, pred_tuple in enumerate(zip(preds, y_test)) if pred_tuple[0] == pred_tuple[1] and pred_tuple[0] == unique_class])
                 print(cors_neg)
                 if cors_neg.size != 0:
-                    shap_values = explainer(x_test.iloc[cors_neg])
+                    shap_values = explainer(x_test.iloc[cors_neg], max_evals = 1854721)
                     shap_values.feature_names = list(attribute_vector)
                     #shap.plots.bar(shap_values, max_display=20) 
                     #shap.summary_plot(shap_values, feature_names=list(attribute_vector), max_display=20)
                     
                     values_array = np.array(shap_values.values)
-                    values_array = values_array[:,:,class_ix] # only take shap values of the unique class
+                    if not twoclasses:
+                        values_array = values_array[:,:,class_ix] # only take shap values of the unique class
 
                     # for vector in range(len(values_array)):
                     #     for value in range(len(values_array[vector])):
