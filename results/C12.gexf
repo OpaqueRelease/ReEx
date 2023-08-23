@@ -6,7 +6,7 @@
   <graph defaultedgetype="directed" mode="static" name="">
     <nodes>
       <node id="F7" label="F7" />
-      <node id="F5" label="F5" />
+      <node id="F6" label="F6" />
     </nodes>
     <edges />
   </graph>

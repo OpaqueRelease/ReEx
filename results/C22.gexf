@@ -1,14 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
 <gexf version="1.2" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd">
-  <meta lastmodifieddate="2023-08-01">
+  <meta lastmodifieddate="2023-08-21">
     <creator>NetworkX 2.5</creator>
   </meta>
   <graph defaultedgetype="directed" mode="static" name="">
     <nodes>
-      <node id="F13" label="F13" />
-      <node id="F12" label="F12" />
-      <node id="F14" label="F14" />
-      <node id="F15" label="F15" />
+      <node id="F7" label="F7" />
+      <node id="F4" label="F4" />
+      <node id="F5" label="F5" />
     </nodes>
     <edges />
   </graph>
