@@ -6,7 +6,7 @@ import pandas as pd
 import time
 import gzip
 import networkx as nx
-# import obonet
+import obonet
 import timeit
 from collections import defaultdict
 import sys
@@ -72,7 +72,7 @@ def read_the_dataset(dataset_name, attribute_mapping = None):
     gaf_map = None
     if attribute_mapping:
         gaf_map = read_generic_gaf(attribute_mapping)
-    rd = pd.read_csv(dataset_name)
+    rd = pd.read_csv(dataset_name , index_col=0)
     ## re-map.
     colx = rd.columns.tolist()
     col_indices = []
@@ -90,39 +90,41 @@ def read_the_dataset(dataset_name, attribute_mapping = None):
     return rd, target_vector, gaf_map
     
     
-def get_ontology(obo_link = '../ontologies/go-basic.obo', reverse_graph = "false"):
+def get_ontology(obo_link = '../example/ontology/go-basic.obo', reverse_graph = "false"):
     """
         Loads ontology for non-textual datasets.
     """
-    return nx.read_edgelist(obo_link, create_using=nx.DiGraph)
-    # try:
-    #     graph = obonet.read_obo(obo_link)
-    # except Exception as es:
-    #     logging.info(es)
-    #     graph = obonet.read_obo(obo_link)
-    #     #obo_link = 'http://purl.obolibrary.org/obo/go/go-basic.obo'
+    if obo_link == '../example/ontology/go-basic.obo':
+        try:
+            graph = obonet.read_obo(obo_link)
+        except Exception as es:
+            logging.info(es)
+            graph = obonet.read_obo(obo_link)
+            #obo_link = 'http://purl.obolibrary.org/obo/go/go-basic.obo'
 
-    # logging.info(obo_link)
-    # numberOfNodes = graph.number_of_nodes() 
-    
-    # logging.info("Number of nodes: {}".format(numberOfNodes))
-    # reverseGraph = nx.DiGraph()
+        logging.info(obo_link)
+        numberOfNodes = graph.number_of_nodes() 
+        
+        logging.info("Number of nodes: {}".format(numberOfNodes))
+        reverseGraph = nx.DiGraph()
 
-    # ## generate whole graph first, we'll specialize later.
-    # wholeset = set()
-    # for edge in list(graph.edges()):
-    #     edge_info = set(graph.get_edge_data(edge[0], edge[1]).keys())
-    #     wholeset = wholeset.union(edge_info)
-    #     for itype in edge_info:
-    #         if itype == "is_a" or itype == "part_of":
-    #             if reverse_graph == "true":
-    #                 reverseGraph.add_edge(edge[1], edge[0], type=itype)
-    #             else:
-    #                 reverseGraph.add_edge(edge[0], edge[1], type=itype)
-    # logging.info(nx.info(reverseGraph))
-    # tnum = len(wholeset)
-    # logging.info("Found {} unique edge types, {}".format(tnum," | ".join(wholeset)))
-    # return reverseGraph
+        ## generate whole graph first, we'll specialize later.
+        wholeset = set()
+        for edge in list(graph.edges()):
+            edge_info = set(graph.get_edge_data(edge[0], edge[1]).keys())
+            wholeset = wholeset.union(edge_info)
+            for itype in edge_info:
+                if itype == "is_a" or itype == "part_of":
+                    if reverse_graph == "true":
+                        reverseGraph.add_edge(edge[1], edge[0], type=itype)
+                    else:
+                        reverseGraph.add_edge(edge[0], edge[1], type=itype)
+        logging.info(nx.info(reverseGraph))
+        tnum = len(wholeset)
+        logging.info("Found {} unique edge types, {}".format(tnum," | ".join(wholeset)))
+        return reverseGraph
+    else:
+        return nx.read_edgelist(obo_link, create_using=nx.DiGraph)
 
 def recurse_custom(G, word):
     syns = wn.synsets(word)

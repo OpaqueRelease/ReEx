@@ -31,6 +31,8 @@ import sys
 import os
 from nltk.corpus import wordnet
 from nltk.wsd import lesk
+from sklearn.cluster import DBSCAN
+from sklearn.cluster import AgglomerativeClustering
 
 try:
     import spyct
@@ -50,7 +52,7 @@ def fit_space(X, model_path="."):
     return features
 
 
-def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_boosting", explanation_method = "shap", shap_explainer = "kernel", text = False, model_path=None, language='eng', clustering=False, feature_prunning=False, disambiguation=False, twoclasses=False):
+def get_instance_explanations(X, Y, subset = 200, classifier_index = "gradient_boosting", explanation_method = "shap", shap_explainer = "kernel", text = False, model_path=None, language='eng', clustering=False, feature_prunning=False, disambiguation=False, twoclasses=False):
     """
     A set of calls for obtaining aggregates of explanations.
     """
@@ -73,7 +75,7 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
         minf = mutual_info_classif(X_usable.values, training_scores_encoded)
         top_k = np.argsort(minf)[::-1][0:subset]
         attribute_vector = X_usable.columns[top_k]
-        X_usable = X_usable.astype(float).values[:,top_k]
+        X_usable = X_usable.astype(float).iloc[:,top_k]
     else:
         attribute_vector = X_usable.columns
         
@@ -81,7 +83,7 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
     performances = []
     enx = 0
     t_start = time.time()
-    logging.info("Starting importance estimation ..  shape: {}".format(X.shape))
+    logging.info("Starting importance estimation ..  shape: {}".format(X_usable.shape))
 
     per_class_explanations = defaultdict(list)
     classifier_mapping = ["gradient_boosting", "random_forest", "svm"]
@@ -169,12 +171,16 @@ def get_instance_explanations(X, Y, subset = 1000, classifier_index = "gradient_
                         model = MeanShift()
                         print(values_array.shape)
                         yhat = model.fit_predict(values_array)
+                        print("CLUSTERS")
+                        print(yhat)
+                        #yhat = DBSCAN(eps=3, min_samples=2).fit(X)
+                        #yhat = yhat.labels_
                         clusters = unique(yhat)
                         print(clusters)
                         for cluster in clusters:
                             row_ix = where(yhat == cluster)
                             values_of_cluster = values_array[row_ix]
-                            cluster_name = str(unique_class) + str(cluster)
+                            cluster_name = str(unique_class) + '-' + str(cluster)
 
                             cohorts = {"": values_of_cluster}
                             cohort_labels = list(cohorts.keys())

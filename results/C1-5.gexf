@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf version="1.2" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd">
+  <meta lastmodifieddate="2023-10-17">
+    <creator>NetworkX 2.5</creator>
+  </meta>
+  <graph defaultedgetype="directed" mode="static" name="">
+    <nodes>
+      <node id="T" label="T" />
+      <node id="H1" label="H1" />
+      <node id="H2" label="H2" />
+      <node id="M1" label="M1" />
+      <node id="M2" label="M2" />
+      <node id="M3" label="M3" />
+      <node id="L1" label="L1" />
+      <node id="L2" label="L2" />
+      <node id="L3" label="L3" />
+      <node id="L4" label="L4" />
+      <node id="L5" label="L5" />
+      <node id="L6" label="L6" />
+      <node id="F1" label="F1" />
+      <node id="F2" label="F2" />
+      <node id="F3" label="F3" />
+      <node id="F4" label="F4" />
+      <node id="F5" label="F5" />
+      <node id="F6" label="F6" />
+      <node id="F7" label="F7" />
+      <node id="F8" label="F8" />
+      <node id="F9" label="F9" />
+      <node id="F10" label="F10" />
+      <node id="F11" label="F11" />
+      <node id="F12" label="F12" />
+      <node id="F15" label="F15" />
+      <node id="F16" label="F16" />
+      <node id="F17" label="F17" />
+      <node id="F18" label="F18" />
+      <node id="F19" label="F19" />
+      <node id="F13" label="F13" />
+      <node id="F14" label="F14" />
+      <node id="F20" label="F20" />
+    </nodes>
+    <edges>
+      <edge id="0" source="T" target="H1" />
+      <edge id="1" source="T" target="H2" />
+      <edge id="2" source="H1" target="M1" />
+      <edge id="3" source="H1" target="M2" />
+      <edge id="4" source="H2" target="M3" />
+      <edge id="5" source="M1" target="L1" />
+      <edge id="6" source="M1" target="F3" />
+      <edge id="7" source="M2" target="L2" />
+      <edge id="8" source="M2" target="L3" />
+      <edge id="9" source="M3" target="L4" />
+      <edge id="10" source="M3" target="L5" />
+      <edge id="11" source="M3" target="L6" />
+      <edge id="12" source="L1" target="F1" />
+      <edge id="13" source="L1" target="F2" />
+      <edge id="14" source="L1" target="F15" />
+      <edge id="15" source="L1" target="F16" />
+      <edge id="16" source="L2" target="F4" />
+      <edge id="17" source="L2" target="F5" />
+      <edge id="18" source="L2" target="F17" />
+      <edge id="19" source="L3" target="F6" />
+      <edge id="20" source="L3" target="F7" />
+      <edge id="21" source="L3" target="F18" />
+      <edge id="22" source="L4" target="F8" />
+      <edge id="23" source="L4" target="F9" />
+      <edge id="24" source="L4" target="F19" />
+      <edge id="25" source="L5" target="F10" />
+      <edge id="26" source="L5" target="F11" />
+      <edge id="27" source="L6" target="F11" />
+      <edge id="28" source="L6" target="F12" />
+      <edge id="29" source="L6" target="F13" />
+      <edge id="30" source="L6" target="F14" />
+      <edge id="31" source="L6" target="F20" />
+    </edges>
+  </graph>
+</gexf>

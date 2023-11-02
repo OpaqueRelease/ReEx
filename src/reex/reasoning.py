@@ -31,7 +31,7 @@ def update_dict_of_generalization_depth(old_dictionary, new_set, iterations_coun
                 
     
 
-def selective_staircase_multiple_sets(list_of_termsets, ontology, intersectionRatio = 0):
+def selective_staircase_multiple_sets(list_of_termsets, ontology, intersectionRatio = 0, cluster_intersection_ratio=1, class_names=[]):
 
     """
     :param list_of_termsets: termsets as found by explanations
@@ -60,7 +60,7 @@ def selective_staircase_multiple_sets(list_of_termsets, ontology, intersectionRa
           #  if(converged[a] == 1):
            #     count_iterations[a] += 1
        
-            
+        print("iteration")
         tmp_ancestor_storage = ancestor_storage.copy()
         
         ## list of lists of dictionaries,  each dictionary contains elements of this class and it's ancestors
@@ -81,18 +81,27 @@ def selective_staircase_multiple_sets(list_of_termsets, ontology, intersectionRa
                 for term in list_of_dicts[ancestor_Set].keys():
                     term_used_in_generalization_step = False
                     for candidate in list_of_dicts[ancestor_Set][term]:
-                        desc_of_candidate = nx.descendants(ontology,candidate)
-
                         ## check for intersection
-                        numberOfTerms = 0
+                        desc_of_candidate = nx.descendants(ontology,candidate)
                         intersectionCount = 0
-                        for setTwo in range(len(ancestor_storage)):
-                            if ancestor_Set != setTwo:
-                                intersectionCount += len(list(set.intersection(desc_of_candidate, list_of_termsets[setTwo])))
-                                numberOfTerms += len(list_of_termsets[setTwo])
+                        numberOfTerms = 0
+                        cluster_intersection_count = 0
+                        cluster_number_of_terms = 0
+                        class_name_split = class_names[enx].split('-')
+                        class_name = class_name_split[0]
+                        for setTwo in range(len(tmp_ancestor_storage)):
+                            class_name_two_split = class_names[setTwo].split('-')
+                            class_name_two = class_name_two_split[0] 
+                            if enx != setTwo:
+                                if class_name_two == class_name:
+                                    cluster_intersection_count+=len(set.intersection(desc_of_candidate, list_of_termsets[setTwo]))
+                                    cluster_number_of_terms += len(list_of_termsets[setTwo])
+                                else:
+                                    intersectionCount+=len(set.intersection(desc_of_candidate, list_of_termsets[setTwo]))
+                                    numberOfTerms += len(list_of_termsets[setTwo])
                              
                         ## add the candidate to the set
-                        if numberOfTerms == 0 or intersectionRatio >= float(intersectionCount) / float(numberOfTerms):
+                        if (numberOfTerms == 0 or cluster_number_of_terms == 0) or (intersectionRatio >= float(intersectionCount) / float(numberOfTerms)) and (cluster_intersection_ratio >= float(cluster_intersection_count) / float(cluster_number_of_terms)):
                             newSet.add(candidate)
                             term_used_in_generalization_step = True
 
@@ -364,7 +373,7 @@ def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, mi
     return term_sets_per_class, class_names
 
 
-def generalize_selective_staircase(ontology_graph, explanations = None, attributes = None, target_relations = {"is_a","partOf"}, test_run = False, intersectionRatio = 0, abs = False, print_results = False,gene_to_onto_map = None, min_terms = 5, step = 0.9):
+def generalize_selective_staircase(ontology_graph, explanations = None, attributes = None, target_relations = {"is_a","partOf"}, test_run = False, intersectionRatio = 0, abs = False, print_results = False,gene_to_onto_map = None, min_terms = 5, step = 0.9, cluster_intersection_ratio=1):
 
     """
     A method which generalizes explanations based on the knowledge graph structure.
@@ -383,7 +392,8 @@ def generalize_selective_staircase(ontology_graph, explanations = None, attribut
     term_sets_per_class, class_names = extract_terms_from_explanations(explanations,attributes, gene_to_onto_map, min_terms, step, ontology_graph, abs)
 
     baseline_terms = copy.deepcopy(term_sets_per_class)
-    subsets = selective_staircase_multiple_sets(term_sets_per_class, ontology_graph, intersectionRatio = intersectionRatio)
+    print("Beginning generalization")
+    subsets = selective_staircase_multiple_sets(term_sets_per_class, ontology_graph, intersectionRatio = intersectionRatio, cluster_intersection_ratio=cluster_intersection_ratio, class_names=class_names)
 
     
     #some basic evaluation of generalization
@@ -443,7 +453,7 @@ def generalizeHedwig(ontology_graph, explanations = None, attributes = None, gen
     return generate_output_json(class_names, generalized_termsets)
 
 
-def ancestor_multiple_sets(list_of_termsets, ontology, depthWeight):
+def ancestor_multiple_sets(list_of_termsets, ontology, depthWeight, cluster_depth_weight, class_names):
 
     """
     :param list_of_termsets: termsets as found by explanations
@@ -460,7 +470,7 @@ def ancestor_multiple_sets(list_of_termsets, ontology, depthWeight):
             combinedDepth[term] = 0
     #combinedDepth = 0
     while not all(v == 0 for v in converged):
-                       
+        print("iteration")
         tmp_ancestor_storage = ancestor_storage.copy()
         for enx, termset in enumerate(ancestor_storage):
             list_of_this_termset = list(termset)
@@ -477,27 +487,37 @@ def ancestor_multiple_sets(list_of_termsets, ontology, depthWeight):
                             #add ancestor of the pair of elements
                             if ontology.has_node(list_of_this_termset[item1]) and ontology.has_node(list_of_this_termset[item2]):
                                 ancestor_element = nx.lowest_common_ancestor(ontology, list_of_this_termset[item1], list_of_this_termset[item2])
+                                print("lca found")
                                 if ancestor_element is not None:
                                     #find just how much did we generalize and how much intersection there is with other classes
                                     generalizationDepth = nx.shortest_path_length(ontology, ancestor_element, list_of_this_termset[item1])
                                     depth2 = nx.shortest_path_length(ontology, ancestor_element, list_of_this_termset[item2])
-
+                                    print("paths found")
                                     generalizationDepth = (depth2 + generalizationDepth) / 2
                                     #check intersection with other classes
                                     descendants_of_val = nx.descendants(ontology,ancestor_element)  
                                     intersectionCount = 0
                                     numberOfTerms = 0
+                                    cluster_intersection_count = 0
+                                    cluster_number_of_terms = 0
+                                    class_name_split = class_names[enx].split('-')
+                                    class_name = class_name_split[0]
                                     for setTwo in range(len(tmp_ancestor_storage)):
+                                        class_name_two_split = class_names[setTwo].split('-')
+                                        class_name_two = class_name_two_split[0] 
                                         if enx != setTwo:
-                                            intersectionCount+=len(set.intersection(descendants_of_val, list_of_termsets[setTwo]))
-                                            numberOfTerms += len(list_of_termsets[setTwo])
-                                
+                                            if class_name_two == class_name:
+                                                cluster_intersection_count+=len(set.intersection(descendants_of_val, list_of_termsets[setTwo]))
+                                                cluster_number_of_terms += len(list_of_termsets[setTwo])
+                                            else:
+                                                intersectionCount+=len(set.intersection(descendants_of_val, list_of_termsets[setTwo]))
+                                                numberOfTerms += len(list_of_termsets[setTwo])
                                     
                                     # UP TO DISCUSSION - based on generalizationDepth and intersectionCount we somehow decide whether to include the element or not
                                     intersectionRatio = 0
                                     if numberOfTerms > 0: 
                                         intersectionRatio = intersectionCount/numberOfTerms
-                                    if generalizationDepth == -1 and intersectionRatio == 0 or generalizationDepth * depthWeight == 0 or intersectionRatio/(generalizationDepth * depthWeight) < 0.5:
+                                    if generalizationDepth == -1 and intersectionRatio == 0 or (generalizationDepth * depthWeight == 0 or intersectionRatio * generalizationDepth < depthWeight) and (generalizationDepth * cluster_depth_weight == 0 or cluster_intersection_count * generalizationDepth < cluster_depth_weight):
                                         pairAncestorSet.add(ancestor_element)
                                         used[item1] = 1
                                         used[item2] = 1
@@ -525,7 +545,7 @@ def ancestor_multiple_sets(list_of_termsets, ontology, depthWeight):
     
     
     
-def generalize_ancestry(ontology_graph, explanations = None, attributes = None, target_relations = {"is_a","partOf"}, test_run = False, depthWeight = 0, abs = False, print_results = False,gene_to_onto_map = None, min_terms = 5, step = 0.9):
+def generalize_ancestry(ontology_graph, explanations = None, attributes = None, target_relations = {"is_a","partOf"}, test_run = False, depthWeight = 0, abs = False, print_results = False,gene_to_onto_map = None, min_terms = 5, step = 0.9, cluster_depth_weight=1000):
 
     """
     A method which generalizes explanations based on the knowledge graph structure.
@@ -544,7 +564,8 @@ def generalize_ancestry(ontology_graph, explanations = None, attributes = None, 
     
     term_sets_per_class, class_names = extract_terms_from_explanations(explanations,attributes, gene_to_onto_map, min_terms, step, ontology_graph, abs)
     baseline_terms = copy.deepcopy(term_sets_per_class)
-    subsets = ancestor_multiple_sets(term_sets_per_class, ontology_graph, depthWeight = depthWeight)
+    print("Beginning generalization")
+    subsets = ancestor_multiple_sets(term_sets_per_class, ontology_graph, depthWeight = depthWeight, cluster_depth_weight=cluster_depth_weight, class_names=class_names)
 
         
     evaluation = evaluate(term_sets_per_class, subsets[0])
