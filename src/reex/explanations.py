@@ -33,6 +33,8 @@ from nltk.corpus import wordnet
 from nltk.wsd import lesk
 from sklearn.cluster import DBSCAN
 from sklearn.cluster import AgglomerativeClustering
+import sklearn_relief as relief
+from sklearn.ensemble import RandomForestClassifier
 
 try:
     import spyct
@@ -63,7 +65,7 @@ def get_instance_explanations(X, Y, subset = 200, classifier_index = "gradient_b
 
     training_scores_encoded = Y
     if text:
-        vectorizer = TfidfVectorizer(analyzer='word',stop_words= 'english')
+        vectorizer = TfidfVectorizer(analyzer='word',stop_words= 'english', ngram_range=(1,9))
         X_vectorized = vectorizer.fit_transform(X)
         X_vectorized = X_vectorized.todense()
         X_usable = pd.DataFrame(X_vectorized)
@@ -71,11 +73,34 @@ def get_instance_explanations(X, Y, subset = 200, classifier_index = "gradient_b
     else:
         X_usable = X.copy()
     if feature_prunning:
-        logging.info("Feature pre-selection via Mutual Information ({}).".format(subset))
-        minf = mutual_info_classif(X_usable.values, training_scores_encoded)
-        top_k = np.argsort(minf)[::-1][0:subset]
+        # MUTUAL INFORMATION
+        # logging.info("Feature pre-selection via Mutual Information ({}).".format(subset))
+        # minf = mutual_info_classif(X_usable.values, training_scores_encoded)
+        # top_k = np.argsort(minf)[::-1][0:subset]
+        # attribute_vector = X_usable.columns[top_k]
+        # X_usable = X_usable.astype(float).iloc[:,top_k]
+
+        #RELIEFF
+        # logging.info("Feature pre-selection via ReliefF ({}).".format(subset))
+
+        # r = relief.Relief(
+        #     n_features=subset 
+        # ) 
+        # print(scores_dict[575])
+        # X_usable = r.fit_transform(
+        #     X_usable,
+        #     scores_dict
+        # )
+
+        # RF feature selection
+        logging.info("Feature pre-selection via Random Forests ({}).".format(subset))
+        forest = RandomForestClassifier(random_state=0)
+        forest.fit(X_usable, training_scores_encoded)
+        importances = forest.feature_importances_
+        top_k = np.argsort(importances)[::-1][0:subset]
         attribute_vector = X_usable.columns[top_k]
         X_usable = X_usable.astype(float).iloc[:,top_k]
+
     else:
         attribute_vector = X_usable.columns
         

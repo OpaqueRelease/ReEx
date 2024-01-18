@@ -353,6 +353,7 @@ def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, mi
             for term in terms:
                 try:
                     mapped = gene_to_go_map[term]
+                    print(term, str(mapped))
                 except:
                     try:
                         mapped = wn.synsets(term)[0].name()
@@ -452,8 +453,30 @@ def generalizeHedwig(ontology_graph, explanations = None, attributes = None, gen
 
     return generate_output_json(class_names, generalized_termsets)
 
+def ancestry_search(term1, term2, ontology, ancestors_searched):
+    if term1 == term2:
+        return term1, 0
+    ancestor_count = 0
+    depth = 1
+    term1_set = set()
+    term2_set = set()
+    iterations = 0
+    while ancestors_searched > ancestor_count and iterations < 20:
+        term1_ancestors = set([x[0] for x in ontology.in_edges(term1)])
+        term2_ancestors = set([x[0] for x in ontology.in_edges(term2)])
+        term1_set = term1_set.union(term1_ancestors)
+        term2_set = term2_set.union(term2_ancestors)
 
-def ancestor_multiple_sets(list_of_termsets, ontology, depthWeight, cluster_depth_weight, class_names):
+        intersection = term1_set.intersection(term2_set)
+        if len(intersection) != 0:
+            return intersection.pop(), depth
+        
+        ancestor_count += len(term1_ancestors) + len(term2_ancestors)
+        depth += 1
+        iterations += 1
+    return None, 0
+
+def ancestor_multiple_sets(list_of_termsets, ontology, depthWeight, cluster_depth_weight, class_names, ancestors_searched):
 
     """
     :param list_of_termsets: termsets as found by explanations
@@ -486,14 +509,18 @@ def ancestor_multiple_sets(list_of_termsets, ontology, depthWeight, cluster_dept
                         if item1 != item2: 
                             #add ancestor of the pair of elements
                             if ontology.has_node(list_of_this_termset[item1]) and ontology.has_node(list_of_this_termset[item2]):
-                                ancestor_element = nx.lowest_common_ancestor(ontology, list_of_this_termset[item1], list_of_this_termset[item2])
-                                print("lca found")
+                                term1 = list_of_this_termset[item1]
+                                term2 = list_of_this_termset[item2]
+                                #ancestor_element = nx.lowest_common_ancestor(ontology, list_of_this_termset[item1], list_of_this_termset[item2])
+                                ancestor_element, generalizationDepth = ancestry_search(term1, term2, ontology, ancestors_searched)
+                                #print("lca found")
                                 if ancestor_element is not None:
                                     #find just how much did we generalize and how much intersection there is with other classes
-                                    generalizationDepth = nx.shortest_path_length(ontology, ancestor_element, list_of_this_termset[item1])
-                                    depth2 = nx.shortest_path_length(ontology, ancestor_element, list_of_this_termset[item2])
-                                    print("paths found")
-                                    generalizationDepth = (depth2 + generalizationDepth) / 2
+                                    # generalizationDepth = nx.shortest_path_length(ontology, ancestor_element, list_of_this_termset[item1])
+                                    # depth2 = nx.shortest_path_length(ontology, ancestor_element, list_of_this_termset[item2])
+                                    # print("paths found")
+                                    # generalizationDepth = (depth2 + generalizationDepth) / 2
+
                                     #check intersection with other classes
                                     descendants_of_val = nx.descendants(ontology,ancestor_element)  
                                     intersectionCount = 0
@@ -545,7 +572,7 @@ def ancestor_multiple_sets(list_of_termsets, ontology, depthWeight, cluster_dept
     
     
     
-def generalize_ancestry(ontology_graph, explanations = None, attributes = None, target_relations = {"is_a","partOf"}, test_run = False, depthWeight = 0, abs = False, print_results = False,gene_to_onto_map = None, min_terms = 5, step = 0.9, cluster_depth_weight=1000):
+def generalize_ancestry(ontology_graph, explanations = None, attributes = None, target_relations = {"is_a","partOf"}, test_run = False, depthWeight = 0, abs = False, print_results = False,gene_to_onto_map = None, min_terms = 5, step = 0.9, cluster_depth_weight=1000, ancestors_searched=1000):
 
     """
     A method which generalizes explanations based on the knowledge graph structure.
@@ -565,7 +592,7 @@ def generalize_ancestry(ontology_graph, explanations = None, attributes = None, 
     term_sets_per_class, class_names = extract_terms_from_explanations(explanations,attributes, gene_to_onto_map, min_terms, step, ontology_graph, abs)
     baseline_terms = copy.deepcopy(term_sets_per_class)
     print("Beginning generalization")
-    subsets = ancestor_multiple_sets(term_sets_per_class, ontology_graph, depthWeight = depthWeight, cluster_depth_weight=cluster_depth_weight, class_names=class_names)
+    subsets = ancestor_multiple_sets(term_sets_per_class, ontology_graph, depthWeight = depthWeight, cluster_depth_weight=cluster_depth_weight, class_names=class_names, ancestors_searched=ancestors_searched)
 
         
     evaluation = evaluate(term_sets_per_class, subsets[0])

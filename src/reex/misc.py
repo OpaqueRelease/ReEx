@@ -42,26 +42,29 @@ def text_mapping(attributes):
     mapping = {}
     for col in attributes:
         try:
-            #syns = wn.synsets(col)
-            #mappedColumn = syns[0].name()
-            #mapping[col] = mappedColumn
-            if col is not None:
-                mapping[col] = col  
+            syns = wn.synsets(col)
+            mappedColumn = syns[0].name()
+            mapping[col] = mappedColumn
+            print(col, mapping[col])
+
+            # if col is not None:
+            #     mapping[col] = col  
 
 
-            #mappedColumn = [x[1] for x in ontology.in_edges(col + ".n.01")][0]
-            #mappedColumn = wn.synset(col + ".n.01").name()
-            #mappedColumn = ontology.node(wn.synset().name())
-            #mappedColumn = col + ".n.01"
+            # mappedColumn = [x[1] for x in ontology.in_edges(col + ".n.01")][0]
+            # mappedColumn = wn.synset(col + ".n.01").name()
+            # mappedColumn = ontology.node(wn.synset().name())
+            # mappedColumn = col + ".n.01"
         except:
             print("failed on: " + str(col))
+    print("Mapping size: ", len(mapping))
     return mapping
 
 def read_textual_dataset(dataset):
     """
     Reads a textual dataset
     """
-    df = pd.read_csv(dataset, sep='\t', header=0)
+    df = pd.read_csv(dataset, sep=',', header=0)
     print(df)
     return df['data'], df['label'].values, None
 
@@ -124,7 +127,7 @@ def get_ontology(obo_link = '../example/ontology/go-basic.obo', reverse_graph = 
         logging.info("Found {} unique edge types, {}".format(tnum," | ".join(wholeset)))
         return reverseGraph
     else:
-        return nx.read_edgelist(obo_link, create_using=nx.DiGraph)
+        return nx.read_edgelist(obo_link, create_using=nx.DiGraph, delimiter=",")
 
 def recurse_custom(G, word):
     syns = wn.synsets(word)

@@ -1,18 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
 <gexf version="1.2" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd">
-  <meta lastmodifieddate="2023-10-19">
+  <meta lastmodifieddate="2023-11-17">
     <creator>NetworkX 2.5</creator>
   </meta>
   <graph defaultedgetype="directed" mode="static" name="">
-    <nodes>
-      <node id="F10" label="F10" />
-      <node id="F1" label="F1" />
-      <node id="L5" label="L5" />
-      <node id="F11" label="F11" />
-    </nodes>
-    <edges>
-      <edge id="0" source="L5" target="F10" />
-      <edge id="1" source="L5" target="F11" />
-    </edges>
+    <nodes />
+    <edges />
   </graph>
 </gexf>
