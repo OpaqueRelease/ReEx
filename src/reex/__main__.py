@@ -43,6 +43,7 @@ parser.add_argument('--prune', action='store_true')
 parser.add_argument('--disambiguate', action='store_true')
 parser.add_argument('--lang',default='eng', type = str)
 parser.add_argument('--twoclasses', action='store_true')
+parser.add_argument('--static', default=0.0, type = float)
 
 
 
@@ -98,7 +99,7 @@ else :
 
 ## reason and output
 if args.reasoner == 'selective_staircase':
-    (outjson, performance_dictionary, baseline_terms, baseline_names) = generalize_selective_staircase(ontology_graph, explanations = explanations, attributes = attributes, test_run = False,  abs = args.absolute, intersectionRatio = args.intersection_ratio, gene_to_onto_map = gene_to_onto_map, print_results = args.results, min_terms=args.min_terms, cluster_intersection_ratio=args.cluster_intersection_ratio)
+    (outjson, performance_dictionary, baseline_terms, baseline_names) = generalize_selective_staircase(ontology_graph, explanations = explanations, attributes = attributes, test_run = False,  abs = args.absolute, intersectionRatio = args.intersection_ratio, gene_to_onto_map = gene_to_onto_map, print_results = args.results, min_terms=args.min_terms, cluster_intersection_ratio=args.cluster_intersection_ratio, static_threshold=args.static)
     if not args.text_input:
         pass
         #scores = compute_all_scores(outjson, ontology_graph, args.mapping_file)
@@ -120,7 +121,7 @@ elif args.reasoner == 'hedwig':
     final_json['resulting_generalization'] = outjson
     
 elif args.reasoner == 'ancestry':
-    (outjson, performance_dictionary, baseline_terms, baseline_names) = generalize_ancestry(ontology_graph, explanations = explanations, attributes = attributes, test_run = False,  abs = args.absolute, depthWeight = args.depth_weight, gene_to_onto_map = gene_to_onto_map, print_results = args.results, min_terms=args.min_terms, cluster_depth_weight=args.cluster_depth_weight, ancestors_searched=args.ancestors_searched)
+    (outjson, performance_dictionary, baseline_terms, baseline_names) = generalize_ancestry(ontology_graph, explanations = explanations, attributes = attributes, test_run = False,  abs = args.absolute, depthWeight = args.depth_weight, gene_to_onto_map = gene_to_onto_map, print_results = args.results, min_terms=args.min_terms, cluster_depth_weight=args.cluster_depth_weight, ancestors_searched=args.ancestors_searched, static_threshold=args.static)
     if not args.text_input:
         pass
         #scores = compute_all_scores(outjson, ontology_graph, args.mapping_file)

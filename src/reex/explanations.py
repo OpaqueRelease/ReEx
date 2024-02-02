@@ -65,7 +65,7 @@ def get_instance_explanations(X, Y, subset = 200, classifier_index = "gradient_b
 
     training_scores_encoded = Y
     if text:
-        vectorizer = TfidfVectorizer(analyzer='word',stop_words= 'english', ngram_range=(1,9))
+        vectorizer = TfidfVectorizer(analyzer='word',stop_words= 'english', ngram_range=(1,5))
         X_vectorized = vectorizer.fit_transform(X)
         X_vectorized = X_vectorized.todense()
         X_usable = pd.DataFrame(X_vectorized)

@@ -64,7 +64,7 @@ def read_textual_dataset(dataset):
     """
     Reads a textual dataset
     """
-    df = pd.read_csv(dataset, sep=',', header=0)
+    df = pd.read_csv(dataset, sep='\t', header=0)
     print(df)
     return df['data'], df['label'].values, None
 

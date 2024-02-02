@@ -55,7 +55,7 @@ def selective_staircase_multiple_sets(list_of_termsets, ontology, intersectionRa
             
         
     count_iterations = 1    
-    while not all(v == 0 for v in converged):
+    while not all(v == 0 for v in converged) and count_iterations<5:
         #for a in range(len(count_iterations)):
           #  if(converged[a] == 1):
            #     count_iterations[a] += 1
@@ -296,7 +296,7 @@ def class_connectedness(ontology, generalized, list_of_termsets):
         return 0
     return connectedness / counter
 
-def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, min_terms, step, ontology, abs):
+def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, min_terms, step, ontology, abs, static_threshold=0.0):
 
     """
     Given explanations, perform thesholding in order to get terms per class.
@@ -328,17 +328,24 @@ def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, mi
                 print("Zero size feature vector. Aborting...")
                 sys.exit()
             maxVector = np.amax(greater_than_zero_vector) #np.absolute ?
-        threshold = maxVector
-        while True:
+
+        if static_threshold > 0:
             if not abs:
-                above_threshold = set(np.argwhere(explanation_vector >= threshold).flatten())
+                above_threshold = set(np.argwhere(explanation_vector >= static_threshold).flatten())
             else:
-                above_threshold = set(np.argwhere(np.absolute(explanation_vector) >= threshold).flatten())
-            if len(above_threshold) > min_terms or threshold < 0.01 * maxVector:
-                #threshold = 0.0001
-                #above_threshold = set(np.argwhere(np.absolute(explanation_vector) >= threshold).flatten())
-                break
-            threshold *= step
+                above_threshold = set(np.argwhere(np.absolute(explanation_vector) >= static_threshold).flatten())
+        else:
+            threshold = maxVector
+            while True:
+                if not abs:
+                    above_threshold = set(np.argwhere(explanation_vector >= threshold).flatten())
+                else:
+                    above_threshold = set(np.argwhere(np.absolute(explanation_vector) >= threshold).flatten())
+                if len(above_threshold) > min_terms or threshold < 0.01 * maxVector:
+                    #threshold = 0.0001
+                    #above_threshold = set(np.argwhere(np.absolute(explanation_vector) >= threshold).flatten())
+                    break
+                threshold *= step
         #terms = set([x for enx,x in enumerate(attributes) if enx in above_threshold])
         terms = set()
         shapley_values = {}
@@ -374,7 +381,7 @@ def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, mi
     return term_sets_per_class, class_names
 
 
-def generalize_selective_staircase(ontology_graph, explanations = None, attributes = None, target_relations = {"is_a","partOf"}, test_run = False, intersectionRatio = 0, abs = False, print_results = False,gene_to_onto_map = None, min_terms = 5, step = 0.9, cluster_intersection_ratio=1):
+def generalize_selective_staircase(ontology_graph, explanations = None, attributes = None, target_relations = {"is_a","partOf"}, test_run = False, intersectionRatio = 0, abs = False, print_results = False,gene_to_onto_map = None, min_terms = 5, step = 0.9, cluster_intersection_ratio=1, static_threshold=0.0):
 
     """
     A method which generalizes explanations based on the knowledge graph structure.
@@ -390,7 +397,7 @@ def generalize_selective_staircase(ontology_graph, explanations = None, attribut
     :param min_terms: minimal number of terms taken for generalization per class
     :param step: multiplier for SHAP value threshold used to take most important terms of each class into generalization
     """
-    term_sets_per_class, class_names = extract_terms_from_explanations(explanations,attributes, gene_to_onto_map, min_terms, step, ontology_graph, abs)
+    term_sets_per_class, class_names = extract_terms_from_explanations(explanations,attributes, gene_to_onto_map, min_terms, step, ontology_graph, abs, static_threshold)
 
     baseline_terms = copy.deepcopy(term_sets_per_class)
     print("Beginning generalization")
@@ -572,7 +579,7 @@ def ancestor_multiple_sets(list_of_termsets, ontology, depthWeight, cluster_dept
     
     
     
-def generalize_ancestry(ontology_graph, explanations = None, attributes = None, target_relations = {"is_a","partOf"}, test_run = False, depthWeight = 0, abs = False, print_results = False,gene_to_onto_map = None, min_terms = 5, step = 0.9, cluster_depth_weight=1000, ancestors_searched=1000):
+def generalize_ancestry(ontology_graph, explanations = None, attributes = None, target_relations = {"is_a","partOf"}, test_run = False, depthWeight = 0, abs = False, print_results = False,gene_to_onto_map = None, min_terms = 5, step = 0.9, cluster_depth_weight=1000, ancestors_searched=1000, static_threshold=0.0):
 
     """
     A method which generalizes explanations based on the knowledge graph structure.
@@ -589,7 +596,7 @@ def generalize_ancestry(ontology_graph, explanations = None, attributes = None, 
     :param step: multiplier for SHAP value threshold used to take most important terms of each class into generalization
     """
     
-    term_sets_per_class, class_names = extract_terms_from_explanations(explanations,attributes, gene_to_onto_map, min_terms, step, ontology_graph, abs)
+    term_sets_per_class, class_names = extract_terms_from_explanations(explanations,attributes, gene_to_onto_map, min_terms, step, ontology_graph, abs, static_threshold)
     baseline_terms = copy.deepcopy(term_sets_per_class)
     print("Beginning generalization")
     subsets = ancestor_multiple_sets(term_sets_per_class, ontology_graph, depthWeight = depthWeight, cluster_depth_weight=cluster_depth_weight, class_names=class_names, ancestors_searched=ancestors_searched)
