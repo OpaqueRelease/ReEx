@@ -381,7 +381,7 @@ def extract_terms_from_explanations(explanations, attributes, gene_to_go_map, mi
     return term_sets_per_class, class_names
 
 
-def generalize_selective_staircase(ontology_graph, explanations = None, attributes = None, target_relations = {"is_a","partOf"}, test_run = False, intersectionRatio = 0, abs = False, print_results = False,gene_to_onto_map = None, min_terms = 5, step = 0.9, cluster_intersection_ratio=1, static_threshold=0.0):
+def generalize_selective_staircase(ontology_graph, explanations = None, attributes = None, target_relations = {"is_a","partOf"}, test_run = False, intersectionRatio = 0, abs = False, print_results = False,gene_to_onto_map = None, min_terms = 5, step = 0.9, cluster_intersection_ratio=1, static_threshold=0.0, plugin=None):
 
     """
     A method which generalizes explanations based on the knowledge graph structure.
@@ -397,7 +397,11 @@ def generalize_selective_staircase(ontology_graph, explanations = None, attribut
     :param min_terms: minimal number of terms taken for generalization per class
     :param step: multiplier for SHAP value threshold used to take most important terms of each class into generalization
     """
-    term_sets_per_class, class_names = extract_terms_from_explanations(explanations,attributes, gene_to_onto_map, min_terms, step, ontology_graph, abs, static_threshold)
+    if plugin is not None:
+        term_sets_per_class = plugin[0]
+        class_names = plugin[1]
+    else:
+        term_sets_per_class, class_names = extract_terms_from_explanations(explanations,attributes, gene_to_onto_map, min_terms, step, ontology_graph, abs, static_threshold)
 
     baseline_terms = copy.deepcopy(term_sets_per_class)
     print("Beginning generalization")
@@ -579,7 +583,7 @@ def ancestor_multiple_sets(list_of_termsets, ontology, depthWeight, cluster_dept
     
     
     
-def generalize_ancestry(ontology_graph, explanations = None, attributes = None, target_relations = {"is_a","partOf"}, test_run = False, depthWeight = 0, abs = False, print_results = False,gene_to_onto_map = None, min_terms = 5, step = 0.9, cluster_depth_weight=1000, ancestors_searched=1000, static_threshold=0.0):
+def generalize_ancestry(ontology_graph, explanations = None, attributes = None, target_relations = {"is_a","partOf"}, test_run = False, depthWeight = 0, abs = False, print_results = False,gene_to_onto_map = None, min_terms = 5, step = 0.9, cluster_depth_weight=1000, ancestors_searched=1000, static_threshold=0.0, plugin=None):
 
     """
     A method which generalizes explanations based on the knowledge graph structure.
@@ -595,8 +599,11 @@ def generalize_ancestry(ontology_graph, explanations = None, attributes = None, 
     :param min_terms: minimal number of terms taken for generalization per class
     :param step: multiplier for SHAP value threshold used to take most important terms of each class into generalization
     """
-    
-    term_sets_per_class, class_names = extract_terms_from_explanations(explanations,attributes, gene_to_onto_map, min_terms, step, ontology_graph, abs, static_threshold)
+    if plugin is not None:
+        term_sets_per_class = plugin[0]
+        class_names = plugin[1]
+    else:
+        term_sets_per_class, class_names = extract_terms_from_explanations(explanations,attributes, gene_to_onto_map, min_terms, step, ontology_graph, abs, static_threshold)
     baseline_terms = copy.deepcopy(term_sets_per_class)
     print("Beginning generalization")
     subsets = ancestor_multiple_sets(term_sets_per_class, ontology_graph, depthWeight = depthWeight, cluster_depth_weight=cluster_depth_weight, class_names=class_names, ancestors_searched=ancestors_searched)

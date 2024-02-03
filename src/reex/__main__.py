@@ -44,7 +44,7 @@ parser.add_argument('--disambiguate', action='store_true')
 parser.add_argument('--lang',default='eng', type = str)
 parser.add_argument('--twoclasses', action='store_true')
 parser.add_argument('--static', default=0.0, type = float)
-
+parser.add_argument('--plugin',default='', type = str)
 
 
 
@@ -58,24 +58,31 @@ if not path.exists(path_to_results):
 salt = uuid.uuid4()
 hash_value = hash(salt)
 
+explanations = None
+attributes = None
+gene_to_onto_map = None
+
 #reversing
 reversing = True
 if args.reverse_graph == "false":
     reversing = False
 
+if args.plugin == '': # Continuation from json result
+    ## read the dataset
+    if args.text_input:
+        parsed_dataset, target_vector, gene_to_onto_map = read_textual_dataset(args.expression_dataset)
 
-## read the dataset
-if args.text_input:
-    parsed_dataset, target_vector, gene_to_onto_map = read_textual_dataset(args.expression_dataset)
+        
+    else:
+        parsed_dataset, target_vector, gene_to_onto_map = read_the_dataset(args.expression_dataset, attribute_mapping = args.mapping_file)
 
-    
+    if args.bert:
+        explanations, attributes = get_explanations(parsed_dataset, target_vector, args.averaged, args.lang)
+    else:
+        explanations, attributes = get_instance_explanations(parsed_dataset, target_vector, subset = args.subset_size, classifier_index = args.classifier, explanation_method = args.explanation_method, shap_explainer = args.SHAP_explainer, text = args.text_input, model_path=args.model, clustering=args.clustering, feature_prunning=args.prune, disambiguation=args.disambiguate, twoclasses=args.twoclasses)
+
 else:
-    parsed_dataset, target_vector, gene_to_onto_map = read_the_dataset(args.expression_dataset, attribute_mapping = args.mapping_file)
-
-if args.bert:
-    explanations, attributes = get_explanations(parsed_dataset, target_vector, args.averaged, args.lang)
-else:
-    explanations, attributes = get_instance_explanations(parsed_dataset, target_vector, subset = args.subset_size, classifier_index = args.classifier, explanation_method = args.explanation_method, shap_explainer = args.SHAP_explainer, text = args.text_input, model_path=args.model, clustering=args.clustering, feature_prunning=args.prune, disambiguation=args.disambiguate, twoclasses=args.twoclasses)
+    plugin_data = get_plugin_data(args.plugin) # (terms_per_class, class_names)
 # if args.text_input:
 #     gene_to_onto_map = text_mapping(attributes)
 final_json = {'id' : hash_value,
@@ -99,7 +106,7 @@ else :
 
 ## reason and output
 if args.reasoner == 'selective_staircase':
-    (outjson, performance_dictionary, baseline_terms, baseline_names) = generalize_selective_staircase(ontology_graph, explanations = explanations, attributes = attributes, test_run = False,  abs = args.absolute, intersectionRatio = args.intersection_ratio, gene_to_onto_map = gene_to_onto_map, print_results = args.results, min_terms=args.min_terms, cluster_intersection_ratio=args.cluster_intersection_ratio, static_threshold=args.static)
+    (outjson, performance_dictionary, baseline_terms, baseline_names) = generalize_selective_staircase(ontology_graph, explanations = explanations, attributes = attributes, test_run = False,  abs = args.absolute, intersectionRatio = args.intersection_ratio, gene_to_onto_map = gene_to_onto_map, print_results = args.results, min_terms=args.min_terms, cluster_intersection_ratio=args.cluster_intersection_ratio, static_threshold=args.static, plugin=plugin_data)
     if not args.text_input:
         pass
         #scores = compute_all_scores(outjson, ontology_graph, args.mapping_file)
@@ -121,7 +128,7 @@ elif args.reasoner == 'hedwig':
     final_json['resulting_generalization'] = outjson
     
 elif args.reasoner == 'ancestry':
-    (outjson, performance_dictionary, baseline_terms, baseline_names) = generalize_ancestry(ontology_graph, explanations = explanations, attributes = attributes, test_run = False,  abs = args.absolute, depthWeight = args.depth_weight, gene_to_onto_map = gene_to_onto_map, print_results = args.results, min_terms=args.min_terms, cluster_depth_weight=args.cluster_depth_weight, ancestors_searched=args.ancestors_searched, static_threshold=args.static)
+    (outjson, performance_dictionary, baseline_terms, baseline_names) = generalize_ancestry(ontology_graph, explanations = explanations, attributes = attributes, test_run = False,  abs = args.absolute, depthWeight = args.depth_weight, gene_to_onto_map = gene_to_onto_map, print_results = args.results, min_terms=args.min_terms, cluster_depth_weight=args.cluster_depth_weight, ancestors_searched=args.ancestors_searched, static_threshold=args.static, plugin=plugin_data)
     if not args.text_input:
         pass
         #scores = compute_all_scores(outjson, ontology_graph, args.mapping_file)

@@ -60,6 +60,23 @@ def text_mapping(attributes):
     print("Mapping size: ", len(mapping))
     return mapping
 
+def get_plugin_data(plugin_file):
+    import json
+    f = open(plugin_file)
+    data = json.load(f)
+    data = json.loads(data)
+    class_names = []
+    terms_per_class = []
+    print(data)
+    print(type(data))
+
+    for class_name in data['resulting_generalization']:
+        if class_name == "average_depth" or class_name == "average_association":
+            continue
+        class_names.append(class_name)
+        terms_per_class.append(set(data['resulting_generalization'][class_name]["terms"]))
+    return terms_per_class, class_names
+
 def read_textual_dataset(dataset):
     """
     Reads a textual dataset
