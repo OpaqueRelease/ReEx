@@ -62,10 +62,9 @@ def get_instance_explanations(X, Y, subset = 200, classifier_index = "gradient_b
     #lab_enc = preprocessing.LabelEncoder()
     #training_scores_encoded = lab_enc.fit_transform(Y)
     # TODO: zakaj je potreben label encoder?
-
     training_scores_encoded = Y
     if text:
-        vectorizer = TfidfVectorizer(analyzer='word',stop_words= 'english', ngram_range=(1,5))
+        vectorizer = TfidfVectorizer(analyzer='word',stop_words= 'english') #, ngram_range=(1,3))
         X_vectorized = vectorizer.fit_transform(X)
         X_vectorized = X_vectorized.todense()
         X_usable = pd.DataFrame(X_vectorized)
@@ -180,7 +179,9 @@ def get_instance_explanations(X, Y, subset = 200, classifier_index = "gradient_b
                     #shap.summary_plot(shap_values, feature_names=list(attribute_vector), max_display=20)
                     
                     values_array = np.array(shap_values.values)
+                    print(values_array.shape)
                     if not twoclasses:
+                        print("taking class values")
                         values_array = values_array[:,:,class_ix] # only take shap values of the unique class
 
                     # for vector in range(len(values_array)):
@@ -246,11 +247,10 @@ def get_instance_explanations(X, Y, subset = 200, classifier_index = "gradient_b
         disambiguated_feature_vector = []
         for feature in attribute_vector:
             ftr = feature.strip()
-            disambiguated_feature = lesk([ftr], ftr, synsets=wordnet.synsets(ftr, lang=language))
-            if disambiguated_feature is not None:
-                disambiguated_feature_vector.append(disambiguated_feature.name())
-            else:
-                disambiguated_feature_vector.append("")
+            #disambiguated_feature = lesk([ftr], ftr, synsets=wordnet.synsets(ftr, lang=language))
+            disambiguated_feature_vector.append(ftr.replace("__", "."))
+        
+        print(disambiguated_feature_vector)
 
         return (final_explanations, disambiguated_feature_vector)
     else:

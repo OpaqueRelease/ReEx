@@ -1,0 +1,179 @@
+,index,Ungeneralized,Generalized,Generalizations
+0,0,skeletal system development,negative regulation of translation,apoptotic signaling pathway
+1,1,proteolysis,collagen trimer,pore complex
+2,2,respiratory gaseous exchange by respiratory system,developmental process,P-TEFb-cap methyltransferase complex
+3,3,cellular response to retinoic acid,membrane,cumulus cell differentiation
+4,4,metal ion binding,signal transduction,fatty acid elongase complex
+5,5,chromatin remodeling,chromatin,CIA complex
+6,6,negative regulation of myelination,host cell nucleus,exomer complex
+7,7,positive regulation of collagen biosynthetic process,extracellular space,nucleolar chromatin
+8,8,cellular response to estrogen stimulus,epithelial cell differentiation,luminal surveillance complex
+9,9,cellular response to estradiol stimulus,extracellular vesicle,matrilin complex
+10,10,RNA polymerase II transcription regulatory region sequence-specific DNA binding,inflammatory response,plasma membrane region
+11,11,regulation of branching involved in prostate gland morphogenesis,nucleus,extracellular exosome complex
+12,12,transcription initiation at RNA polymerase II promoter,membrane,subsynaptic reticulum
+13,13,cell-cell signaling,cytosol,lysosomal multienzyme complex
+14,14,prostate epithelial cord elongation,stem cell differentiation,GO:0007571
+15,15,positive regulation of glial cell proliferation,apoptotic process,anaerobic ribonucleoside-triphosphate reductase complex
+16,16,positive regulation of transcription by RNA polymerase II,nucleoplasm,collagen type XXVI trimer
+17,17,"DNA-binding transcription factor activity, RNA polymerase II-specific",regulation of DNA-templated transcription,viral integration complex
+18,18,nuclear matrix,protein-containing complex,hepatoblast differentiation
+19,19,wound healing,Golgi apparatus,PeBoW complex
+20,20,opsonization,clathrin-coated endocytic vesicle,Sertoli cell development
+21,21,chromatin binding,plasma membrane,anatomical structure formation involved in morphogenesis
+22,22,mammary gland alveolus development,anatomical structure morphogenesis,pituitary gonadotropin complex
+23,23,O-glycan processing,male gonad development,transmembrane collagen trimer
+24,24,regulation of Wnt signaling pathway,protein deubiquitination,GO:0051482
+25,25,cyclooxygenase pathway,negative regulation of gene expression,mRNA destabilization
+26,26,neutrophil chemotaxis,endoplasmic reticulum lumen,MAML2-RBP-Jkappa-ICN3 complex
+27,27,extracellular exosome,endopeptidase activity,protein deubiquitination involved in ubiquitin-dependent protein catabolic process
+28,28,mitotic cell cycle,lysosome,larval serum protein complex
+29,29,negative regulation of transcription by RNA polymerase II,positive regulation of cytosolic calcium ion concentration,positive regulation of androgen receptor activity
+30,30,phosphatidylinositol 3-kinase regulatory subunit binding,proteolysis involved in protein catabolic process,Syp1 complex
+31,31,cellular response to type II interferon,extracellular region,cis-Golgi network
+32,32,androgen metabolic process,serine-type peptidase activity,Swi5-Swi2 complex
+33,33,GO:0051571,nucleolus,inflammatory response to antigenic stimulus
+34,34,molecular_function,cysteine-type peptidase activity,
+35,35,uterus development,immune response,
+36,36,chloride ion binding,cytoplasm,
+37,37,regulation of toll-like receptor signaling pathway,regulation of transcription by RNA polymerase II,
+38,38,protein binding,phospholipase C-activating G protein-coupled receptor signaling pathway,
+39,39,xenobiotic metabolic process,GO:0007568,
+40,40,positive regulation of T-helper cell differentiation,epithelial cell development,
+41,41,mRNA 5'-UTR binding,positive regulation of DNA-templated transcription,
+42,42,TBP-class protein binding,intracellular membrane-bounded organelle,
+43,43,TFIIB-class transcription factor binding,positive regulation of DNA-binding transcription factor activity,
+44,44,15-hydroxyprostaglandin dehydrogenase (NADP+) activity,plasma membrane,
+45,45,regulation of chondrocyte differentiation,regulation of mRNA stability,
+46,46,regulation of systemic arterial blood pressure,endoplasmic reticulum membrane,
+47,47,negative regulation of DNA-templated transcription,antral ovarian follicle growth,
+48,48,polypeptide N-acetylgalactosaminyltransferase activity,collagen-containing extracellular matrix,
+49,49,CCR chemokine receptor binding,,
+50,50,cellular response to hydrogen peroxide,,
+51,51,T cell mediated cytotoxicity,,
+52,52,regulation of hematopoietic stem cell differentiation,,
+53,53,positive regulation of apoptotic signaling pathway,,
+54,54,DNA-templated transcription,,
+55,55,protein-folding chaperone binding,,
+56,56,vagina development,,
+57,57,negative regulation of canonical NF-kappaB signal transduction,,
+58,58,regulation of cell shape,,
+59,59,nitric-oxide synthase regulator activity,,
+60,60,visual learning,,
+61,61,GO:0043966,,
+62,62,positive regulation of GTPase activity,,
+63,63,activation of GTPase activity,,
+64,64,lipid transport,,
+65,65,lipid transporter activity,,
+66,66,identical protein binding,,
+67,67,positive regulation of hepatic stellate cell activation,,
+68,68,G protein-coupled receptor signaling pathway,,
+69,69,protein metabolic process,,
+70,70,steroid binding,,
+71,71,protein domain specific binding,,
+72,72,RNA binding,,
+73,73,response to hypoxia,,
+74,74,COPII-coated ER to Golgi transport vesicle,,
+75,75,focal adhesion,,
+76,76,transcription coactivator binding,,
+77,77,Golgi membrane,,
+78,78,vitamin K metabolic process,,
+79,79,regulation of intracellular estrogen receptor signaling pathway,,
+80,80,protein kinase binding,,
+81,81,protein kinase inhibitor activity,,
+82,82,phosphatase binding,,
+83,83,GO:0005623,,
+84,84,positive regulation of fibroblast proliferation,,
+85,85,protein localization to chromatin,,
+86,86,transcription factor binding,,
+87,87,endoplasmic reticulum to Golgi vesicle-mediated transport,,
+88,88,long-term memory,,
+89,89,signaling receptor binding,,
+90,90,RNA polymerase II cis-regulatory region sequence-specific DNA binding,,
+91,91,positive regulation of testosterone secretion,,
+92,92,cellular response to interleukin-1,,
+93,93,antibacterial peptide production,,
+94,94,"oxidoreductase activity, acting on NAD(P)H, quinone or similar compound as acceptor",,
+95,95,intracellular calcium ion homeostasis,,
+96,96,secretory granule,,
+97,97,zymogen activation,,
+98,98,euchromatin,,
+99,99,azurophil granule lumen,,
+100,100,calcium ion binding,,
+101,101,transcription by RNA polymerase II,,
+102,102,endoplasmic reticulum-Golgi intermediate compartment membrane,,
+103,103,cellular_component,,
+104,104,positive regulation of neuron apoptotic process,,
+105,105,positive regulation of transforming growth factor beta production,,
+106,106,intracellular steroid hormone receptor signaling pathway,,
+107,107,monosaccharide binding,,
+108,108,intracellular estrogen receptor signaling pathway,,
+109,109,toll-like receptor signaling pathway,,
+110,110,nuclear estrogen receptor activity,,
+111,111,translation regulator activity,,
+112,112,positive regulation of phospholipase C activity,,
+113,113,GO:0005671,,
+114,114,GO:0051574,,
+115,115,positive regulation of phosphatidylinositol 3-kinase/protein kinase B signal transduction,,
+116,116,centrosome,,
+117,117,enzyme binding,,
+118,118,peptidase activator activity involved in apoptotic process,,
+119,119,positive regulation of proteolysis involved in protein catabolic process,,
+120,120,epithelial cell proliferation involved in mammary gland duct elongation,,
+121,121,neutrophil degranulation,,
+122,122,mRNA 3'-UTR binding,,
+123,123,GO:0000173,,
+124,124,carbonyl reductase (NADPH) activity,,
+125,125,negative regulation of miRNA processing,,
+126,126,antimicrobial humoral immune response mediated by antimicrobial peptide,,
+127,127,killing of cells of another organism,,
+128,128,nuclear receptor activity,,
+129,129,negative regulation of DNA-binding transcription factor activity,,
+130,130,ATPase binding,,
+131,131,COPII vesicle coating,,
+132,132,estrogen response element binding,,
+133,133,cell population proliferation,,
+134,134,response to estrogen,,
+135,135,positive regulation of hepatic stellate cell proliferation,,
+136,136,positive regulation of ERK1 and ERK2 cascade,,
+137,137,GTPase activator activity,,
+138,138,eosinophil chemotaxis,,
+139,139,nuclear estrogen receptor binding,,
+140,140,translation,,
+141,141,positive regulation of smooth muscle cell proliferation,,
+142,142,regulation of apoptotic process,,
+143,143,"hydrolase activity, acting on carbon-nitrogen (but not peptide) bonds, in linear amides",,
+144,144,biological_process,,
+145,145,lymphocyte chemotaxis,,
+146,146,protein self-association,,
+147,147,response to estradiol,,
+148,148,beta-catenin binding,,
+149,149,positive regulation of microglial cell activation,,
+150,150,small GTPase binding,,
+151,151,zinc ion binding,,
+152,152,lamellar body,,
+153,153,DNA-binding transcription factor activity,,
+154,154,chemotaxis,,
+155,155,monocyte chemotaxis,,
+156,156,mRNA transport,,
+157,157,transcription preinitiation complex,,
+158,158,chemokine activity,,
+159,159,regulation of inflammatory response,,
+160,160,response to organic substance,,
+161,161,cytoskeleton organization,,
+162,162,prostate epithelial cord arborization involved in prostate glandular acinus morphogenesis,,
+163,163,carbohydrate binding,,
+164,164,cellular response to tumor necrosis factor,,
+165,165,intracellular protein transport,,
+166,166,epidermal growth factor receptor signaling pathway,,
+167,167,negative regulation of angiogenesis,,
+168,168,tetraspanin-enriched microdomain,,
+169,169,regulation of cytokine production,,
+170,170,chemokine-mediated signaling pathway,,
+171,171,"DNA-binding transcription activator activity, RNA polymerase II-specific",,
+172,172,serine-type endopeptidase activity,,
+173,173,GO:0055114,,
+174,174,positive regulation of RNA polymerase II transcription preinitiation complex assembly,,
+175,175,mammary gland branching involved in pregnancy,,
+176,176,prostaglandin-E2 9-reductase activity,,
+177,177,cysteine-type endopeptidase activity,,

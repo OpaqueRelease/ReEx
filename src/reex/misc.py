@@ -28,6 +28,7 @@ def read_generic_gaf(gaf_file):
     symmap = defaultdict(set)
     with gzip.open(gaf_file,"rt") as gf:
         for line in gf:
+            print(line)
             line = line.strip().split("\t")
             if "UniProt" in line[0] and len(line) > 5:
                 symmap[line[2]].add(line[4])
@@ -60,11 +61,32 @@ def text_mapping(attributes):
     print("Mapping size: ", len(mapping))
     return mapping
 
+def get_plugin_data(plugin_file):
+    import json
+    mapping = {}
+    f = open(plugin_file)
+    data = json.load(f)
+    data = json.loads(data)
+    class_names = []
+    terms_per_class = []
+    print(data)
+    print(type(data))
+
+    for class_name in data['resulting_generalization']:
+        if class_name == "average_depth" or class_name == "average_association":
+            continue
+        class_names.append(class_name)
+        terms_per_class.append(set(data['resulting_generalization'][class_name]["terms"]))
+        for term in set(data['resulting_generalization'][class_name]["terms"]):
+            mapping[term] = term
+    return (terms_per_class, class_names), mapping
+
 def read_textual_dataset(dataset):
     """
     Reads a textual dataset
     """
-    df = pd.read_csv(dataset, sep='\t', header=0)
+    df = pd.read_csv(dataset, sep='\t', header=0, index_col = False)
+    df = df[df['label'].notna()]
     print(df)
     return df['data'], df['label'].values, None
 
@@ -80,8 +102,9 @@ def read_the_dataset(dataset_name, attribute_mapping = None):
     colx = rd.columns.tolist()
     col_indices = []
     col_names = []
-    target_vector = rd['class'].values
-    rd = rd.drop('class', axis=1)
+    print(rd.head())
+    target_vector = rd['target'].values
+    rd = rd.drop('target', axis=1)
     # for enx, x in enumerate(colx):
     #     if x in gaf_map:
     #         col_indices.append(enx)
@@ -127,7 +150,9 @@ def get_ontology(obo_link = '../example/ontology/go-basic.obo', reverse_graph = 
         logging.info("Found {} unique edge types, {}".format(tnum," | ".join(wholeset)))
         return reverseGraph
     else:
-        return nx.read_edgelist(obo_link, create_using=nx.DiGraph, delimiter=",")
+        edgelist = nx.read_edgelist(obo_link, create_using=nx.DiGraph, delimiter=",")
+        print(nx.info(edgelist))
+        return edgelist
 
 def recurse_custom(G, word):
     syns = wn.synsets(word)
@@ -146,9 +171,9 @@ def get_ontology_text_custom(mapping):
     nltk.download('wordnet')
     G = nx.DiGraph()
 
-    for word in mapping.keys():
-       if word != "":
-            node = wn.synset(mapping[word])
+    for word in mapping:
+       if word != "" and "." in word and "\'" not in word and "s_company" not in word and not word.startswith("_"):
+            node = wn.synset(word)
             temp_graph = closure_graph_fn(node, lambda s: s.hypernyms())
             G = nx.compose(G, temp_graph)
 
