@@ -28,6 +28,7 @@ def read_generic_gaf(gaf_file):
     symmap = defaultdict(set)
     with gzip.open(gaf_file,"rt") as gf:
         for line in gf:
+            #print(line)
             line = line.strip().split("\t")
             if "UniProt" in line[0] and len(line) > 5:
                 symmap[line[2]].add(line[4])
@@ -44,88 +45,122 @@ def text_mapping(attributes):
         try:
             syns = wn.synsets(col)
             mappedColumn = syns[0].name()
-            #mappedColumn = [x[1] for x in ontology.in_edges(col + ".n.01")][0]
-            #mappedColumn = wn.synset(col + ".n.01").name()
-            #mappedColumn = ontology.node(wn.synset().name())
-            #mappedColumn = col + ".n.01"
             mapping[col] = mappedColumn
+            print(col, mapping[col])
+
+            # if col is not None:
+            #     mapping[col] = col  
+
+
+            # mappedColumn = [x[1] for x in ontology.in_edges(col + ".n.01")][0]
+            # mappedColumn = wn.synset(col + ".n.01").name()
+            # mappedColumn = ontology.node(wn.synset().name())
+            # mappedColumn = col + ".n.01"
         except:
             print("failed on: " + str(col))
-    print(mapping)
+    print("Mapping size: ", len(mapping))
     return mapping
+
+def get_plugin_data(plugin_file):
+    import json
+    mapping = {}
+    f = open(plugin_file)
+    data = json.load(f)
+    data = json.loads(data)
+    class_names = []
+    terms_per_class = []
+    print(data)
+    print(type(data))
+
+    for class_name in data['resulting_generalization']:
+        if class_name == "average_depth" or class_name == "average_association":
+            continue
+        class_names.append(class_name)
+        terms_per_class.append(set(data['resulting_generalization'][class_name]["terms"]))
+        for term in set(data['resulting_generalization'][class_name]["terms"]):
+            mapping[term] = term
+    return (terms_per_class, class_names), mapping
 
 def read_textual_dataset(dataset):
     """
     Reads a textual dataset
     """
-    df = pd.read_csv(dataset, sep='\t')
-    return df['text_a'], df['label'].values, None
+    df = pd.read_csv(dataset, sep='\t', header=0, index_col = False)
+    df = df[df['label'].notna()]
+    print(df)
+    return df['data'], df['label'].values, None
 
 def read_the_dataset(dataset_name, attribute_mapping = None):
     """
     Reads a nontextual dataset
     """
-    gaf_map = read_generic_gaf(attribute_mapping)
-    rd = pd.read_csv(dataset_name)
+    gaf_map = None
+    if attribute_mapping:
+        gaf_map = read_generic_gaf(attribute_mapping)
+    rd = pd.read_csv(dataset_name , index_col=0)
     ## re-map.
     colx = rd.columns.tolist()
     col_indices = []
     col_names = []
+    print(rd.head())
     target_vector = rd['target'].values
+    rd = rd.drop('target', axis=1)
+    # for enx, x in enumerate(colx):
+    #     if x in gaf_map:
+    #         col_indices.append(enx)
+    #         nmx = list(gaf_map[x])
+    #         col_names.append(nmx[0])
 
-    for enx, x in enumerate(colx):
-        if x in gaf_map:
-            col_indices.append(enx)
-            nmx = list(gaf_map[x])
-            col_names.append(nmx[0])
-    new_dx = rd.iloc[:,col_indices]
-    logging.info("Considering DF of shape {}".format(new_dx.shape))
-    return new_dx, target_vector, gaf_map
+    # new_dx = rd.iloc[:,col_indices]
+    logging.info("Considering DF of shape {}".format(rd.shape))
+    return rd, target_vector, gaf_map
     
     
-def get_ontology(obo_link = '../ontologies/go-basic.obo', reverse_graph = "false"):
+def get_ontology(obo_link = '../example/ontology/go-basic.obo', reverse_graph = False):
     """
         Loads ontology for non-textual datasets.
     """
-    try:
-        graph = obonet.read_obo(obo_link)
-    except Exception as es:
-        logging.info(es)
-        graph = obonet.read_obo(obo_link)
-        #obo_link = 'http://purl.obolibrary.org/obo/go/go-basic.obo'
+    if obo_link == '../example/ontology/go-basic.obo':
+        try:
+            graph = obonet.read_obo(obo_link)
+        except Exception as es:
+            logging.info(es)
+            graph = obonet.read_obo(obo_link)
+            #obo_link = 'http://purl.obolibrary.org/obo/go/go-basic.obo'
 
-    logging.info(obo_link)
-    numberOfNodes = graph.number_of_nodes() 
-    
-    logging.info("Number of nodes: {}".format(numberOfNodes))
-    reverseGraph = nx.DiGraph()
+        logging.info(obo_link)
+        numberOfNodes = graph.number_of_nodes() 
+        
+        logging.info("Number of nodes: {}".format(numberOfNodes))
+        reverseGraph = nx.DiGraph()
 
-    ## generate whole graph first, we'll specialize later.
-    wholeset = set()
-    for edge in list(graph.edges()):
-        edge_info = set(graph.get_edge_data(edge[0], edge[1]).keys())
-        wholeset = wholeset.union(edge_info)
-        for itype in edge_info:
-            if itype == "is_a" or itype == "part_of":
-                if reverse_graph == "true":
-                    reverseGraph.add_edge(edge[1], edge[0], type=itype)
-                else:
-                    reverseGraph.add_edge(edge[0], edge[1], type=itype)
-    logging.info(nx.info(reverseGraph))
-    tnum = len(wholeset)
-    logging.info("Found {} unique edge types, {}".format(tnum," | ".join(wholeset)))
-    return reverseGraph
+        ## generate whole graph first, we'll specialize later.
+        wholeset = set()
+        for edge in list(graph.edges()):
+            edge_info = set(graph.get_edge_data(edge[0], edge[1]).keys())
+            wholeset = wholeset.union(edge_info)
+            for itype in edge_info:
+                if itype == "is_a" or itype == "part_of":
+                    if reverse_graph:
+                        reverseGraph.add_edge(edge[1], edge[0], type=itype)
+                    else:
+                        reverseGraph.add_edge(edge[0], edge[1], type=itype)
+        logging.info(nx.info(reverseGraph))
+        tnum = len(wholeset)
+        logging.info("Found {} unique edge types, {}".format(tnum," | ".join(wholeset)))
+        return reverseGraph
+    else:
+        edgelist = nx.read_edgelist(obo_link, create_using=nx.DiGraph, delimiter=",")
+        print(nx.info(edgelist))
+        return edgelist
 
 def recurse_custom(G, word):
-    print("Entering with word: " + str(word))
     syns = wn.synsets(word)
-    print(syns)
     w = syns[0]
     if not G.has_node(w.name()):
         G.add_node(w.name())
         for h in w.hypernyms():
             if h.name() != w.name():
-                print (h)
                 G.add_node(h.name())
                 G.add_edge(w.name(),h.name())
                 G = recurse_custom(G, h.name()[:-5])
@@ -136,12 +171,17 @@ def get_ontology_text_custom(mapping):
     nltk.download('wordnet')
     G = nx.DiGraph()
 
-    for word in mapping.keys():
-       node = wn.synset(mapping[word])
-       temp_graph = closure_graph_fn(node, lambda s: s.hypernyms())
-       G = nx.compose(G, temp_graph)
+    for word in mapping:
+        try:
+            if word != "" and "." in word and "\'" not in word and "s_company" not in word and not word.startswith("_"):
+                node = wn.synset(word)
+                temp_graph = closure_graph_fn(node, lambda s: s.hypernyms())
+                G = nx.compose(G, temp_graph)
+        except:
+            print("Failed on "+word)
 
     print(nx.info(G))
+    nx.write_edgelist(G, "wordnet.edgelist")
     return G
 
 def get_ontology_text():
@@ -179,7 +219,7 @@ def closure_graph_fn(synset, fn):
     return graph
 
 
-def visualize_sets_of_terms(json, ontology, dict, class_names,  k = 3):
+def visualize_sets_of_terms(json, ontology, dict, class_names,  k = 20):
     """
         Find the most generalized terms for each class, and visualize the subgraph of this term with depth *k*
     """
@@ -187,10 +227,10 @@ def visualize_sets_of_terms(json, ontology, dict, class_names,  k = 3):
     for generalization_result in json['resulting_generalization'].keys():
         if generalization_result  !="average_depth" and generalization_result != "average_association":
             set1 = json['resulting_generalization'][generalization_result]["terms"]
-            working_dict = dict[0]
-
+            #working_dict = dict[0]
+            draw_subgraph(set(set1), ontology, str(generalization_result), 6)
+            continue
             set_of_top_k_terms = set()
-
             for iter in range(k):
                 if iter < len(set1):
                     max = 0
@@ -204,7 +244,10 @@ def visualize_sets_of_terms(json, ontology, dict, class_names,  k = 3):
                     set_of_top_k_terms.add(term)
                     working_dict[term] = -1
 
-            draw_subgraph(set_of_top_k_terms, ontology, str(generalization_result), 2)
+            if len(set_of_top_k_terms) == 0:
+                draw_subgraph(set1, ontology, str(generalization_result), 2)
+            else:
+                draw_subgraph(set_of_top_k_terms, ontology, str(generalization_result), 2)
             counter += 1
 
 
@@ -224,10 +267,13 @@ def draw_subgraph(set_of_terms, ontology, class_name, depth):
     """
     Draws a graph
     """
+    print(set_of_terms)
     copy = set()
     copy.update(set_of_terms)
     combined_subgraph = expand_set(set_of_terms, ontology, depth)
     k = ontology.subgraph(combined_subgraph)
+    nx.write_gexf(k, "../results/" + class_name + ".gexf")
+    print(class_name, nx.info(k))
     color_map = []
     for node in k:
         if str(node) in copy:
@@ -238,7 +284,7 @@ def draw_subgraph(set_of_terms, ontology, class_name, depth):
     pos = nx.spring_layout(k)
     plt.title("Terms for class " + class_name)
     nx.draw(k, pos = pos, with_labels=True, node_color = color_map)
-    plt.show()
+    plt.savefig(class_name + ".png", dpi=1000)
     plt.clf()
 
 
@@ -259,6 +305,7 @@ def IC_of_a_term(term, mapping, mc, normalization):
 
 
 def textualize_top_k_terms(json_data, mapping, obo_link, class_names,  k_number = 5):
+    pass
     """
         This method prints the names of the *k_number* most important terms for each class (according to genQ)
     """
