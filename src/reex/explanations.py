@@ -71,37 +71,7 @@ def get_instance_explanations(X, Y, subset = 200, classifier_index = "gradient_b
         X_usable.columns = vectorizer.get_feature_names()
     else:
         X_usable = X.copy()
-    if feature_prunning:
-        # MUTUAL INFORMATION
-        # logging.info("Feature pre-selection via Mutual Information ({}).".format(subset))
-        # minf = mutual_info_classif(X_usable.values, training_scores_encoded)
-        # top_k = np.argsort(minf)[::-1][0:subset]
-        # attribute_vector = X_usable.columns[top_k]
-        # X_usable = X_usable.astype(float).iloc[:,top_k]
-
-        #RELIEFF
-        # logging.info("Feature pre-selection via ReliefF ({}).".format(subset))
-
-        # r = relief.Relief(
-        #     n_features=subset 
-        # ) 
-        # print(scores_dict[575])
-        # X_usable = r.fit_transform(
-        #     X_usable,
-        #     scores_dict
-        # )
-
-        # RF feature selection
-        logging.info("Feature pre-selection via Random Forests ({}).".format(subset))
-        forest = RandomForestClassifier(random_state=0)
-        forest.fit(X_usable, training_scores_encoded)
-        importances = forest.feature_importances_
-        top_k = np.argsort(importances)[::-1][0:subset]
-        attribute_vector = X_usable.columns[top_k]
-        X_usable = X_usable.astype(float).iloc[:,top_k]
-
-    else:
-        attribute_vector = X_usable.columns
+    
         
     skf = StratifiedKFold(n_splits=3)
     performances = []
@@ -134,6 +104,20 @@ def get_instance_explanations(X, Y, subset = 200, classifier_index = "gradient_b
             
             y_train = Y[train_index]
             y_test = Y[test_index]
+
+            if feature_prunning:
+                # RF feature selection
+                logging.info("Feature pre-selection via Random Forests ({}).".format(subset))
+                forest = RandomForestClassifier(random_state=0)
+                forest.fit(x_train, y_train)
+                importances = forest.feature_importances_
+                top_k = np.argsort(importances)[::-1][0:subset]
+                attribute_vector = x_train.columns[top_k]
+                x_train = x_train.astype(float).iloc[:,top_k]
+                x_test = x_test.astype(float).iloc[:,top_k]
+
+            else:
+                attribute_vector = X_usable.columns
 
             if not text:
                 pass
