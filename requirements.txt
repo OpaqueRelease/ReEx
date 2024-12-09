@@ -50,7 +50,7 @@ mongoengine==0.20.0
 more-itertools==8.2.0
 multitasking==0.0.9
 networkx==2.4
-numpy==1.18.4
+numpy==1.22.0
 obonet==0.2.5
 olefile==0.46
 packaging==20.1
