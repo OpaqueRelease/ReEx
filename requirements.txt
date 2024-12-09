@@ -20,7 +20,7 @@ cytoolz==0.10.1
 dask==2.11.0
 decorator==4.4.1
 Flask==1.1.2
-Flask-Cors==3.0.8
+Flask-Cors==3.0.9
 flask-mongoengine==0.9.5
 Flask-SQLAlchemy==2.4.1
 Flask-WTF==0.14.3
