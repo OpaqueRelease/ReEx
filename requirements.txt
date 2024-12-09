@@ -61,7 +61,7 @@ Pillow==7.1.0
 pluggy==0.12.0
 prompt-toolkit==3.0.3
 psycopg2==2.8.5
-py==1.8.1
+py==1.10.0
 py3plex==0.72
 pycodestyle==2.5.0
 pycosat==0.6.3
